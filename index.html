@@ -18,7 +18,7 @@
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-600.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-400.woff2" crossorigin />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=56" />
+  <link rel="stylesheet" href="src/styles/main.css?v=67" />
 
   <script type="application/ld+json">
   {
@@ -37,7 +37,10 @@
   <header class="header" data-header>
     <div class="container header__inner">
       <a class="header__logo" href="/" aria-label="UAK Trade — на главную">
-        <img src="assets/logo/logoHeader.png" alt="UAK Trade" width="133" height="56" />
+        <picture>
+          <source media="(max-width: 600px)" srcset="assets/logo/logoMobileHeader.png" />
+          <img src="assets/logo/logoHeader.png" alt="UAK Trade" width="133" height="56" />
+        </picture>
       </a>
 
       <div class="header__actions">
@@ -80,12 +83,14 @@
     <div class="container">
       <div class="hero-home__inner">
         <span class="hero-home__glow" aria-hidden="true"></span>
-        <img class="hero-home__decor" src="assets/images/heroBackground.svg" alt="" aria-hidden="true" width="1360" height="602" />
+        <img class="hero-home__decor hero-home__decor--d" src="assets/images/heroBackground.svg" alt="" aria-hidden="true" width="1360" height="602" />
+        <img class="hero-home__decor hero-home__decor--m" src="assets/images/heroMobileBackground.svg" alt="" aria-hidden="true" width="358" height="359" />
         <div class="hero-home__content">
           <h1 class="hero-home__title">UAK Trade</h1>
           <p class="hero-home__lead">Инженерное проектирование,<br />где каждый этап под контролем</p>
         </div>
       </div>
+      <a class="btn hero-home__cta" href="contacts.html">Связаться</a>
     </div>
   </section>
 
@@ -176,6 +181,9 @@
     <div class="container">
       <h2 class="proj__title">Галерея наших проектов</h2>
 
+      <!-- Вывод: десктоп — 6 карточек, мобилка — 3 (лишние помечены .proj-card--m-hide).
+           WP: цикл WP_Query по CPT «project»; posts_per_page=6, на мобиле первые 3 —
+           класс --m-hide навешивать начиная с 4-й карточки в шаблоне. -->
       <div class="proj__gallery">
         <div class="proj__col">
           <figure class="proj-card">
@@ -193,18 +201,18 @@
             <span class="proj-card__tag">Family Garden, BI GROUP</span>
             <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
           </figure>
-          <figure class="proj-card">
+          <figure class="proj-card proj-card--m-hide">
             <span class="proj-card__tag">Family Garden, BI GROUP</span>
             <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
           </figure>
         </div>
 
         <div class="proj__col">
-          <figure class="proj-card">
+          <figure class="proj-card proj-card--m-hide">
             <span class="proj-card__tag">Family Garden, BI GROUP</span>
             <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
           </figure>
-          <figure class="proj-card">
+          <figure class="proj-card proj-card--m-hide">
             <span class="proj-card__tag">Family Garden, BI GROUP</span>
             <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
           </figure>
@@ -225,22 +233,42 @@
     </div>
 
     <div class="ticker__track" aria-hidden="true">
-      <ul class="ticker__row">
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-      </ul>
-      <ul class="ticker__row" aria-hidden="true">
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-      </ul>
+      <div class="ticker__line ticker__line--ltr">
+        <ul class="ticker__row">
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+        </ul>
+        <ul class="ticker__row" aria-hidden="true">
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+        </ul>
+      </div>
+      <div class="ticker__line ticker__line--rtl">
+        <ul class="ticker__row">
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+        </ul>
+        <ul class="ticker__row" aria-hidden="true">
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -255,7 +283,7 @@
         </div>
 
         <div class="cta__content">
-          <h2 class="cta__title">Давайте обсудим ваш<br />проект</h2>
+          <h2 class="cta__title">Давайте обсудим<br class="cta__br-m" /> ваш<br class="cta__br-d" />проект</h2>
 
           <form class="cta__form" data-form data-success="#modal-success">
             <div class="cta__fields">
@@ -290,7 +318,10 @@
       <div class="footer__grid">
         <div>
           <a class="footer__logo" href="/" aria-label="UAK Trade">
-            <img src="assets/logo/logoFooter.png" alt="UAK Trade" width="207" height="87" />
+            <picture>
+              <source media="(max-width: 600px)" srcset="assets/logo/logoMobileFooter.png" />
+              <img src="assets/logo/logoFooter.png" alt="UAK Trade" width="207" height="87" />
+            </picture>
           </a>
         </div>
 
