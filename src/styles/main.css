@@ -1022,6 +1022,79 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 .certs__card img { width: 100%; height: 100%; object-fit: cover; }
 
 /* =============================================================================
+   26в. СТРАНИЦА УСЛУГИ (напр. «Аудит»): аккордеон, этапы, лайм-баннер «почему мы»,
+   ряд проектов с шапкой. Центрированная колонка контента 668 (Figma left 386).
+   ============================================================================= */
+
+/* --- Аккордеон (список вопросов) --- */
+.faq__list { max-width: calc(668 * var(--wm)); margin-inline: auto; display: flex; flex-direction: column; gap: calc(26 * var(--wm)); }
+.faq__item { }
+.faq__head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+  width: 100%; text-align: left;
+  padding: calc(13 * var(--wm)) calc(16 * var(--wm));
+  background: var(--color-surface); border-radius: var(--radius-sm);
+}
+.faq__q { font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: 1.2; color: rgba(255,255,255,0.6); }  /* 20/700 */
+.faq__toggle {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: calc(30 * var(--wm)); height: calc(30 * var(--wm));
+  border: 1px solid var(--color-white); border-radius: 50%; color: var(--color-white);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+.faq__toggle svg { width: calc(11 * var(--wm)); height: calc(12 * var(--wm)); }
+.faq__item.is-open .faq__toggle { transform: rotate(180deg); }
+.faq__body { overflow: hidden; max-height: 0; transition: max-height var(--duration-base) var(--ease-out); }
+.faq__item.is-open .faq__body { max-height: calc(600 * var(--wm)); }
+.faq__panel {
+  margin-top: calc(18 * var(--wm)); padding: calc(16 * var(--wm));
+  background: var(--color-surface); border-radius: var(--radius-sm);
+  font-size: var(--text-base); line-height: 1.3; color: var(--color-white);
+}
+
+/* --- Этапы работы --- */
+.steps__inner { max-width: calc(668 * var(--wm)); margin-inline: auto; }
+.steps__intro { font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: 1.2; color: var(--color-white); margin-bottom: calc(40 * var(--wm)); }
+.steps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+.step { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); }
+.step__badge {
+  padding: calc(6 * var(--wm)); text-align: center;
+  background: var(--color-accent); color: var(--color-on-accent); border-radius: var(--radius-lg);
+  font-size: var(--text-base); font-weight: var(--weight-medium); line-height: 1.3;   /* 16/500 «N этап» */
+}
+.step__box {
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  padding: calc(24 * var(--wm)) calc(22 * var(--wm));
+  font-size: var(--text-sm); line-height: 1.2; color: var(--color-white);   /* 14 */
+}
+
+/* --- Лайм-баннер «Почему мы?» --- */
+.why__box {
+  display: flex; justify-content: space-between; gap: var(--space-2xl);
+  background: var(--color-accent); color: var(--color-ink);
+  border-radius: var(--radius-lg);
+  padding: calc(80 * var(--wm)) calc(40 * var(--wm));
+}
+.why__title { margin: 0; color: var(--color-ink); flex: none; }        /* Benzin 36 uppercase */
+.why__main { max-width: calc(668 * var(--wm)); }
+.why__text { font-size: var(--text-base); line-height: 1.3; color: var(--color-ink); margin-bottom: calc(24 * var(--wm)); }
+.why__stats { display: flex; justify-content: space-between; gap: var(--space-md); }
+.why__stat { display: flex; flex-direction: column; gap: calc(6 * var(--wm)); }
+.why__value { font-size: var(--text-numbers); font-weight: var(--weight-medium); line-height: 1.1; color: var(--color-ink); }   /* 48/500 */
+.why__label { font-size: var(--text-sm); color: var(--color-ink); }
+
+/* --- Проекты: шапка (заголовок слева + кнопка справа) + ряд из 3 карточек --- */
+.proj__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: 2.5rem; }
+.proj__title--left { margin: 0; }
+.proj__gallery--row { grid-template-columns: repeat(3, 1fr); text-align: left; }
+
+@media (max-width: 900px) {
+  .why__box { flex-direction: column; gap: var(--space-lg); }
+  .why__main { max-width: none; }
+  .proj__gallery--row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =============================================================================
    27. МОБИЛЬНАЯ ВЕРСТКА (≤600 — макет 375/390)
    Точечные переопределения под мобильный Figma-макет.
    ============================================================================= */
@@ -1141,4 +1214,15 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
   /* Сертификаты: без стрелок, листаем свайпом (overflow-x трека). Заголовок — как блоки на главной (24, перенос сам) */
   .certs__nav { display: none; }
+
+  /* Страница услуги: центрированные колонки 668 разворачиваем во всю ширину */
+  .faq__list, .steps__inner, .why__main { max-width: none; }
+  .steps__grid { grid-template-columns: 1fr; }
+  .steps__intro { margin-bottom: calc(24 * var(--wm)); }
+  .why__box { flex-direction: column; gap: calc(24 * var(--wm)); padding: calc(24 * var(--wm)); }
+  .why__title { font-size: calc(24 * var(--wm)); }
+  .why__stats { flex-direction: column; gap: calc(24 * var(--wm)); }
+  .proj__head { flex-direction: column; align-items: stretch; gap: var(--space-md); }
+  .proj__title--left { text-align: left; }
+  .proj__gallery--row { grid-template-columns: 1fr; }
 }
