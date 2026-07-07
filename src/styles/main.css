@@ -313,10 +313,10 @@ p  { line-height: var(--leading-normal); }
    ============================================================================= */
 .header {
   position: sticky; top: 0; z-index: var(--z-header);
-  background: transparent;                 /* фон сайта и так тёмный */
+  background: var(--color-bg);             /* непрозрачный фон — контент не просвечивает под шапкой при прокрутке */
   transition: box-shadow var(--duration-base) var(--ease-out);
 }
-.header.is-scrolled { box-shadow: none; }
+.header.is-scrolled { box-shadow: 0 calc(1 * var(--wm)) 0 0 var(--color-border); }   /* тонкая линия при прокрутке */
 .header__inner {
   min-height: var(--header-height);
   display: flex; align-items: center; justify-content: space-between;
