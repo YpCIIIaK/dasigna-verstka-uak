@@ -946,6 +946,10 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
    Точечные переопределения под мобильный Figma-макет.
    ============================================================================= */
 @media (max-width: 600px) {
+  /* Между всеми основными блоками — 80px. --space-section = полный промежуток
+     (каждая .section берёт /2 сверху и /2 снизу, футер — margin-top /2). Меняем один токен. */
+  :root { --space-section: calc(80 * var(--wm)); }
+
   /* Заголовки всех блоков: Benzin 24, uppercase, 120% (базовый h2 = clamp 28→36) */
   .about-intro__title, .services__title, .proj__title,
   .ticker__title, .cta__title { font-size: calc(24 * var(--wm)); }
@@ -957,7 +961,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .header__logo img { width: calc(95 * var(--wm)); height: auto; }
 
   /* Hero: круг влезает в экран (375−16·2); блик анимируется; заголовок в одну строку; кнопка снизу */
-  .hero-home { padding-block: calc(16 * var(--wm)) 0; }
+  .hero-home { padding-block: calc(16 * var(--wm)) calc(40 * var(--wm)); }   /* низ = половина 80 до след. блока */
   .hero-home__inner {
     aspect-ratio: 1;                       /* квадрат → круг, а не эллипс */
     width: 100%; max-width: calc(358 * var(--wm));
