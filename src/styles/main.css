@@ -1038,5 +1038,6 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .footer__grid { flex-wrap: nowrap; gap: calc(24 * var(--wm)); padding-bottom: calc(24 * var(--wm)); }
   .footer__grid > :first-child { margin-right: 0; flex-basis: auto; }
   .footer__logo img { width: calc(144 * var(--wm)); height: auto; }
-  .footer__cols { flex-direction: column-reverse; gap: calc(24 * var(--wm)); margin-right: 0; }
+  .footer__cols { flex-direction: column-reverse; gap: calc(32 * var(--wm)); margin-right: 0; }   /* соцсети → список ссылок 32 */
+  .footer__contacts { margin-bottom: calc(16 * var(--wm)); }   /* email → соцсети 16 */
 }
