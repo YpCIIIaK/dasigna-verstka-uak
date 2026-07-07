@@ -1126,10 +1126,10 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
   .u-br-m { display: inline; }   /* мобильные переносы: баннер-лид и длинный заголовок about */
 
-  /* О компании — баннер: текст внизу картинки (лид 16 от низа, 6 до «О компании»), кнопка под картинкой */
-  .about-banner__inner { aspect-ratio: 358 / 430; }
+  /* О компании — баннер: фото 358×372 (16 от края через .container); текст внизу (12 по бокам, 16 от низа, 6 до «О компании») */
+  .about-banner__inner { aspect-ratio: 358 / 372; }
   .about-banner__content {
-    left: calc(16 * var(--wm)); right: calc(16 * var(--wm));
+    left: calc(12 * var(--wm)); right: calc(12 * var(--wm));
     top: auto; bottom: calc(16 * var(--wm)); max-width: none;
   }
   .about-banner__cta {
@@ -1137,7 +1137,6 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
     margin-top: calc(32 * var(--wm)); width: 100%;
   }
 
-  /* Сертификаты: без стрелок, листаем свайпом (overflow-x трека); заголовок в одну строку */
+  /* Сертификаты: без стрелок, листаем свайпом (overflow-x трека). Заголовок — как блоки на главной (24, перенос сам) */
   .certs__nav { display: none; }
-  .certs__title { white-space: nowrap; }
 }
