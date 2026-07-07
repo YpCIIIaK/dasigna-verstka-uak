@@ -959,6 +959,11 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   /* Шапка: ниже, без «Связаться» (см. §6), лого-мобайл */
   .header__inner { min-height: auto; padding-block: calc(24 * var(--wm)); }
   .header__logo img { width: calc(95 * var(--wm)); height: auto; }
+  .btn--menu {                              /* фикс 77×46 — «Меню»/«Закрыть» не меняют размер */
+    min-width: 0;
+    width: calc(77 * var(--wm)); height: calc(46 * var(--wm));
+    padding: 0;
+  }
 
   /* Hero: круг влезает в экран (375−16·2); блик анимируется; заголовок в одну строку; кнопка снизу */
   .hero-home { padding-block: calc(16 * var(--wm)) calc(40 * var(--wm)); }   /* низ = половина 80 до след. блока */
