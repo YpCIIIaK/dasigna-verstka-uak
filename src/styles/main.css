@@ -988,7 +988,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   /* Кольца-цифры: крупнее, до краёв блока (18 внутри), стопкой с нахлёстом */
   .circles { flex-direction: column; align-items: center; }
   .circle {
-    width: 100%; max-width: calc(358 * var(--wm)); height: auto; aspect-ratio: 1;
+    width: 100%; max-width: calc(322 * var(--wm)); height: auto; aspect-ratio: 1;   /* круг 322×322 */
     padding: calc(18 * var(--wm));
   }
   .circle + .circle { margin-left: 0; margin-top: calc(-34 * var(--wm)); }
@@ -1003,6 +1003,9 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .proj__gallery { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
   .proj__col { gap: calc(16 * var(--wm)); }
   .proj-card--m-hide { display: none; }
+  .proj-card { aspect-ratio: auto; height: calc(426 * var(--wm)); }   /* высота 426, ширина как была (100% колонки) */
+  .proj-card__img { height: 100%; }
+  .proj-card__tag { box-shadow: 0 -2px 0 0 var(--color-bg); }         /* на HiDPI 1px не перекрывает ободок — берём 2px */
   .proj-card::before { clip-path: circle(75% at 50% 50%); }   /* градиент по умолчанию — на тач нет ховера */
 
   /* Партнёры/клиенты: две ленты в разные стороны */
