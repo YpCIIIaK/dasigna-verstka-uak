@@ -1139,6 +1139,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
     margin-top: calc(32 * var(--wm)); width: 100%;
   }
 
-  /* Сертификаты: без стрелок, листаем свайпом (overflow-x трека). Заголовок — как блоки на главной (24, перенос сам) */
+  /* Сертификаты: без стрелок, листаем свайпом (overflow-x трека). Заголовок 24 — одной строкой */
   .certs__nav { display: none; }
+  .certs__title { white-space: nowrap; }
 }
