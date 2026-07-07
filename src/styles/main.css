@@ -946,9 +946,11 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
    ============================================================================= */
 .u-accent { color: var(--color-accent); }
 .u-br-d { display: inline; }                   /* десктопный перенос строки (на мобиле скрыт, см. §27) */
+.u-br-m { display: none; }                     /* мобильный перенос строки (на десктопе скрыт, см. §27) */
 
 /* Hero-баннер: фото 1360×430 (radius-lg), контент слева поверх */
 .about-banner { padding-top: 0; }              /* без отступа от navbar до первого блока (как на главной) */
+.about-banner .container { position: relative; }   /* контекст для абсолютной кнопки на десктопе */
 .about-banner__inner {
   position: relative;
   border-radius: var(--radius-lg);
@@ -975,7 +977,11 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   font-size: var(--text-base); font-weight: var(--weight-medium); line-height: 1.3;
   color: var(--color-white);
 }
-.about-banner__cta { margin-top: calc(40 * var(--wm)); }                       /* подзаголовок → кнопка 40 */
+.about-banner__cta {                          /* десктоп: кнопка поверх фото (Figma left 115, top 256 от края фото) */
+  position: absolute;
+  left: calc(var(--container-pad) + 115 * var(--wm));
+  top: calc(256 * var(--wm));
+}
 @media (hover: hover) and (min-width: 601px) {                                  /* как кнопка в карточках «Ключевые направления» */
   .about-banner__cta:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
   .about-banner__cta:active { --_bg: #000;                --_fg: var(--color-white); }
@@ -1118,14 +1124,20 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .footer__contacts { margin-bottom: calc(16 * var(--wm)); }   /* email → соцсети 16 */
   .footer__bottom { flex-direction: column; gap: calc(6 * var(--wm)); }   /* копирайт → «Сделано в factum» 6 */
 
-  /* О компании — баннер: выше, контент прижат к низу, кнопка на всю ширину */
+  .u-br-m { display: inline; }   /* мобильные переносы: баннер-лид и длинный заголовок about */
+
+  /* О компании — баннер: текст внизу картинки (лид 16 от низа, 6 до «О компании»), кнопка под картинкой */
   .about-banner__inner { aspect-ratio: 358 / 430; }
   .about-banner__content {
     left: calc(16 * var(--wm)); right: calc(16 * var(--wm));
-    top: auto; bottom: calc(24 * var(--wm)); max-width: none;
+    top: auto; bottom: calc(16 * var(--wm)); max-width: none;
   }
-  .about-banner__cta { width: 100%; }
+  .about-banner__cta {
+    position: static;                        /* из оверлея — в поток под фото */
+    margin-top: calc(32 * var(--wm)); width: 100%;
+  }
 
-  /* Сертификаты: стрелки под заголовком, карточки листаются свайпом */
-  .certs__head { flex-wrap: wrap; gap: calc(16 * var(--wm)); margin-bottom: calc(24 * var(--wm)); }
+  /* Сертификаты: без стрелок, листаем свайпом (overflow-x трека); заголовок в одну строку */
+  .certs__nav { display: none; }
+  .certs__title { white-space: nowrap; }
 }
