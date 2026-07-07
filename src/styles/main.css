@@ -942,6 +942,80 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 
 /* =============================================================================
+   26б. СТРАНИЦА «О КОМПАНИИ» — hero-баннер + слайдер сертификатов
+   ============================================================================= */
+.u-accent { color: var(--color-accent); }
+.u-br-d { display: inline; }                   /* десктопный перенос строки (на мобиле скрыт, см. §27) */
+
+/* Hero-баннер: фото 1360×430 (radius-lg), контент слева поверх */
+.about-banner { padding-top: 0; }              /* без отступа от navbar до первого блока (как на главной) */
+.about-banner__inner {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1360 / 430;
+}
+.about-banner__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.about-banner__content {
+  position: absolute; left: calc(115 * var(--wm)); top: calc(125 * var(--wm));
+  display: flex; flex-direction: column; align-items: flex-start;
+  max-width: calc(350 * var(--wm));
+}
+.about-banner__title {                        /* Benzin-Semibold 36/120% uppercase, трекинг 0 */
+  margin: 0; color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--text-h2);                  /* 28→36 (десктоп = 36) */
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);           /* 120% */
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.about-banner__lead {
+  margin-top: calc(6 * var(--wm));            /* заголовок → подзаголовок 6 (Figma) */
+  font-size: var(--text-base); font-weight: var(--weight-medium); line-height: 1.3;
+  color: var(--color-white);
+}
+.about-banner__cta { margin-top: calc(40 * var(--wm)); }                       /* подзаголовок → кнопка 40 */
+@media (hover: hover) and (min-width: 601px) {                                  /* как кнопка в карточках «Ключевые направления» */
+  .about-banner__cta:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
+  .about-banner__cta:active { --_bg: #000;                --_fg: var(--color-white); }
+}
+
+/* Длинный заголовок блока «о компании»: жёсткие переносы (.u-br-d) в 5 строк.
+   Без сжатия по ширине и без balance — иначе строки ломаются повторно. */
+.about-intro__title--long { max-width: none; padding-inline: 0; text-wrap: normal; color: var(--color-body); }   /* второстепенные строки — светло-серый; .u-accent перекрывает лаймом */
+
+/* Слайдер сертификатов */
+.certs__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: calc(43 * var(--wm)); }
+.certs__title { margin: 0; }                                                   /* Benzin 36 uppercase */
+.certs__nav { display: flex; gap: calc(20 * var(--wm)); flex: none; }
+.certs__arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: calc(46 * var(--wm)); height: calc(46 * var(--wm));
+  border: 1px solid var(--color-white); border-radius: 50%;
+  background: transparent; color: var(--color-white); cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+.certs__arrow svg { width: calc(18 * var(--wm)); height: calc(14 * var(--wm)); }
+@media (hover: hover) and (min-width: 601px) {
+  .certs__arrow:hover  { background: var(--color-accent);    border-color: var(--color-accent);    color: var(--color-on-accent); }   /* ховер → акцент */
+  .certs__arrow:active { background: var(--color-surface-3); border-color: var(--color-surface-3); color: var(--color-white); }        /* нажатие → светло-серый */
+}
+.certs__track {
+  display: flex; gap: calc(24 * var(--wm));
+  list-style: none; margin: 0; padding: 0;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none;                       /* прячем полосу — навигация стрелками */
+}
+.certs__track::-webkit-scrollbar { display: none; }
+.certs__card {
+  flex: none; scroll-snap-align: start;
+  width: calc(322 * var(--wm)); height: calc(480 * var(--wm));
+  border-radius: var(--radius-md); overflow: hidden;
+}
+.certs__card img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =============================================================================
    27. МОБИЛЬНАЯ ВЕРСТКА (≤600 — макет 375/390)
    Точечные переопределения под мобильный Figma-макет.
    ============================================================================= */
@@ -952,9 +1026,11 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
   /* Заголовки всех блоков: Benzin 24, uppercase, 120% (базовый h2 = clamp 28→36) */
   .about-intro__title, .services__title, .proj__title,
-  .ticker__title, .cta__title { font-size: calc(24 * var(--wm)); }
+  .ticker__title, .cta__title,
+  .about-banner__title, .certs__title { font-size: calc(24 * var(--wm)); }
   .cta__br-d { display: none; }   /* десктопный перенос убираем */
   .cta__br-m { display: inline; } /* «Давайте обсудим» / «ваш проект» */
+  .u-br-d { display: none; }      /* переносы длинного заголовка about — только десктоп */
 
   /* Шапка: ниже, без «Связаться» (см. §6), лого-мобайл */
   .header__inner { min-height: auto; padding-block: calc(24 * var(--wm)); }
@@ -1041,4 +1117,15 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .footer__cols { flex-direction: column-reverse; gap: calc(32 * var(--wm)); margin-right: 0; }   /* соцсети → список ссылок 32 */
   .footer__contacts { margin-bottom: calc(16 * var(--wm)); }   /* email → соцсети 16 */
   .footer__bottom { flex-direction: column; gap: calc(6 * var(--wm)); }   /* копирайт → «Сделано в factum» 6 */
+
+  /* О компании — баннер: выше, контент прижат к низу, кнопка на всю ширину */
+  .about-banner__inner { aspect-ratio: 358 / 430; }
+  .about-banner__content {
+    left: calc(16 * var(--wm)); right: calc(16 * var(--wm));
+    top: auto; bottom: calc(24 * var(--wm)); max-width: none;
+  }
+  .about-banner__cta { width: 100%; }
+
+  /* Сертификаты: стрелки под заголовком, карточки листаются свайпом */
+  .certs__head { flex-wrap: wrap; gap: calc(16 * var(--wm)); margin-bottom: calc(24 * var(--wm)); }
 }
