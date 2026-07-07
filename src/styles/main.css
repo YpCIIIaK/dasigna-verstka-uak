@@ -529,7 +529,7 @@ textarea.field__control { min-height: calc(120 * var(--wm)); resize: vertical; }
 /* Смена базы fluid-множителя: планшет считается от 768, мобайл — от 375.
    100vmin берёт меньшую сторону вьюпорта → в портрете масштаб идёт от ширины. */
 @media (max-width: 1024px) { :root { --width-base: 768; --width-current: 100vmin; } }
-@media (max-width: 767px)  { :root { --width-base: 375; --width-current: 100vmin; } }
+@media (max-width: 767px)  { :root { --width-base: 390; --width-current: 100vmin; } }   /* мобильный макет — 390 */
 
 @media (max-width: 1024px) {
   .footer__grid { grid-template-columns: 1fr 1fr; }
