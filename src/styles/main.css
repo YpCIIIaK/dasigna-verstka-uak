@@ -1083,6 +1083,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
   /* Кольца-цифры: крупнее, до краёв блока (18 внутри), стопкой с нахлёстом */
   .about-intro__title { margin-bottom: calc(20 * var(--wm)); }   /* заголовок → кольца 20 */
+  .about-intro__title--long { text-align: left; }                /* длинный заголовок about — по левому краю (макет) */
   .circles { flex-direction: column; align-items: center; }
   .circle {
     width: 100%; max-width: calc(322 * var(--wm)); height: auto; aspect-ratio: 1;   /* круг 322×322 */
