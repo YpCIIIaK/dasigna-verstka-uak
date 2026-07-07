@@ -1133,6 +1133,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
     left: calc(12 * var(--wm)); right: calc(12 * var(--wm));
     top: auto; bottom: calc(16 * var(--wm)); max-width: none;
   }
+  .about-banner__lead { font-size: calc(16 * var(--wm)); }   /* скейлится вместе с шириной блока — 2 строки на любом экране */
   .about-banner__cta {
     position: static;                        /* из оверлея — в поток под фото */
     margin-top: calc(32 * var(--wm)); width: 100%;
