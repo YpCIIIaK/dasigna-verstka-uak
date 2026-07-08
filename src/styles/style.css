@@ -353,6 +353,11 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
           mask: radial-gradient(circle closest-side, transparent 80%, #000 83%, #000 85.5%, transparent 90%);
   filter: blur(70px);
   animation: hero-glow-spin 9s linear infinite;
+  /* Кэшируем размытый+маскированный слой в отдельную GPU-текстуру: тогда на каждом
+     кадре крутится только transform (дёшево), а blur(70px) НЕ пере-растеризуется —
+     иначе он конкурирует с композитором при скролле и вызывает «буксование». */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 @keyframes hero-glow-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .hero-home__glow { animation: none; } }

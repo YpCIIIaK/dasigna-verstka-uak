@@ -15,10 +15,19 @@
      -------------------------------------------------------------------------- */
   let lenis = null;
   if (typeof Lenis !== "undefined" && !prefersReduced) {
-    lenis = new Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.5 });
+    lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),   // expo-out — как в dasigna, мягче инерция
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
     const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
+    window.lenis = lenis;                                   // доступ снаружи (напр. отладка)
   }
+  // Пауза/возобновление плавного скролла (модалки, оверлей-меню)
+  const lenisPause = () => { if (lenis) lenis.stop(); };
+  const lenisResume = () => { if (lenis) lenis.start(); };
 
   /* --------------------------------------------------------------------------
      Шапка: тень при скролле
@@ -47,6 +56,7 @@
       menuToggle.classList.toggle("is-open", open);            // кнопка → акцент
       menuToggle.setAttribute("aria-expanded", String(open));
       setLabel(open ? "Закрыть" : "Меню");                     // текст «Меню ↔ Закрыть»
+      open ? lenisPause() : lenisResume();                     // при открытом меню — стоп плавного скролла
     };
     menuToggle.addEventListener("click", () =>
       setMenu(menuToggle.getAttribute("aria-expanded") !== "true")
@@ -94,24 +104,63 @@
   }
 
   /* --------------------------------------------------------------------------
-     Маска телефона +7 (___) ___ ____
+     Маска телефона +7 (___) ___ ____ — модуль (студийный паттерн initX + вызов)
      -------------------------------------------------------------------------- */
-  const MATRIX = "+7 (___) ___ ____";
-  function maskPhone(event) {
-    const input = event.target;
-    let val = input.value.replace(/\D/g, "");
-    if (val && val[0] !== "7") val = "7" + val;         // нормализуем префикс
-    let out = "", vi = 0;
-    for (const ch of MATRIX) {
-      if (ch === "_") { if (vi < val.length) out += val[vi++]; else break; }
-      else out += ch;
-    }
-    input.value = out;
-    if (event.type === "blur" && val.length < 2) input.value = "";
-  }
-  document.querySelectorAll('input[type="tel"]').forEach((input) => {
-    ["input", "focus", "blur"].forEach((ev) => input.addEventListener(ev, maskPhone, false));
-  });
+  const initPhoneMask = () => {
+    const inputs = document.querySelectorAll('input[type="tel"]');
+    if (!inputs.length) return;
+
+    const matrix = "+7 (___) ___ ____";
+
+    const mask = function (event) {
+      const key = event.key;
+      const pos = this.selectionStart ?? this.value.length;
+
+      // Статичный префикс «+7 (» защищён от правок/удаления
+      if (pos < 3 && event.type === "keydown") {
+        event.preventDefault();
+        return;
+      }
+
+      const def = matrix.replace(/\D/g, "");
+      let val = this.value.replace(/\D/g, "");
+      if (def.length >= val.length) val = def;
+
+      let i = 0;
+      let newValue = matrix.replace(/[_\d]/g, (a) =>
+        i < val.length ? val.charAt(i++) : a
+      );
+
+      // Обрезаем незаполненный хвост — каретка остаётся на «живом» слоте
+      i = newValue.indexOf("_");
+      if (i !== -1) {
+        if (i < 5) i = 3;
+        newValue = newValue.slice(0, i);
+      }
+
+      let reg = matrix.substring(0, this.value.length)
+        .replace(/_+/g, (a) => `\\d{1,${a.length}}`)
+        .replace(/[+()]/g, "\\$&");
+      reg = new RegExp(`^${reg}$`);
+
+      if (
+        !reg.test(this.value) ||
+        this.value.length < 5 ||
+        (key && key.length === 1 && /\d/.test(key))
+      ) {
+        this.value = newValue;
+      }
+
+      if (event.type === "blur" && this.value.length < 5) this.value = "";
+    };
+
+    inputs.forEach((input) => {
+      ["input", "focus", "blur", "keydown"].forEach((ev) =>
+        input.addEventListener(ev, mask, false)
+      );
+    });
+  };
+  initPhoneMask();
 
   /* --------------------------------------------------------------------------
      Модалка: focus-trap + возврат фокуса + пауза скролла

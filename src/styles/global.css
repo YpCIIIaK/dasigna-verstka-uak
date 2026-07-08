@@ -7,7 +7,20 @@
 
 [hidden] { display: none !important; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
+/* overflow-x гасим на body (как в dasigna), НЕ на html: overflow на документе
+   мешает Lenis скроллить window и вызывает «буксование». */
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+/* Официальный CSS Lenis (классы на <html> вешает сам Lenis).
+   Ключевая строка — scroll-behavior: auto при активном Lenis: он пишет позицию
+   через scrollTop каждый кадр, а сеттер scrollTop подчиняется CSS scroll-behavior;
+   с «smooth» браузер ДОСГЛАЖИВАЕТ каждый кадр поверх Lenis → задержка/буксование.
+   При выключенном JS/Lenis классов нет — остаётся нативный smooth для якорей. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }   /* только во время скролла — иначе карта некликабельна */
 
 body {
   font-family: var(--font-sans);
