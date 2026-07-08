@@ -856,11 +856,12 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   align-items: start;
 }
 .pdel__img { width: 100%; aspect-ratio: 668 / 401; object-fit: cover; border-radius: var(--radius-lg); }
+.pdel__col { display: flex; flex-direction: column; }   /* список + кнопка под ним в правой колонке */
 .pdel__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(24 * var(--wm)); }
 .pdel__item { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
 .pdel__lead { margin: 0; font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: var(--leading-snug); color: var(--color-white); }   /* 20/700 */
 .pdel__text { margin: 0; font-size: var(--text-base); font-weight: var(--weight-regular); line-height: var(--leading-snug); color: var(--color-white); }
-.pdel__actions { display: flex; justify-content: center; margin-top: calc(40 * var(--wm)); }
+.pdel__actions { display: flex; justify-content: flex-start; margin-top: calc(40 * var(--wm)); }   /* кнопка под текстом на 40 */
 @media (hover: hover) and (min-width: 601px) {              /* кнопка «Начать проект»: ховер → светло-серый, нажатие → белый */
   .pdel .btn--outline:hover  { --_bg: var(--color-surface-3); --_fg: var(--color-white); border-color: var(--color-surface-3); }
   .pdel .btn--outline:active { --_bg: var(--color-white);     --_fg: var(--color-ink);   border-color: var(--color-white); }
@@ -888,6 +889,114 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .pcta__title { margin-bottom: calc(24 * var(--wm)); font-size: calc(24 * var(--wm)); }
   /* Figma mobile: 171×48 — сужаем горизонтальный паддинг, чтобы «Обсудить проект» влез целиком */
   .btn--dark { width: calc(171 * var(--wm)); min-width: 0; padding-inline: calc(12 * var(--wm)); }
+}
+
+/* =============================================================================
+   СТРАНИЦА «КОНТАКТЫ»
+   Figma: крупный h1, слева две плашки (контакты+график / форма), справа карта
+   на всю высоту двух плашек. Карта — существующий стиль .cta__media, но крупнее.
+   ============================================================================= */
+.cpage { padding-top: 0; }                             /* без отступа от navbar до заголовка */
+.cpage__title { margin: 0 0 calc(20 * var(--wm)); }   /* h1 Benzin 100 → контент 20 */
+.cpage__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;                     /* Figma: две колонки по 668, gap 24 */
+  gap: calc(24 * var(--wm));
+  align-items: stretch;
+}
+.cpage__col { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); }   /* Figma: между плашками 20 */
+
+/* --- Плашка «контакты + график» --- */
+.cpage__info {
+  display: flex; justify-content: space-between; gap: calc(24 * var(--wm));
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: calc(24 * var(--wm));
+}
+.cpage__info-main { display: flex; flex-direction: column; justify-content: space-between; gap: calc(24 * var(--wm)); }
+.cpage__lines { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
+.cpage__line { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }   /* Manrope 18/500/120% */
+.cpage__socials { display: flex; align-items: center; gap: calc(20 * var(--wm)); }
+.cpage__social { display: inline-flex; width: calc(24 * var(--wm)); height: calc(24 * var(--wm)); color: var(--color-white); transition: color var(--duration-base) var(--ease-out); }
+.cpage__social svg { width: 100%; height: 100%; }
+@media (hover: hover) and (min-width: 601px) { .cpage__social:hover { color: var(--color-accent); } }
+.cpage__hours { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); flex: none; }
+.cpage__hours-item { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }   /* Manrope 18/500/120% */
+
+/* --- Плашка с формой --- */
+.cpage__form-card {
+  display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0;
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: calc(24 * var(--wm));
+}
+.cpage__form-title { margin: 0 0 calc(20 * var(--wm)); }   /* h3 Manrope 24/700 uppercase → поля 20 */
+
+/* --- Карта: наш стиль .cta__media, но крупнее (на всю высоту двух плашек) --- */
+.cpage__map { min-height: calc(593 * var(--wm)); height: 100%; border-radius: var(--radius-lg); }
+.cpage__map iframe { min-height: calc(593 * var(--wm)); }
+
+/* Мобайл ≤600: одна колонка — контакты, форма, карта */
+@media (max-width: 600px) {
+  .cpage__title { font-size: calc(40 * var(--wm)); }   /* Benzin 40/100% +2% uppercase */
+  .cpage__grid { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
+  .cpage__info { flex-direction: column; gap: calc(24 * var(--wm)); }
+  .cpage__map { min-height: calc(360 * var(--wm)); }
+  .cpage__map iframe { min-height: calc(360 * var(--wm)); filter: none; }   /* без ховера на тач — карта светлая */
+}
+
+/* =============================================================================
+   СТРАНИЦА «СПАСИБО ЗА ЗАЯВКУ» — центр. контент на фоне hero-круга (тот же SVG+блик)
+   Фон/анимация переиспользуют .hero-home__inner / __glow / __decor.
+   ============================================================================= */
+.thanks__content { display: flex; flex-direction: column; align-items: center; }
+.thanks__title {                               /* Benzin 36/120% uppercase, центр */
+  margin: 0; color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: calc(36 * var(--wm)); font-weight: var(--weight-regular);
+  line-height: var(--leading-snug); letter-spacing: 0;
+  text-align: center; text-transform: uppercase;
+}
+.thanks__text {                                /* Manrope 18/500/120%, центр */
+  margin: calc(12 * var(--wm)) 0 0;
+  font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium);
+  line-height: var(--leading-snug); text-align: center; color: var(--color-white);
+}
+.thanks__btn { margin-top: calc(40 * var(--wm)); }
+@media (hover: hover) and (min-width: 601px) {  /* «На главную»: ховер → акцент, нажатие → чёрный */
+  .thanks__btn:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
+  .thanks__btn:active { --_bg: #000;                --_fg: var(--color-white); }
+}
+/* Мобайл ≤600: контент строго по центру круга; заголовок 24, текст 16/400, до кнопки 32 */
+@media (max-width: 600px) {
+  .thanks .hero-home__inner { align-items: center; }        /* не прижимаем к низу — центр круга */
+  .thanks .hero-home__content { margin-bottom: 0; }
+  .thanks__title { font-size: calc(24 * var(--wm)); }       /* Benzin 24/120% uppercase */
+  .thanks__text { font-size: calc(16 * var(--wm)); font-weight: var(--weight-regular); }   /* Manrope 16/400/120% */
+  .thanks__btn { margin-top: calc(32 * var(--wm)); }        /* текст → кнопка 32 */
+}
+
+/* =============================================================================
+   СТРАНИЦА 404 — крупный «404», подпись и кнопка «На главную», всё по центру
+   ============================================================================= */
+.nf { display: grid; place-items: center; min-height: calc(564 * var(--wm)); text-align: center; padding-top: 0; }   /* без отступа от navbar */
+.nf__inner { display: flex; flex-direction: column; align-items: center; }
+.nf__title { margin: 0; color: var(--color-white); }        /* h1 Benzin 100/100% +2% uppercase — из базового h1 */
+.nf__text {                                    /* Manrope 18/500/120%, центр */
+  margin: calc(12 * var(--wm)) 0 0;
+  font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium);
+  line-height: var(--leading-snug); text-align: center; color: var(--color-white);
+}
+.nf__btn { margin-top: calc(40 * var(--wm)); }
+.nf-br-m { display: none; }                     /* мобильные переносы — вкл. в мобильном блоке */
+@media (hover: hover) and (min-width: 601px) {  /* «На главную»: ховер → акцент, нажатие → чёрный */
+  .nf__btn:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
+  .nf__btn:active { --_bg: #000;                --_fg: var(--color-white); }
+}
+@media (max-width: 600px) {
+  .nf__title { font-size: calc(40 * var(--wm)); }           /* Benzin 40/100% +2% uppercase */
+  .nf__text { margin-top: calc(8 * var(--wm)); font-size: calc(14 * var(--wm)); font-weight: var(--weight-regular); }   /* Manrope 14/400/120%; заголовок → текст 8 */
+  .nf__btn { margin-top: calc(32 * var(--wm)); }            /* текст → кнопка 32 */
+  .nf-br-m { display: inline; }                             /* переносы: после «ищете,» и «вернёмся» */
+  .nf-br-d { display: none; }                               /* десктопный перенос убираем */
 }
 
 /* Слайдер сертификатов */
