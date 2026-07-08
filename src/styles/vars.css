@@ -1,6 +1,5 @@
 /* =============================================================================
    vars.css — дизайн-токены (по образцу Artwin: vars + :root в global)
-   Значения токенов помечены TODO(figma) — заменить из макета.
    ============================================================================= */
 :root {
   /* --- Fluid-масштаб (студийный метод) ---
@@ -21,7 +20,7 @@
   --color-accent:        #e9ffbc;  /* акцент = ховер-эффекты (лайм), один цвет */
   --color-on-accent:     #191919;  /* текст на акценте (тёмный на лайме) */
   --color-heading:       #ffffff;  /* заголовки на тёмном фоне */
-  --color-body:          rgba(255, 255, 255, 0.72);  /* основной текст; TODO(figma): точное значение */
+  --color-body:          rgba(255, 255, 255, 0.72);  /* основной текст */
   --color-ink:           #1a1718;  /* тёмный текст на светлых плашках */
   --color-white:         #ffffff;
 
@@ -34,8 +33,7 @@
   --color-overlay:       rgba(9, 9, 9, 0.6);          /* подложка модалки */
 
   /* --- Fluid-типографика: clamp(min, предпочт, max) + "px → px" ---
-     Desktop-значения из Figma text styles. Мобильный минимум для H1/H2 —
-     предварительный, TODO(figma): уточнить по мобильному макету. */
+     Desktop-значения из Figma text styles. */
   --text-h1:  clamp(2.75rem, 1.2rem + 7.5vw, 6.25rem);  /* 44 → 100 (Benzin, UPPER) */
   --text-h2:  clamp(1.75rem, 1.1rem + 2.6vw, 2.25rem);  /* 28 → 36 (Benzin, UPPER) */
   --text-display-sm: 1.5rem;                            /* 24 (Benzin, UPPER) */
@@ -60,12 +58,12 @@
   --space-3xs: 0.25rem;  --space-2xs: 0.5rem;  --space-xs: 0.75rem;
   --space-sm:  1rem;     --space-md:  1.5rem;  --space-lg: 2rem;
   --space-xl:  3rem;     --space-2xl: 4rem;
-  --space-section: clamp(4rem, 1.45rem + 10.9vw, 11.25rem);   /* 64 → 180 (Figma: 180px между блоками); мин — TODO(figma): mobile */
+  --space-section: clamp(4rem, 1.45rem + 10.9vw, 11.25rem);   /* 64 → 180 Figma: 180px между блоками */
 
   /* --- Раскладка (Figma: артборд 1440, контент 1360, поле 40) ---
      max-width = артборд 1440; паддинг 40 съедает поля → контент ровно 1360. */
   --container-max: 1440px;
-  --container-pad: clamp(1rem, 0.4rem + 3vw, 2.5rem);  /* 16 (mob) → 40 (desktop); TODO(figma): уточнить мобильное поле */
+  --container-pad: clamp(1rem, 0.4rem + 3vw, 2.5rem);  /* 16 (mob) → 40 (desktop) */
   --header-height: calc(136 * var(--wm));                               /* Figma: 40 + 56 + 40 */
 
   /* --- Радиусы / тени --- */

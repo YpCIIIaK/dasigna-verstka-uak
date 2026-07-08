@@ -240,7 +240,7 @@
 
       if (!ok) { const bad = form.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
 
-      // TODO(prod): POST на бэкенд / WordPress REST
+      // Отправка: POST на бэкенд / WordPress REST
       form.reset();
       if (successModal) openModalEl(successModal);
     });

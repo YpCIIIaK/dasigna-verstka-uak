@@ -14,8 +14,8 @@
 
    При правках менять ?v= у изменённого файла (кэш-бастинг).
    ============================================================================= */
-@import url("vars.css?v=1");
-@import url("fonts.css?v=1");
+@import url("vars.css?v=2");
+@import url("fonts.css?v=2");
 @import url("global.css?v=3");
 @import url("header.css?v=2");
 @import url("footer.css?v=1");

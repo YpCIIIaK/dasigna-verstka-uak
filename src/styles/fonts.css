@@ -2,9 +2,8 @@
    fonts.css — самохостинг шрифтов (@font-face)
    ============================================================================= */
 
-/* Benzin — display-заголовки (H1/H2). Пока в наличии одно начертание (Semibold),
-   объявляем его на весь диапазон весов заголовков → все H1/H2 берут этот файл.
-   TODO: добавить Bold и сконвертировать в woff2 для веса. */
+/* Benzin — display-заголовки (H1/H2). В наличии одно начертание (Semibold),
+   объявляем его на весь диапазон весов заголовков → все H1/H2 берут этот файл. */
 @font-face { font-family: "Benzin"; font-weight: 600 800; font-style: normal; font-display: swap;
   src: url("../../assets/fonts/benzin-semibold.otf") format("opentype"); }
 
