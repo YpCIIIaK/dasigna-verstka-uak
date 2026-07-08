@@ -3,33 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UAK Trade — инженерное проектирование полного цикла</title>
-  <meta name="description" content="UAK Trade — проектная компания полного цикла: аудит проектов, проектирование наружных и внутренних сетей, сопровождение под ключ." />
-  <link rel="canonical" href="https://uaktrade.kz/" />
+  <title>Проекты — UAK Trade</title>
+  <meta name="description" content="Проекты UAK Trade — реализованные объекты инженерного проектирования полного цикла." />
+  <link rel="canonical" href="https://uaktrade.kz/projects.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://uaktrade.kz/" />
-  <meta property="og:title" content="UAK Trade — инженерное проектирование полного цикла" />
-  <meta property="og:description" content="Проектная компания полного цикла: аудит, наружные и внутренние сети, сопровождение под ключ." />
+  <meta property="og:url" content="https://uaktrade.kz/projects.html" />
+  <meta property="og:title" content="Проекты — UAK Trade" />
+  <meta property="og:description" content="Реализованные объекты инженерного проектирования полного цикла." />
   <meta property="og:locale" content="ru_RU" />
 
   <!-- Manrope самохостится через @font-face в main.css; предзагрузка ключевых начертаний -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-600.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-400.woff2" crossorigin />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=96" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "UAK Trade",
-    "description": "Инженерное проектирование полного цикла",
-    "url": "https://uaktrade.kz/",
-    "areaServed": "KZ"
-  }
-  </script>
+  <link rel="stylesheet" href="src/styles/main.css?v=97" />
 </head>
 <body>
 
@@ -77,197 +66,75 @@
     </div>
   </div>
 
-  <!-- ============================= HERO =========================== -->
   <main>
-  <section class="hero-home">
+
+  <!-- ===================== HERO — избранный проект ===================== -->
+  <section class="section proj-hero">
     <div class="container">
-      <div class="hero-home__inner">
-        <span class="hero-home__glow" aria-hidden="true"></span>
-        <img class="hero-home__decor hero-home__decor--d" src="assets/images/heroBackground.svg" alt="" aria-hidden="true" width="1360" height="602" />
-        <img class="hero-home__decor hero-home__decor--m" src="assets/images/heroMobileBackground.svg" alt="" aria-hidden="true" width="358" height="359" />
-        <div class="hero-home__content">
-          <h1 class="hero-home__title">UAK Trade</h1>
-          <p class="hero-home__lead">Инженерное проектирование,<br />где каждый этап под контролем</p>
-        </div>
+      <div class="proj-hero__head">
+        <h1 class="proj-hero__title">Проекты</h1>
+        <p class="proj-hero__lead">Мы — проектная компания полного цикла, которая помогает заказчику пройти путь от идеи до реализации без критических ошибок, срывов и лишних затрат</p>
       </div>
-      <a class="btn hero-home__cta" href="contacts.html">Связаться</a>
+
+      <!-- WP: избранный проект (поле «is_featured» или последний из CPT «project») -->
+      <figure class="proj-hero__banner">
+        <img class="proj-hero__img" src="assets/images/projectsImg.png" alt="Family Gardens, 2026" width="1360" height="420" />
+        <figcaption class="proj-hero__overlay">
+          <h3 class="proj-hero__name">Family Gardens, 2026</h3>
+          <p class="proj-hero__desc">Есть над чем задуматься: диаграммы связей, которые представляют собой яркий пример континентально-европейского типа политической культуры, будут разоблачены</p>
+          <a class="link-underline" href="project.html">Подробнее</a>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- ================= О КОМПАНИИ / ЦИФРЫ (кольца) ================ -->
-  <section class="section about-intro">
+  <!-- ===================== ГАЛЕРЕЯ ПРОЕКТОВ ===================== -->
+  <section class="section proj" data-proj-load>
     <div class="container">
-      <h2 class="about-intro__title">Мы — проектная компания<br />полного цикла</h2>
-
-      <div class="circles">
-        <div class="circle">
-          <span class="circle__value">700+</span>
-          <span class="circle__label">Реализованных проектов</span>
-        </div>
-        <div class="circle">
-          <span class="circle__value">16 лет</span>
-          <span class="circle__label">Сложных инженерных решений</span>
-        </div>
-        <div class="circle">
-          <span class="circle__value">100+</span>
-          <span class="circle__label">Объектов в работе одновременно</span>
-        </div>
+      <!-- WP: WP_Query по CPT «project», posts_per_page=9. По «Загрузить ещё» —
+           показ следующей карточки по одной (десктоп старт 6, мобилка 3, максимум 9).
+           Карточки 4–9 помечены hidden — JS раскрывает их по одной с плавным появлением. -->
+      <div class="proj__gallery proj__gallery--flat">
+        <figure class="proj-card">
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card">
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card">
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card" hidden>
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card" hidden>
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card" hidden>
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card" hidden>
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card" hidden>
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
+        <figure class="proj-card" hidden>
+          <span class="proj-card__tag">Family Gardens, BI GROUP</span>
+          <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Gardens, BI GROUP" width="437" height="471" loading="lazy" />
+        </figure>
       </div>
 
       <div class="actions-center">
-        <a class="btn btn--outline btn--wide" href="about.html">Подробнее о нас</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ КЛЮЧЕВЫЕ НАПРАВЛЕНИЯ (услуги) ============ -->
-  <section class="section services">
-    <div class="container">
-      <div class="services__head">
-        <h2 class="services__title">Ключевые направления<br />проектирования</h2>
-        <p class="services__intro">Мы — проектная компания полного цикла, которая помогает заказчику пройти путь от идеи до реализации без критических ошибок, срывов и лишних затрат</p>
-      </div>
-
-      <div class="services__grid">
-        <article class="service-card">
-          <span class="service-card__icon">
-            <img src="assets/images/servicesAudit.svg" alt="" width="38" height="38" aria-hidden="true" />
-          </span>
-          <div class="service-card__body">
-            <h3 class="service-card__title">Аудит проектов</h3>
-            <p class="service-card__text">Проверяем проектную документацию до выхода на стройку, выявляем критические ошибки, которые могут привести к переделкам и лишним затратам</p>
-          </div>
-          <a class="btn btn--block" href="services/audit.html">Подробнее</a>
-        </article>
-
-        <article class="service-card">
-          <span class="service-card__icon">
-            <img src="assets/images/servicesProject.svg" alt="" width="38" height="38" aria-hidden="true" />
-          </span>
-          <div class="service-card__body">
-            <h3 class="service-card__title">Проектирование наружных сетей</h3>
-            <p class="service-card__text">Проверяем проектную документацию до выхода на стройку, выявляем критические ошибки, которые могут привести к переделкам и лишним затратам</p>
-          </div>
-          <a class="btn btn--block" href="services/outdoor.html">Подробнее</a>
-        </article>
-
-        <article class="service-card">
-          <span class="service-card__icon">
-            <img src="assets/images/servicesProjectIn.svg" alt="" width="38" height="38" aria-hidden="true" />
-          </span>
-          <div class="service-card__body">
-            <h3 class="service-card__title">Проектирование внутренних сетей</h3>
-            <p class="service-card__text">Проверяем проектную документацию до выхода на стройку, выявляем критические ошибки, которые могут привести к переделкам и лишним затратам</p>
-          </div>
-          <a class="btn btn--block" href="services/indoor.html">Подробнее</a>
-        </article>
-
-        <article class="service-card">
-          <span class="service-card__icon">
-            <img src="assets/images/servicesKey.svg" alt="" width="38" height="38" aria-hidden="true" />
-          </span>
-          <div class="service-card__body">
-            <h3 class="service-card__title">Сопровождение под ключ</h3>
-            <p class="service-card__text">Проверяем проектную документацию до выхода на стройку, выявляем критические ошибки, которые могут привести к переделкам и лишним затратам</p>
-          </div>
-          <a class="btn btn--block" href="services/turnkey.html">Подробнее</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== ГАЛЕРЕЯ ПРОЕКТОВ ================== -->
-  <section class="section proj">
-    <div class="container">
-      <h2 class="proj__title">Галерея наших проектов</h2>
-
-      <!-- Вывод: десктоп — 6 карточек, мобилка — 3 (лишние помечены .proj-card--m-hide).
-           WP: цикл WP_Query по CPT «project»; posts_per_page=6, на мобиле первые 3 —
-           класс --m-hide навешивать начиная с 4-й карточки в шаблоне. -->
-      <div class="proj__gallery">
-        <div class="proj__col">
-          <figure class="proj-card">
-            <span class="proj-card__tag">Family Garden, BI GROUP</span>
-            <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
-          </figure>
-          <figure class="proj-card">
-            <span class="proj-card__tag">Family Garden, BI GROUP</span>
-            <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
-          </figure>
-        </div>
-
-        <div class="proj__col proj__col--offset">
-          <figure class="proj-card">
-            <span class="proj-card__tag">Family Garden, BI GROUP</span>
-            <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
-          </figure>
-          <figure class="proj-card proj-card--m-hide">
-            <span class="proj-card__tag">Family Garden, BI GROUP</span>
-            <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
-          </figure>
-        </div>
-
-        <div class="proj__col">
-          <figure class="proj-card proj-card--m-hide">
-            <span class="proj-card__tag">Family Garden, BI GROUP</span>
-            <img class="proj-card__img" src="assets/images/projects_image_1.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
-          </figure>
-          <figure class="proj-card proj-card--m-hide">
-            <span class="proj-card__tag">Family Garden, BI GROUP</span>
-            <img class="proj-card__img" src="assets/images/projects_image_2.png" alt="Family Garden, BI GROUP" width="437" height="471" loading="lazy" />
-          </figure>
-        </div>
-      </div>
-
-      <div class="actions-center">
-        <a class="btn btn--outline btn--wide" href="projects.html">Все проекты</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= НАШИ ПАРТНЁРЫ (бегущая строка) ================= -->
-  <section class="section ticker">
-    <div class="container ticker__head">
-      <h2 class="ticker__title">Наши партнёры<br />и клиенты</h2>
-      <p class="ticker__intro">Мы — проектная компания полного цикла, которая помогает заказчику пройти путь от идеи до реализации без критических ошибок, срывов и лишних затрат</p>
-    </div>
-
-    <div class="ticker__track" aria-hidden="true">
-      <div class="ticker__line ticker__line--ltr">
-        <ul class="ticker__row">
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        </ul>
-        <ul class="ticker__row" aria-hidden="true">
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        </ul>
-      </div>
-      <div class="ticker__line ticker__line--rtl">
-        <ul class="ticker__row">
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        </ul>
-        <ul class="ticker__row" aria-hidden="true">
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-          <li class="ticker__item"><img src="assets/images/runningLine.png" alt="" width="187" height="48" /></li>
-        </ul>
+        <button class="btn btn--outline btn--wide" type="button" data-load-more>Загрузить ещё</button>
       </div>
     </div>
   </section>
@@ -366,9 +233,45 @@
     </div>
   </footer>
 
-  <!-- Vendor (самохостинг) — раскомментировать после добавления файлов:
-  <script src="assets/vendor/lenis.min.js"></script>
-  -->
   <script src="src/lib/main.js?v=2"></script>
+  <!-- «Загрузить ещё»: показ проектов по одному (десктоп старт 6, мобилка 3, максимум 9),
+       каждый новый — плавно. WP: заменить на ajax-подгрузку по одному посту (paged/offset). -->
+  <script>
+    (function () {
+      var section = document.querySelector('[data-proj-load]');
+      if (!section) return;
+      var btn = section.querySelector('[data-load-more]');
+      var cards = Array.prototype.slice.call(section.querySelectorAll('.proj-card'));
+      var mq = window.matchMedia('(max-width: 600px)');
+      var first = true;
+      var shown;
+
+      function initialCount() { return mq.matches ? 3 : 6; }
+
+      function render() {
+        cards.forEach(function (card, i) {
+          if (i < shown) {
+            if (card.hidden) { card.hidden = false; if (!first) card.classList.add('is-loading'); }
+          } else {
+            card.hidden = true;
+            card.classList.remove('is-loading');
+          }
+        });
+        btn.hidden = shown >= cards.length;   // все 9 показаны — прячем кнопку
+        first = false;
+      }
+
+      shown = initialCount();
+      render();
+
+      btn.addEventListener('click', function () {
+        shown = Math.min(shown + 3, cards.length);   // по 3 за раз
+        render();
+      });
+
+      // Смена десктоп/мобилка — пересчёт стартового показа
+      mq.addEventListener('change', function () { shown = initialCount(); render(); });
+    })();
+  </script>
 </body>
 </html>

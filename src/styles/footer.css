@@ -1,0 +1,48 @@
+/* =============================================================================
+   footer.css — футер (медиа-запросы блока — рядом с блоком)
+   ============================================================================= */
+.footer { background: var(--color-surface); color: var(--color-white); border-radius: var(--radius-lg); padding-block: calc(60 * var(--wm)) calc(40 * var(--wm)); margin-top: calc(var(--space-section) / 2); }  /* Figma: #222222, r16; горизонт — через .container; отступ сверху — добор до 180 после CTA */
+.footer a { color: var(--color-white); transition: color var(--duration-fast); }
+.footer a:hover { color: var(--color-accent); }
+.footer__grid {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: calc(40 * var(--wm));
+}
+.footer__grid > :first-child { margin-right: auto; }  /* лого прижимает группу вправо */
+/* Группа nav+контакты (Figma: до правой стенки 362, между собой 211, слева авто) */
+.footer__cols { display: flex; gap: calc(211 * var(--wm)); margin-right: calc(322 * var(--wm)); }  /* 322 = 362 − поле 40 */
+.footer__label { font-size: var(--text-sm); color: rgba(255,255,255,0.5); margin-bottom: var(--space-md); }
+.footer__list { display: grid; gap: calc(12 * var(--wm)); }        /* Figma: gap 12 */
+.footer__list, .footer__contacts { font-size: var(--text-base); font-weight: var(--weight-regular); }
+.footer__contacts { display: grid; gap: calc(12 * var(--wm)); margin-bottom: var(--space-lg); }
+.footer__socials { display: flex; gap: calc(20 * var(--wm)); }     /* Figma: gap 20 */
+.footer__social { display: inline-flex; color: var(--color-white); transition: color var(--duration-fast) var(--ease-out); }
+.footer__social:hover { color: var(--color-accent); }
+.footer__social svg { width: calc(24 * var(--wm)); height: calc(24 * var(--wm)); }
+.footer__divider { height: 1px; background: var(--color-border); border: 0; margin: 0; }  /* rgba(255,255,255,.3) */
+.footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-sm); padding-top: calc(40 * var(--wm)); font-size: var(--text-base); color: rgba(255,255,255,0.6); }
+.footer__bottom b { color: var(--color-white); font-weight: var(--weight-semibold); }
+
+@media (max-width: 1024px) {
+  /* фикс-отступы макета убираем — группа встаёт сразу за лого */
+  .footer__cols { gap: clamp(2rem, 1rem + 5vw, 6rem); margin-right: 0; }
+}
+@media (max-width: 760px) {
+  .footer__grid { flex-wrap: wrap; gap: var(--space-xl); }
+  .footer__grid > :first-child { margin-right: 0; flex-basis: 100%; }  /* лого сверху на всю ширину */
+}
+@media (max-width: 540px) {
+  .footer__cols { flex-direction: column; gap: var(--space-lg); }
+}
+
+/* Мобайл ≤600: две колонки — лого слева, инфо-колонка справа (контакты → соцсети → меню) */
+@media (max-width: 600px) {
+  .footer { padding-block: calc(24 * var(--wm)) calc(24 * var(--wm)); }
+  .footer__grid { flex-wrap: nowrap; gap: calc(24 * var(--wm)); padding-bottom: calc(24 * var(--wm)); }
+  .footer__grid > :first-child { margin-right: 0; flex-basis: auto; }
+  .footer__logo img { width: calc(144 * var(--wm)); height: auto; }
+  .footer__cols { flex-direction: column-reverse; gap: calc(32 * var(--wm)); margin-right: 0; }   /* соцсети → список ссылок 32 */
+  .footer__contacts { margin-bottom: calc(16 * var(--wm)); }   /* email → соцсети 16 */
+  .footer__bottom { flex-direction: column; gap: calc(6 * var(--wm)); }   /* копирайт → «Сделано в factum» 6 */
+}

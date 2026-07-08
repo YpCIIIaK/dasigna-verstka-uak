@@ -1,0 +1,142 @@
+/* =============================================================================
+   global.css — reset, базовая типографика, утилиты (по образцу Artwin global.scss)
+   ============================================================================= */
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-body);
+  background: var(--color-bg);
+  overflow-x: clip;                        /* clip, а не hidden — не делает body скролл-контейнером и не ломает sticky-шапку */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: none; }
+ul, ol { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: calc(3 * var(--wm));
+  border-radius: 2px;
+}
+
+/* --- Типографика --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  text-wrap: balance;
+}
+/* H1 / H2 — display-шрифт Benzin, UPPERCASE */
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-h1);
+  text-transform: uppercase;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
+}
+/* H3 / H4 — Manrope Bold; H3 UPPERCASE */
+h3 {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
+}
+h4 {
+  font-size: var(--text-h4);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+/* Display-акцент помельче (Benzin 24, UPPER) — для эйбрау/подзаголовков секций */
+.display-sm {
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
+}
+p  { line-height: var(--leading-normal); }
+
+/* Мобайл: заголовки всех блоков — Benzin 24, uppercase, 120% (базовый h2 = clamp 28→36) */
+@media (max-width: 600px) {
+  .about-intro__title, .services__title, .proj__title,
+  .ticker__title, .cta__title,
+  .about-banner__title, .certs__title { font-size: calc(24 * var(--wm)); }
+}
+
+/* --- Утилиты --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+/* Половинный отступ с каждой стороны: соседние секции складываются в
+   --space-section (Figma: calc(180 * var(--wm)) — это ВЕСЬ промежуток между блоками, не удвоенный). */
+.section { padding-block: calc(var(--space-section) / 2); }
+.section--tight { padding-block: clamp(1.25rem, 1rem + 1.5vw, 2.25rem); }
+.section--dark { background: var(--color-surface-dark); color: rgba(255,255,255,0.82); }
+.section--dark h1, .section--dark h2, .section--dark h3 { color: var(--color-white); }
+.section--surface { background: var(--color-surface); }
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+.text-accent { color: var(--color-accent); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.section-head { max-width: 60ch; margin-bottom: var(--space-xl); }
+.section-head__title { margin-bottom: var(--space-sm); }
+.section-head__intro { color: var(--color-body); font-size: var(--text-lead, 1.125rem); }
+
+/* Акцент и управляемые переносы строк */
+.u-accent { color: var(--color-accent); }
+.u-br-d { display: inline; }                   /* десктопный перенос строки */
+.u-br-m { display: none; }                     /* мобильный перенос строки */
+@media (max-width: 600px) {
+  .u-br-d { display: none; }
+  .u-br-m { display: inline; }
+}
+
+/* --- prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
