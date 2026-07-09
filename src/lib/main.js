@@ -30,6 +30,44 @@
   const lenisResume = () => { if (lenis) lenis.start(); };
 
   /* --------------------------------------------------------------------------
+     Прелоадер (десктоп): круг с подсветкой + счётчик процентов при загрузке.
+     На мобиле (скрыт CSS) сразу убираем и не блокируем скролл.
+     -------------------------------------------------------------------------- */
+  const initPreloader = () => {
+    const pre = document.querySelector("[data-preloader]");
+    if (!pre) return;
+    const percentEl = pre.querySelector("[data-preloader-percent]");
+    if (mq("(max-width: 600px)").matches) { pre.remove(); return; }   // только десктоп
+
+    document.documentElement.style.overflow = "hidden";               // блок скролла на время загрузки
+    lenisPause();
+
+    let loaded = false;
+    let pct = 0;
+    window.addEventListener("load", () => { loaded = true; });
+
+    const finish = () => {
+      if (percentEl) percentEl.textContent = "100%";
+      setTimeout(() => {
+        pre.classList.add("is-hidden");
+        document.documentElement.style.overflow = "";                 // возврат к CSS (overflow-x: clip)
+        lenisResume();
+        pre.addEventListener("transitionend", () => pre.remove(), { once: true });
+      }, 250);
+    };
+
+    const tick = () => {
+      const target = loaded ? 100 : 90;                               // до полной загрузки не доходим до 100
+      pct += Math.max(0.6, (target - pct) * 0.06);
+      if (pct >= 100) { pct = 100; finish(); return; }
+      if (percentEl) percentEl.textContent = Math.floor(pct) + "%";
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  initPreloader();
+
+  /* --------------------------------------------------------------------------
      Шапка: тень при скролле
      -------------------------------------------------------------------------- */
   if (header) {

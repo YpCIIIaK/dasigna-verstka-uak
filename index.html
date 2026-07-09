@@ -18,7 +18,7 @@
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-600.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-400.woff2" crossorigin />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=116" />
+  <link rel="stylesheet" href="src/styles/main.css?v=117" />
 
   <script type="application/ld+json">
   {
@@ -32,6 +32,15 @@
   </script>
 </head>
 <body>
+
+  <!-- ===================== ПРЕЛОАДЕР (десктоп) ===================== -->
+  <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Загрузка сайта">
+    <div class="preloader__stage">
+      <span class="preloader__glow" aria-hidden="true"></span>
+      <span class="preloader__ring" aria-hidden="true"></span>
+      <span class="preloader__percent" data-preloader-percent>0%</span>
+    </div>
+  </div>
 
   <!-- ============================ ШАПКА ============================ -->
   <header class="header" data-header>
@@ -368,6 +377,6 @@
   </footer>
 
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="src/lib/main.js?v=6"></script>
+  <script src="src/lib/main.js?v=7"></script>
 </body>
 </html>

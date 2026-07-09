@@ -365,6 +365,51 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 .hero-home__content { position: relative; z-index: 2; text-align: center; padding-inline: var(--space-md); }
 .hero-home__title { color: var(--color-accent); max-width: none; margin: 0; }   /* лайм; размеры/трекинг — из базового h1 */
 .hero-home__cta { display: none; }   /* только мобайл — на десктопе кнопка «Связаться» в шапке */
+
+/* =============================================================================
+   ПРЕЛОАДЕР (десктоп): тёмный фон + один большой круг (как эллипс из hero-SVG,
+   Ø580) + та же вращающаяся подсветка + счётчик процентов по центру круга.
+   ============================================================================= */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: var(--color-bg);
+  transition: opacity var(--duration-slow) var(--ease-out), visibility var(--duration-slow);
+}
+.preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader__stage {
+  position: relative; display: grid; place-items: center;
+  width: calc(580 * var(--wm)); height: calc(580 * var(--wm));   /* Ø большого круга из heroBackground.svg */
+  isolation: isolate;
+}
+.preloader__ring {
+  position: absolute; inset: 0; z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.08);   /* тонкий обод — как эллипс на макете */
+  border-radius: 50%;
+}
+.preloader__glow {                                /* идентична hero-home__glow */
+  position: absolute; top: 50%; left: 50%; z-index: 0;
+  height: 122%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from -23deg,
+    rgba(233, 255, 188, 0) 0deg,
+    rgba(233, 255, 188, 0.9) 23deg,
+    rgba(233, 255, 188, 0) 46deg);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 80%, #000 83%, #000 85.5%, transparent 90%);
+          mask: radial-gradient(circle closest-side, transparent 80%, #000 83%, #000 85.5%, transparent 90%);
+  filter: blur(70px);
+  animation: hero-glow-spin 9s linear infinite;
+  will-change: transform; backface-visibility: hidden;
+}
+.preloader__percent {
+  position: relative; z-index: 2;
+  font-family: var(--font-display); text-transform: uppercase;
+  font-size: calc(72 * var(--wm)); font-weight: var(--weight-semibold);
+  line-height: 1; color: var(--color-accent);
+}
+@media (prefers-reduced-motion: reduce) { .preloader__glow { animation: none; } }
+@media (max-width: 600px) { .preloader { display: none; } }   /* прелоадер — только десктоп */
 .hero-home__lead {
   margin-top: var(--space-md);          /* Figma: заголовок → подзаголовок ~24 */
   font-size: var(--text-base);          /* 16 */
