@@ -9,7 +9,7 @@
 
 /* overflow-x гасим на body (как в dasigna), НЕ на html: overflow на документе
    мешает Lenis скроллить window и вызывает «буксование». */
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }  /* clip (не hidden) — гасит фантомный горизонт-скролл на мобиле, не делает документ скролл-контейнером (Lenis/sticky целы) */
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; scrollbar-gutter: stable; }  /* clip (не hidden) — гасит фантомный горизонт-скролл; scrollbar-gutter: stable — место под скроллбар зарезервировано всегда, контент не прыгает при его появлении */
 
 /* Официальный CSS Lenis (классы на <html> вешает сам Lenis).
    Ключевая строка — scroll-behavior: auto при активном Lenis: он пишет позицию
