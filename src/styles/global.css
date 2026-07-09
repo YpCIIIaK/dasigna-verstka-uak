@@ -9,7 +9,7 @@
 
 /* overflow-x гасим на body (как в dasigna), НЕ на html: overflow на документе
    мешает Lenis скроллить window и вызывает «буксование». */
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }  /* clip (не hidden) — гасит фантомный горизонт-скролл на мобиле, не делает документ скролл-контейнером (Lenis/sticky целы) */
 
 /* Официальный CSS Lenis (классы на <html> вешает сам Lenis).
    Ключевая строка — scroll-behavior: auto при активном Lenis: он пишет позицию
@@ -93,7 +93,9 @@ p  { line-height: var(--leading-normal); }
 @media (max-width: 600px) {
   .about-intro__title, .services__title, .proj__title,
   .ticker__title, .cta__title,
-  .about-banner__title, .certs__title { font-size: calc(24 * var(--wm)); text-align: center; }
+  .about-banner__title, .certs__title { font-size: calc(24 * var(--wm)); }
+  /* по центру — только «Мы — проектная компания полного цикла»; остальные заголовки по левому краю */
+  .about-intro__title { text-align: center; }
 }
 
 /* --- Утилиты --- */
