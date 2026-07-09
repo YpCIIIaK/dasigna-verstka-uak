@@ -436,6 +436,8 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   font-weight: var(--weight-medium);    /* 500 */
   line-height: 1.3;
   color: var(--color-white);
+  max-width: calc(247 * var(--wm));     /* макс. длина 247 → перенос как на макете */
+  margin-inline: auto;
 }
 
 /* Мобайл ≤600: круг влезает в экран (375−16·2); блик анимируется; заголовок в одну строку; кнопка снизу */

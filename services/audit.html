@@ -22,7 +22,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="../src/styles/main.css?v=137" />
+  <link rel="stylesheet" href="../src/styles/main.css?v=138" />
 </head>
 <body>
 
@@ -434,8 +434,17 @@
         var head = e.target.closest('.faq__head');
         if (!head) return;
         var item = head.closest('.faq__item');
-        var open = item.classList.toggle('is-open');
-        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        var willOpen = !item.classList.contains('is-open');
+        // Аккордеон: раскрываем один — остальные закрываем
+        root.querySelectorAll('.faq__item.is-open').forEach(function (other) {
+          if (other !== item) {
+            other.classList.remove('is-open');
+            var oh = other.querySelector('.faq__head');
+            if (oh) oh.setAttribute('aria-expanded', 'false');
+          }
+        });
+        item.classList.toggle('is-open', willOpen);
+        head.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
       });
     })();
   </script>
