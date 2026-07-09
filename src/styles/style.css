@@ -945,6 +945,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .cpage__title { font-size: calc(40 * var(--wm)); }   /* Benzin 40/100% +2% uppercase */
   .cpage__grid { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
   .cpage__info { flex-direction: column; gap: calc(24 * var(--wm)); padding: calc(24 * var(--wm)); }   /* мобайл: равномерный паддинг, отступы 86/186 — только десктоп */
+  .cpage__hours { flex-direction: row; gap: calc(16 * var(--wm)); }   /* ПН-ПТ и СБ-ВС рядом, отступ 16 */
   .cpage__map { min-height: calc(360 * var(--wm)); }
   .cpage__map iframe { min-height: calc(360 * var(--wm)); filter: none; }   /* без ховера на тач — карта светлая */
 }
