@@ -28,10 +28,12 @@ body {
   line-height: var(--leading-normal);
   color: var(--color-body);
   background: var(--color-bg);
-  overflow-x: clip;                        /* clip, а не hidden — не делает body скролл-контейнером и не ломает sticky-шапку */
+  overflow-x: clip;                        /* clip, а не hidden — не делает body скролл-контейнером */
+  padding-top: var(--header-height);       /* фикс-шапка висит сверху → отступ на её высоту (136) */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+@media (max-width: 600px) { body { padding-top: calc(96 * var(--wm)); } }   /* мобильная шапка ниже — 96 */
 
 img, picture, svg, video { display: block; max-width: 100%; height: auto; }
 

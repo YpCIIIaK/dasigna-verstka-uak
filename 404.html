@@ -15,7 +15,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=122" />
+  <link rel="stylesheet" href="src/styles/main.css?v=134" />
 </head>
 <body>
 
@@ -30,7 +30,7 @@
       </a>
 
       <div class="header__actions">
-        <a class="btn" href="contacts.html">
+        <a class="btn" data-modal-open="#modal-request">
           <span class="btn__swap"><span>Связаться</span><span>Связаться</span></span>
         </a>
         <button class="btn btn--menu" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu">
@@ -132,6 +132,33 @@
       </div>
     </div>
   </footer>
+
+  <div class="modal" id="modal-request">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog modal__dialog--form" role="dialog" aria-modal="true" aria-labelledby="modal-request-title">
+      <button class="modal__close" type="button" data-modal-close aria-label="Закрыть">
+        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <h3 class="modal__title" id="modal-request-title">Оставьте заявку</h3>
+      <form class="cta__form" data-form data-success="#modal-success">
+        <div class="cta__fields">
+          <div class="cta__field" data-field="name">
+            <input class="cta__control field__control" type="text" name="name" placeholder="Ваше имя *" />
+          </div>
+          <div class="cta__field" data-field="phone">
+            <input class="cta__control field__control" type="tel" name="phone" placeholder="Номер телефона *" />
+          </div>
+          <div class="cta__field">
+            <input class="cta__control field__control" type="text" name="company" placeholder="Наименование компании" />
+          </div>
+          <div class="cta__field cta__field--comment">
+            <textarea class="cta__control field__control" name="comment" rows="1" placeholder="Комментарий"></textarea>
+          </div>
+        </div>
+        <button class="btn btn--md btn--block" type="submit">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
   <script src="src/lib/main.js?v=7"></script>

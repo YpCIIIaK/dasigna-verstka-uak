@@ -22,7 +22,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=122" />
+  <link rel="stylesheet" href="src/styles/main.css?v=134" />
 </head>
 <body>
 
@@ -37,7 +37,7 @@
       </a>
 
       <div class="header__actions">
-        <a class="btn" href="contacts.html">
+        <a class="btn" data-modal-open="#modal-request">
           <span class="btn__swap"><span>Связаться</span><span>Связаться</span></span>
         </a>
         <button class="btn btn--menu" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu">
@@ -149,9 +149,7 @@
       <div class="pcta__box">
         <h2 class="pcta__title">Оставьте заявку, чтобы начать проект</h2>
         <div class="pcta__actions">
-          <button class="btn btn--md btn--dark" type="button" data-modal-open="#modal-request">
-            <span class="btn__swap"><span>Обсудить проект</span><span>Обсудить проект</span></span>
-          </button>
+          <button class="btn btn--md btn--dark" type="button" data-modal-open="#modal-request">Обсудить проект</button>
         </div>
       </div>
     </div>

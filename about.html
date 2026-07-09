@@ -22,8 +22,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="assets/vendor/fancybox.css" />
-  <link rel="stylesheet" href="src/styles/main.css?v=122" />
+  <link rel="stylesheet" href="src/styles/main.css?v=134" />
 </head>
 <body>
 
@@ -38,7 +37,7 @@
       </a>
 
       <div class="header__actions">
-        <a class="btn" href="contacts.html">
+        <a class="btn" data-modal-open="#modal-request">
           <span class="btn__swap"><span>Связаться</span><span>Связаться</span></span>
         </a>
         <button class="btn btn--menu" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu">
@@ -84,9 +83,7 @@
           <p class="about-banner__lead">Полный цикл инженерного  проектирования — от&nbsp;идеи&nbsp;до&nbsp;реализации</p>
         </div>
       </div>
-      <button class="btn about-banner__cta" type="button" data-modal-open="#modal-request">
-        <span class="btn__swap"><span>Оставить заявку</span><span>Оставить заявку</span></span>
-      </button>
+      <button class="btn about-banner__cta" type="button" data-modal-open="#modal-request">Оставить заявку</button>
     </div>
   </section>
 
@@ -94,7 +91,7 @@
   <section class="section about-intro">
     <div class="container">
       <h2 class="about-intro__title about-intro__title--long">
-        <span class="u-accent">Мы — проектная  компания полного   цикла,</span> которая  помогает  заказчику  пройти  путь от идеи до  реализации  без  критических  ошибок, срывов и   лишних затрат
+        <strong class="u-accent">Мы — проектная компания полного цикла,</strong> которая помогает  заказчику  пройти  путь от идеи до  реализации  без  критических  ошибок, срывов и   лишних затрат
       </h2>
 
       <div class="circles">
@@ -130,14 +127,14 @@
       </div>
 
       <ul class="certs__track" data-cert-track>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
-        <li class="certs__card"><a class="certs__link" href="assets/images/certificate.png" data-fancybox="certs" data-caption="Сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
       </ul>
     </div>
   </section>
@@ -153,7 +150,7 @@
         </div>
 
         <div class="cta__content">
-          <h2 class="cta__title">Давайте обсудим  ваш проект</h2>
+          <h2 class="cta__title"><span>Давайте обсудим</span> <span>ваш проект</span></h2>
 
           <form class="cta__form" data-form data-success="#modal-success">
             <div class="cta__fields">
@@ -263,15 +260,8 @@
   </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="assets/vendor/fancybox.umd.js"></script>
   <script src="src/lib/main.js?v=7"></script>
-  <!-- Лайтбокс сертификатов: клик открывает галерею, листается мышью/свайпом -->
-  <script>
-    if (window.Fancybox) {
-      Fancybox.bind('[data-fancybox="certs"]', { Thumbs: false, Toolbar: { display: { right: ["close"] } } });
-    }
-  </script>
-  <!-- Слайдер сертификатов: прокрутка трека стрелками (на шаг = ширина карточки + gap) -->
+  <!-- Слайдер сертификатов: стрелки (шаг = ширина карточки + gap) + перетаскивание мышью -->
   <script>
     (function () {
       var track = document.querySelector('[data-cert-track]');
@@ -286,6 +276,23 @@
       }
       prev && prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
       next && next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+
+      // Перетаскивание мышью/пальцем (drag-to-scroll)
+      var down = false, startX = 0, startScroll = 0;
+      track.querySelectorAll('img').forEach(function (img) { img.draggable = false; });
+      track.addEventListener('pointerdown', function (e) {
+        down = true; startX = e.clientX; startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+        try { track.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      track.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        track.scrollLeft = startScroll - (e.clientX - startX);
+      });
+      var end = function () { down = false; track.classList.remove('is-dragging'); };
+      track.addEventListener('pointerup', end);
+      track.addEventListener('pointercancel', end);
+      track.addEventListener('pointerleave', end);
     })();
   </script>
 </body>

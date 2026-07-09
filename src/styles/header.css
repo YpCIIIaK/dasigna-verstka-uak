@@ -2,14 +2,15 @@
    header.css — шапка, логотип, меню-модалка (медиа-запросы блока — рядом с блоком)
    ============================================================================= */
 .header {
-  position: sticky; top: 0; z-index: var(--z-header);
+  position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-header);   /* висит сверху, потока не занимает → сжатие при скролле не двигает контент */
   background: transparent;                 /* прозрачная в самом верху */
   transition: background-color var(--duration-base) var(--ease-out),
               box-shadow var(--duration-base) var(--ease-out);
 }
 /* При прокрутке: фон = цвет фона сайта, паддинги вдвое меньше — компактная шапка */
 .header.is-scrolled { background: var(--color-bg); box-shadow: none; }
-.header.is-scrolled .header__inner { min-height: auto; padding-block: calc(20 * var(--wm)); }
+/* Компактная высота задана конкретным числом (не auto) — иначе min-height не анимируется и шапка «дёргается» */
+.header.is-scrolled .header__inner { min-height: calc(96 * var(--wm)); padding-block: calc(20 * var(--wm)); }
 .header__inner {
   position: relative;                                 /* якорь для абсолютного меню-дропдауна */
   min-height: var(--header-height);
@@ -102,7 +103,7 @@
 /* Мобайл ≤600: шапка ниже, лого-мобайл, кнопка «Меню» фиксированного размера */
 @media (max-width: 600px) {
   .header__inner { min-height: calc(96 * var(--wm)); padding-block: calc(24 * var(--wm)); }
-  .header.is-scrolled .header__inner { padding-block: calc(12 * var(--wm)); }
+  .header.is-scrolled .header__inner { min-height: calc(72 * var(--wm)); padding-block: calc(12 * var(--wm)); }
   .header__logo img { width: calc(95 * var(--wm)); height: auto; }
   .header__actions .btn--menu {             /* фикс 77×46 — «Меню»/«Закрыть» не меняют размер */
     min-width: 0;

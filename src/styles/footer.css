@@ -15,7 +15,7 @@
 .footer__label { font-size: var(--text-sm); color: rgba(255,255,255,0.5); margin-bottom: var(--space-md); }
 .footer__list { display: grid; gap: calc(12 * var(--wm)); }        /* Figma: gap 12 */
 .footer__list, .footer__contacts { font-size: var(--text-base); font-weight: var(--weight-regular); }
-.footer__contacts { display: grid; gap: calc(12 * var(--wm)); margin-bottom: var(--space-lg); }
+.footer__contacts { display: grid; gap: calc(8 * var(--wm)); margin-bottom: calc(16 * var(--wm)); }   /* телефон/адрес/почта — 8; контакты → соцсети 16 */
 .footer__socials { display: flex; gap: calc(20 * var(--wm)); }     /* Figma: gap 20 */
 .footer__social { display: inline-flex; color: var(--color-white); transition: color var(--duration-fast) var(--ease-out); }
 .footer__social:hover { color: var(--color-accent); }
