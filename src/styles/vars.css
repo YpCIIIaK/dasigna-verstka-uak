@@ -1,97 +1,72 @@
-/* =============================================================================
-   vars.css — дизайн-токены (по образцу Artwin: vars + :root в global)
-   ============================================================================= */
+
 :root {
-  /* --- Fluid-масштаб (студийный метод) ---
-     Все «жёсткие» layout-размеры записаны как calc(N * var(--wm)), где --wm ≈ 1px
-     при базовой ширине макета. Ниже базы всё линейно ужимается пропорционально;
-     на брейкпоинтах база меняется (1440 → 768 → 390).
-     100vw закапирован базой → на мониторах ≥1440 множитель = 1px: макет замирает
-     пиксель-в-пиксель (без переростания и вылета за --container-max).
-     Бордеры 1–2px, clamp()-типографика и --space-section намеренно НЕ масштабируются
-     этим методом (у шрифтов остаётся нижний потолок читаемости). */
+
   --width-base:       1440;
   --width-current:    min(100vw, 1440px);
   --width-multiplier: calc(var(--width-current) / var(--width-base));
   --wm:               var(--width-multiplier);
 
-  /* --- Цвета (из Figma-палитры; тёмная тема) --- */
-  --color-bg:            #191919;  /* фон сайта */
-  --color-accent:        #e9ffbc;  /* акцент = ховер-эффекты (лайм), один цвет */
-  --color-on-accent:     #191919;  /* текст на акценте (тёмный на лайме) */
-  --color-heading:       #ffffff;  /* заголовки на тёмном фоне */
-  --color-body:          rgba(255, 255, 255, 0.72);  /* основной текст */
-  --color-ink:           #1a1718;  /* тёмный текст на светлых плашках */
+  --color-bg:            #191919;
+  --color-accent:        #e9ffbc;
+  --color-on-accent:     #191919;
+  --color-heading:       #ffffff;
+  --color-body:          rgba(255, 255, 255, 0.72);
+  --color-ink:           #1a1718;
   --color-white:         #ffffff;
 
-  /* Формы / поверхности (из группы «Формы/Фон») */
-  --color-surface:       #222222;  /* фон полей/карточек на тёмном */
+  --color-surface:       #222222;
   --color-surface-2:     #4d4d4d;
   --color-surface-3:     #5a5a5a;
-  --color-surface-dark:  #111111;  /* секции/футер темнее основного фона */
-  --color-border:        rgba(255, 255, 255, 0.30);  /* граница полей */
-  --color-overlay:       rgba(9, 9, 9, 0.6);          /* подложка модалки */
+  --color-surface-dark:  #111111;
+  --color-border:        rgba(255, 255, 255, 0.30);
+  --color-overlay:       rgba(9, 9, 9, 0.6);
 
-  /* --- Fluid-типографика: clamp(min, предпочт, max) + "px → px" ---
-     Desktop-значения из Figma text styles. */
-  --text-h1:  clamp(2.75rem, 1.2rem + 7.5vw, 6.25rem);  /* 44 → 100 (Benzin, UPPER) */
-  --text-h2:  clamp(1.75rem, 1.1rem + 2.6vw, 2.25rem);  /* 28 → 36 (Benzin, UPPER) */
-  --text-display-sm: 1.5rem;                            /* 24 (Benzin, UPPER) */
-  --text-h3:  1.5rem;                                   /* 24 (Manrope 700, UPPER) */
-  --text-h4:  1.25rem;                                  /* 20 (Manrope 700) */
-  --text-numbers: clamp(2.25rem, 1.6rem + 2.4vw, 3rem); /* 36 → 48 (Manrope 500) */
-  --text-base:  1rem;                                   /* 16 */
-  --text-sm:    0.875rem;                               /* 14 */
+  --text-h1:  clamp(2.75rem, 1.2rem + 7.5vw, 6.25rem);
+  --text-h2:  clamp(1.75rem, 1.1rem + 2.6vw, 2.25rem);
+  --text-display-sm: 1.5rem;
+  --text-h3:  1.5rem;
+  --text-h4:  1.25rem;
+  --text-numbers: clamp(2.25rem, 1.6rem + 2.4vw, 3rem);
+  --text-base:  1rem;
+  --text-sm:    0.875rem;
 
-  /* Шрифты: Benzin — display-заголовки (коммерческий, фолбэк Manrope);
-     Manrope — весь остальной текст. */
   --font-display: "Benzin", "Manrope", system-ui, sans-serif;
   --font-sans:    "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   --weight-regular: 400;  --weight-medium: 500;  --weight-semibold: 600;  --weight-bold: 700;
-  --tracking-h1: 0.02em;                                /* letter-spacing H1 = 2% */
-  --leading-tight: 1;     /* H1 100% */
-  --leading-snug:  1.2;   /* H2/H3/H4 120% */
-  --leading-normal: 1.3;  /* body 130% */
+  --tracking-h1: 0.02em;
+  --leading-tight: 1;
+  --leading-snug:  1.2;
+  --leading-normal: 1.3;
 
-  /* --- Шкала отступов --- */
   --space-3xs: 0.25rem;  --space-2xs: 0.5rem;  --space-xs: 0.75rem;
   --space-sm:  1rem;     --space-md:  1.5rem;  --space-lg: 2rem;
   --space-xl:  3rem;     --space-2xl: 4rem;
-  --space-section: clamp(4rem, 1.45rem + 10.9vw, 11.25rem);   /* 64 → 180 Figma: 180px между блоками */
+  --space-section: clamp(4rem, 1.45rem + 10.9vw, 11.25rem);
 
-  /* --- Раскладка (Figma: артборд 1440, контент 1360, поле 40) ---
-     max-width = артборд 1440; паддинг 40 съедает поля → контент ровно 1360. */
   --container-max: 1440px;
-  --container-pad: clamp(1rem, 0.4rem + 3vw, 2.5rem);  /* 16 (mob) → 40 (desktop) */
-  --header-height: calc(136 * var(--wm));                               /* Figma: 40 + 56 + 40 */
+  --container-pad: clamp(1rem, 0.4rem + 3vw, 2.5rem);
+  --header-height: calc(136 * var(--wm));
 
-  /* --- Радиусы / тени --- */
   --radius-sm:   calc(8 * var(--wm));
-  --radius-md:   calc(12 * var(--wm));   /* из Figma-плашек rounded-[12px] */
-  --radius-lg:   calc(16 * var(--wm));   /* Figma: крупные контейнеры (карточки, футер, меню, галерея) */
+  --radius-md:   calc(12 * var(--wm));
+  --radius-lg:   calc(16 * var(--wm));
   --radius-pill: calc(999 * var(--wm));
   --shadow-sm: 0 calc(4 * var(--wm)) calc(14 * var(--wm)) rgba(20, 24, 29, 0.06);
   --shadow-md: 0 calc(12 * var(--wm)) calc(30 * var(--wm)) rgba(20, 24, 29, 0.10);
 
-  /* --- Motion --- */
   --duration-fast: 150ms;
   --duration-base: 260ms;
   --duration-slow: 600ms;
   --ease-out:      cubic-bezier(0.33, 1, 0.68, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* --- Слои --- */
   --z-header: 100;  --z-menu: 200;  --z-widget: 300;  --z-modal: 400;
 }
 
-/* Смена базы fluid-множителя: планшет считается от 768, мобайл — от 390.
-   100vmin берёт меньшую сторону вьюпорта → в портрете масштаб идёт от ширины. */
 @media (max-width: 1024px) { :root { --width-base: 768; --width-current: 100vmin; } }
-@media (max-width: 767px)  { :root { --width-base: 390; --width-current: 100vmin; } }   /* мобильный макет — 390 */
+@media (max-width: 767px)  { :root { --width-base: 390; --width-current: 100vmin; } }
 
-/* Мобайл: между всеми основными блоками — 80px. --space-section = полный промежуток
-   (каждая .section берёт /2 сверху и /2 снизу, футер — margin-top /2). Меняем один токен. */
 @media (max-width: 600px) {
   :root { --space-section: calc(80 * var(--wm)); }
 }

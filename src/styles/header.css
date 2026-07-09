@@ -1,59 +1,51 @@
-/* =============================================================================
-   header.css — шапка, логотип, меню-модалка (медиа-запросы блока — рядом с блоком)
-   ============================================================================= */
+
 .header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-header);   /* висит сверху, потока не занимает → сжатие при скролле не двигает контент */
-  background: transparent;                 /* прозрачная в самом верху */
+  position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-header);
+  background: transparent;
   transition: background-color var(--duration-base) var(--ease-out),
               box-shadow var(--duration-base) var(--ease-out);
 }
-/* При прокрутке: фон = цвет фона сайта, паддинги вдвое меньше — компактная шапка */
+
 .header.is-scrolled { background: var(--color-bg); box-shadow: none; }
-/* Компактная высота задана конкретным числом (не auto) — иначе min-height не анимируется и шапка «дёргается» */
+
 .header.is-scrolled .header__inner { min-height: calc(96 * var(--wm)); padding-block: calc(20 * var(--wm)); }
 .header__inner {
-  position: relative;                                 /* якорь для абсолютного меню-дропдауна */
+  position: relative;
   min-height: var(--header-height);
   display: flex; align-items: center; justify-content: space-between;
   gap: var(--space-lg);
-  padding-block: calc(40 * var(--wm));                /* Figma: контент отступает на 40 сверху/снизу */
+  padding-block: calc(40 * var(--wm));
   transition: min-height var(--duration-base) var(--ease-out),
               padding-block var(--duration-base) var(--ease-out);
 }
 .header__logo { display: inline-flex; align-items: center; gap: calc(12 * var(--wm)); color: var(--color-heading); }
-.header__actions { display: inline-flex; align-items: center; gap: calc(15 * var(--wm)); }  /* Figma: зазор Связаться↔Меню */
-/* Кнопки в шапке фиксированного размера: «Связаться» 125×46, «Меню» 92×46.
-   Паддинг уменьшен, nowrap — чтобы длинный текст («Связаться», «Закрыть») влезал при масштабировании. */
+.header__actions { display: inline-flex; align-items: center; gap: calc(15 * var(--wm)); }
+
 .header__actions .btn { min-width: 0; width: calc(125 * var(--wm)); height: calc(46 * var(--wm)); padding-block: 0; padding-inline: calc(12 * var(--wm)); white-space: nowrap; }
 .header__actions .btn--menu { width: calc(92 * var(--wm)); }
 .header__actions .btn__swap { width: 100%; }
 
-/* Белая кнопка «Связаться» в шапке: нажатие → чёрный фон, белый текст. */
 @media (hover: hover) and (min-width: 601px) { .header .btn:not(.btn--menu):active { --_bg: #000; --_fg: var(--color-white); } }
 
-/* Мобайл: «Связаться» + «Меню» + лого не влезают в узкий ряд → оставляем лого + «Меню». */
 @media (max-width: 600px) {
   .header__inner { gap: var(--space-sm); }
   .header__actions .btn:not(.btn--menu) { display: none; }
 }
 
-/* Логотип-вордмарк (пока текстом; SVG из Figma → assets/logo/) */
 .logo { display: inline-flex; align-items: center; gap: calc(12 * var(--wm)); line-height: 1; }
 .logo__mark { width: calc(40 * var(--wm)); height: calc(40 * var(--wm)); flex: none; }
 .logo__text { font-weight: var(--weight-bold); font-size: 1.25rem; letter-spacing: 0.01em; color: var(--color-heading); text-transform: uppercase; }
 .logo--lg .logo__mark { width: calc(60 * var(--wm)); height: calc(60 * var(--wm)); }
 .logo--lg .logo__text { font-size: 1.75rem; }
 
-/* Меню-модалка (дропдаун из кнопки «Меню»).
-   Живёт ВНУТРИ .header__inner (position:relative). */
 .menu {
   position: absolute; z-index: var(--z-menu);
-  top: calc(100% - 16 * var(--wm));           /* низ шапки минус нахлёст 16 (как было) */
-  right: calc(40 * var(--wm));                /* отступ справа — у контейнера есть свой паддинг */
-  width: calc(248 * var(--wm));                               /* Figma: 248 × 336 */
-  background: var(--color-surface);           /* #222222 */
-  border-radius: var(--radius-lg);            /* 16 */
-  padding: calc(24 * var(--wm));                              /* (248 − контент 200) / 2 */
+  top: calc(100% - 16 * var(--wm));
+  right: calc(40 * var(--wm));
+  width: calc(248 * var(--wm));
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: calc(24 * var(--wm));
   display: grid; gap: calc(24 * var(--wm));
   opacity: 0; visibility: hidden; transform: translateY(calc(-8 * var(--wm)));
   transition: opacity var(--duration-base) var(--ease-out),
@@ -62,29 +54,28 @@
 }
 .menu.is-open { opacity: 1; visibility: visible; transform: none; }
 
-.menu__nav { display: grid; gap: calc(22 * var(--wm)); }       /* Figma: gap 22 */
+.menu__nav { display: grid; gap: calc(22 * var(--wm)); }
 .menu__item {
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
-  font-size: var(--text-base); font-weight: var(--weight-semibold);  /* 16/600 */
+  font-size: var(--text-base); font-weight: var(--weight-semibold);
   color: var(--color-white);
   transition: color var(--duration-fast) var(--ease-out);
 }
 .menu__item:hover, .menu__item[aria-current="page"] { color: var(--color-accent); }
 .menu__arrow { width: calc(14 * var(--wm)); height: calc(14 * var(--wm)); flex: none; }
 
-.menu__socials { display: flex; gap: calc(20 * var(--wm)); }   /* Figma: gap 20 */
+.menu__socials { display: flex; gap: calc(20 * var(--wm)); }
 .menu__social {
-  flex: 1; aspect-ratio: 1;                   /* 3 квадрата в ряд (контент 200, gap 20) */
+  flex: 1; aspect-ratio: 1;
   display: grid; place-items: center;
-  background: rgba(255, 255, 255, 0.3);        /* белый 30% — фон не меняется на ховере */
-  border-radius: var(--radius-md);             /* 12 */
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-md);
   color: var(--color-white);
   transition: color var(--duration-fast) var(--ease-out);
 }
-.menu__social:hover { color: var(--color-accent); }  /* меняется только иконка */
+.menu__social:hover { color: var(--color-accent); }
 .menu__social svg { width: calc(24 * var(--wm)); height: calc(24 * var(--wm)); }
 
-/* Легаси мобильного меню-панели (страницы со старой разметкой .nav / .header__nav) */
 @media (max-width: 760px) {
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
   .nav, .header__cta .btn { display: none; }
@@ -99,15 +90,14 @@
   .header__nav.is-open .nav { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-md); }
 }
 
-/* Мобайл ≤600: шапка ниже, лого-мобайл, кнопка «Меню» фиксированного размера */
 @media (max-width: 600px) {
   .header__inner { min-height: calc(96 * var(--wm)); padding-block: calc(24 * var(--wm)); }
   .header.is-scrolled .header__inner { min-height: calc(72 * var(--wm)); padding-block: calc(12 * var(--wm)); }
   .header__logo img { width: calc(95 * var(--wm)); height: auto; }
-  .header__actions .btn--menu {             /* фикс 77×46 — «Меню»/«Закрыть» не меняют размер */
+  .header__actions .btn--menu {
     min-width: 0;
     width: calc(77 * var(--wm)); height: calc(46 * var(--wm));
     padding: 0;
   }
-  .menu { right: calc(16 * var(--wm)); }    /* в мобильном отступ контейнера меньше */
+  .menu { right: calc(16 * var(--wm)); }
 }

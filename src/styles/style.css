@@ -1,30 +1,22 @@
-/* =============================================================================
-   style.css — компоненты и секции страниц (по образцу Artwin style.scss).
-   Практика: медиа-запросы каждого блока лежат сразу за самим блоком,
-   а не в общей секции «адаптив» в конце файла.
-   Брейкпоинты: 375/390 / 540 / 600 / 760 / 900 / 1024 / 1440.
-   ============================================================================= */
 
-/* =============================================================================
-   КНОПКИ (локальные переменные)
-   ============================================================================= */
+
 .btn {
-  --_bg: var(--color-white);          /* по умолчанию — белая (кнопка «Связаться») */
+  --_bg: var(--color-white);
   --_fg: var(--color-ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;                    /* <a> без href (data-modal-open) сам курсор не ставит */
+  cursor: pointer;
   gap: calc(10 * var(--wm));
-  padding: calc(16 * var(--wm)) calc(24 * var(--wm));                 /* Figma py16 px24 */
+  padding: calc(16 * var(--wm)) calc(24 * var(--wm));
   border: 1px solid transparent;
-  border-radius: var(--radius-sm);    /* Figma: calc(8 * var(--wm)) */
+  border-radius: var(--radius-sm);
   background: var(--_bg);
   color: var(--_fg);
-  font-size: var(--text-sm);          /* 14 */
-  font-weight: var(--weight-semibold);/* 600 */
-  line-height: 1;                     /* 100% */
-  overflow: hidden;                   /* для слайд-свапа текста */
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  overflow: hidden;
   transition: transform var(--duration-fast) var(--ease-out),
               filter var(--duration-fast) var(--ease-out),
               background-color var(--duration-base) var(--ease-out),
@@ -34,10 +26,10 @@
 }
 .btn[disabled] { opacity: 0.6; pointer-events: none; }
 
-.btn--md     { font-size: var(--text-base); }   /* text M (16) — крупная кнопка (CTA) */
-.btn--menu   { --_bg: var(--color-surface-3); --_fg: var(--color-white); min-width: calc(118 * var(--wm)); }  /* фикс под «Меню»/«Закрыть» */
-.btn--menu.is-open { --_bg: var(--color-accent); --_fg: var(--color-on-accent); } /* открыто → акцент */
-.btn--accent { --_bg: var(--color-accent);    --_fg: var(--color-on-accent); }    /* лайм CTA */
+.btn--md     { font-size: var(--text-base); }
+.btn--menu   { --_bg: var(--color-surface-3); --_fg: var(--color-white); min-width: calc(118 * var(--wm)); }
+.btn--menu.is-open { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
+.btn--accent { --_bg: var(--color-accent);    --_fg: var(--color-on-accent); }
 .btn--ghost  { --_bg: transparent; --_fg: var(--color-white); border-color: var(--color-border); }
 @media (hover: hover) and (min-width: 601px) { .btn--ghost:hover { --_bg: rgba(255,255,255,0.08); } }
 .btn--block  { display: flex; width: 100%; }
@@ -46,8 +38,6 @@
 .btn--wide { width: min(calc(438 * var(--wm)), 100%); }
 .actions-center { display: flex; justify-content: center; margin-top: var(--space-2xl); }
 
-/* Слайд-свап текста на ховере: две одинаковые строки в overflow:hidden.
-   Высота строки 1.3em, чтобы descender'ы (р, у, ц) не обрезались и не «торчали». */
 .btn__swap { display: grid; height: 1.3em; overflow: hidden; text-align: center; align-content: start; }
 .btn__swap > span { line-height: 1.3; transition: transform var(--duration-base) var(--ease-out); }
 @media (hover: hover) and (min-width: 601px) { .btn:hover .btn__swap > span { transform: translateY(-100%); } }
@@ -62,9 +52,6 @@
 }
 .link-arrow:hover { gap: calc(12 * var(--wm)); }
 
-/* =============================================================================
-   HERO (базовые классы; специфика главной — ниже, «HERO ГЛАВНОЙ»)
-   ============================================================================= */
 .hero__grid {
   display: grid;
   grid-template-columns: 1.1fr 0.85fr;
@@ -75,7 +62,6 @@
 .hero__lead  { max-width: 46ch; font-size: var(--text-lead, 1.125rem); margin-bottom: var(--space-lg); }
 .hero__image { aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
 
-/* Hero — центрированный, с декоративными кругами на фоне (демо-мок) */
 .hero { position: relative; overflow: hidden; text-align: center; padding-block: clamp(3rem, 2rem + 8vw, 7rem); }
 .hero__inner {
   position: relative; z-index: 1;
@@ -100,22 +86,16 @@
   .hero__image { order: -1; }
 }
 
-/* =============================================================================
-   ЦИФРЫ / ДОСТИЖЕНИЯ
-   ============================================================================= */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
 .stat__value { font-size: var(--text-numbers); font-weight: var(--weight-medium); color: var(--color-accent); line-height: 1.1; }
 .stat__label { margin-top: var(--space-2xs); font-size: var(--text-sm); }
-/* Ряд из трёх цифр */
+
 .stats--3 { grid-template-columns: repeat(3, 1fr); max-width: calc(760 * var(--wm)); margin-inline: auto; }
 .stat { text-align: center; }
 
 @media (max-width: 900px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 540px) { .stats { grid-template-columns: 1fr 1fr; } }
 
-/* =============================================================================
-   КАРТОЧКИ (услуги / преимущества / кейсы / проекты)
-   ============================================================================= */
 .card-grid { display: grid; gap: var(--space-lg); }
 .card-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .card-grid--3 { grid-template-columns: repeat(3, 1fr); }
@@ -134,7 +114,6 @@
 .card__text { font-size: var(--text-sm); color: var(--color-body); }
 .card .btn { margin-top: auto; align-self: flex-start; }
 
-/* Проект/кейс с фото */
 .project-card { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base); }
 .project-card:hover { transform: translateY(calc(-4 * var(--wm))); border-color: var(--color-accent); }
 .project-card__image { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; }
@@ -145,18 +124,12 @@
 @media (max-width: 900px)  { .card-grid--3 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px)  { .card-grid--2, .card-grid--3, .card-grid--4 { grid-template-columns: 1fr; } }
 
-/* =============================================================================
-   ПАРТНЁРЫ (лого-линейка)
-   ============================================================================= */
 .partners { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(1.5rem, 1rem + 3vw, 4rem); }
 .partners__logo { max-height: calc(48 * var(--wm)); width: auto; filter: grayscale(1); opacity: 0.7; transition: filter var(--duration-base), opacity var(--duration-base); }
 .partners__logo:hover { filter: none; opacity: 1; }
-/* Логотипы партнёров — плашка-заглушка */
+
 .partners__logo.placeholder { width: calc(140 * var(--wm)); height: calc(56 * var(--wm)); border-radius: var(--radius-sm); filter: none; opacity: 0.85; }
 
-/* =============================================================================
-   ФОРМА
-   ============================================================================= */
 .form { display: grid; gap: var(--space-md); max-width: calc(560 * var(--wm)); }
 .form--wide { max-width: none; grid-template-columns: repeat(2, 1fr); }
 .field { display: flex; flex-direction: column; gap: var(--space-3xs); }
@@ -178,16 +151,12 @@ textarea.field__control { min-height: calc(120 * var(--wm)); resize: vertical; }
 
 @media (max-width: 600px) { .form--wide { grid-template-columns: 1fr; } }
 
-/* =============================================================================
-   МОДАЛКА
-   ============================================================================= */
 .modal { position: fixed; inset: 0; z-index: var(--z-modal); display: none; place-items: center; padding: var(--space-md); }
 .modal.is-open { display: grid; }
 .modal__overlay { position: absolute; inset: 0; background: var(--color-overlay); }
 .modal__dialog { position: relative; width: min(calc(480 * var(--wm)), 100%); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-xl); box-shadow: var(--shadow-md); text-align: center; }
 .modal__close { position: absolute; top: var(--space-sm); right: var(--space-sm); width: calc(40 * var(--wm)); height: calc(40 * var(--wm)); font-size: 1.5rem; line-height: 1; color: var(--color-body); }
 
-/* Модалка-форма «Оставьте заявку» (Figma: 438×387, #222, r16, border rgba(255,255,255,.3), паддинг 24) */
 .modal__dialog--form {
   width: min(calc(438 * var(--wm)), 100%);
   padding: calc(24 * var(--wm));
@@ -202,12 +171,9 @@ textarea.field__control { min-height: calc(120 * var(--wm)); resize: vertical; }
 }
 .modal__dialog--form .modal__close svg { width: 100%; height: 100%; }
 @media (hover: hover) and (min-width: 601px) { .modal__dialog--form .modal__close:hover { color: var(--color-accent); } }
-.modal__title { margin: 0 0 calc(20 * var(--wm)); font-size: calc(24 * var(--wm)); font-weight: var(--weight-bold); line-height: var(--leading-snug); text-transform: uppercase; color: var(--color-white); }   /* Manrope 24/700 uppercase */
-.modal__dialog--form .cta__field--comment { flex: none; }   /* в модалке textarea не растягивается на всю высоту */
+.modal__title { margin: 0 0 calc(20 * var(--wm)); font-size: calc(24 * var(--wm)); font-weight: var(--weight-bold); line-height: var(--leading-snug); text-transform: uppercase; color: var(--color-white); }
+.modal__dialog--form .cta__field--comment { flex: none; }
 
-/* =============================================================================
-   КАРТА / КОНТАКТЫ
-   ============================================================================= */
 .contacts__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-xl); align-items: start; }
 .contacts__map { aspect-ratio: 16 / 10; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
 .contacts__map iframe { width: 100%; height: 100%; border: 0; }
@@ -217,24 +183,14 @@ textarea.field__control { min-height: calc(120 * var(--wm)); resize: vertical; }
 
 @media (max-width: 900px) { .contacts__grid { grid-template-columns: 1fr; } }
 
-/* =============================================================================
-   ГАЛЕРЕЯ (простая сетка)
-   ============================================================================= */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
 .gallery__item { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; border-radius: var(--radius-sm); }
 
 @media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
 
-/* =============================================================================
-   REVEAL (IntersectionObserver)
-   ============================================================================= */
 .reveal { opacity: 0; transform: translateY(calc(24 * var(--wm))); transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out); }
 .reveal.is-visible { opacity: 1; transform: none; }
 
-/* =============================================================================
-   ПЛЕЙСХОЛДЕРЫ (демо-моки; заменяются реальным контентом)
-   ============================================================================= */
-/* Заглушка изображения — до подстановки WebP из Figma */
 .placeholder {
   background: linear-gradient(135deg, #2a2a2a 0%, #363636 100%);
   position: relative;
@@ -247,7 +203,6 @@ textarea.field__control { min-height: calc(120 * var(--wm)); resize: vertical; }
   color: rgba(255,255,255,0.25);
 }
 
-/* Иконка услуги (мок) */
 .service-icon {
   width: calc(48 * var(--wm)); height: calc(48 * var(--wm)); border-radius: var(--radius-md);
   display: grid; place-items: center;
@@ -255,67 +210,61 @@ textarea.field__control { min-height: calc(120 * var(--wm)); resize: vertical; }
   font-weight: var(--weight-bold);
 }
 
-/* =============================================================================
-   CTA-ФОРМА «Давайте обсудим ваш проект»
-   Обводка вокруг блока: паддинг 40 сверху/снизу, 70 по бокам (Figma).
-   Внутри две колонки: карта слева (628), форма справа (438).
-   ============================================================================= */
 .cta {
   display: grid;
-  grid-template-columns: calc(628 * var(--wm)) calc(483 * var(--wm));             /* Figma: карта 628 и форма 483 — обе фиксированы */
-  gap: calc(139 * var(--wm));                                     /* Figma: 139 между картой и формой */
+  grid-template-columns: calc(628 * var(--wm)) calc(483 * var(--wm));
+  gap: calc(139 * var(--wm));
   align-items: stretch;
-  height: calc(579 * var(--wm));                                  /* Figma: вся карточка (с обводкой) 579 — колонки подстраиваются */
-  width: fit-content;                             /* карточка по содержимому, чтобы размеры колонок не «плыли» */
-  margin-inline: auto;                            /* и по центру контейнера */
+  height: calc(579 * var(--wm));
+  width: fit-content;
+  margin-inline: auto;
   max-width: 100%;
-  border: 1px solid var(--color-border);          /* обводка rgba(255,255,255,.3) */
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: calc(40 * var(--wm)) calc(70 * var(--wm)) calc(40 * var(--wm)) calc(40 * var(--wm));                   /* Figma: верх/низ 40, слева до карты 40, справа до формы 70 */
+  padding: calc(40 * var(--wm)) calc(70 * var(--wm)) calc(40 * var(--wm)) calc(40 * var(--wm));
 }
-.cta__media { border-radius: var(--radius-md); overflow: hidden; min-height: calc(499 * var(--wm)); background: var(--color-surface); border: 2px solid var(--color-accent); }  /* акцентная обводка вокруг карты, 2px */
+.cta__media { border-radius: var(--radius-md); overflow: hidden; min-height: calc(499 * var(--wm)); background: var(--color-surface); border: 2px solid var(--color-accent); }
 .cta__media, .cta__media:focus, .cta__media:focus-within,
 .cta__media iframe, .cta__media iframe:focus, .cta__media iframe:focus-visible { outline: none !important; }
 .cta__media iframe { width: 100%; height: 100%; min-height: calc(499 * var(--wm)); border: 0; filter: grayscale(0.2) brightness(0.6); transition: filter var(--duration-base) var(--ease-out); }
 .cta__media:hover iframe { filter: grayscale(0) brightness(1); }
 
 .cta__content { display: flex; flex-direction: column; height: 100%; min-height: 0; }
-.cta__title { margin-bottom: calc(24 * var(--wm)); }  /* заголовок → первое поле 24 */
-.cta__title { max-width: calc(483 * var(--wm)); }  /* макс. длина 483 */
-.cta__title span { white-space: nowrap; }   /* перенос только между «Давайте обсудим» / «ваш проект», внутри строк не рвём */
-.cta__br-m { display: none; }     /* мобильный перенос («Давайте обсудим» / «ваш проект») — вкл. в мобильном блоке ниже */
+.cta__title { margin-bottom: calc(24 * var(--wm)); }
+.cta__title { max-width: calc(483 * var(--wm)); }
+.cta__title span { white-space: nowrap; }
+.cta__br-m { display: none; }
 
-.cta__form { display: flex; flex-direction: column; gap: calc(40 * var(--wm)); flex: 1 1 auto; min-height: 0; }  /* тянется на высоту карточки: поля ↔ кнопка 40 */
-/* Кнопка «Отправить заявку»: без слайда текста, только заливка акцентом на ховере
-   (фон белый → лайм, текст → тёмный). */
+.cta__form { display: flex; flex-direction: column; gap: calc(40 * var(--wm)); flex: 1 1 auto; min-height: 0; }
+
 .cta__form .btn {
   transition: background-color var(--duration-base) var(--ease-out),
               color var(--duration-base) var(--ease-out);
 }
 @media (hover: hover) and (min-width: 601px) {
   .cta__form .btn:hover { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
-  .cta__form .btn:active { --_bg: #000; --_fg: var(--color-white); }  /* нажатие → чёрный фон, белый текст */
+  .cta__form .btn:active { --_bg: #000; --_fg: var(--color-white); }
 }
-.cta__fields { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); flex: 1 1 auto; min-height: 0; }  /* поля тянутся, «Комментарий» забирает остаток высоты */
+.cta__fields { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); flex: 1 1 auto; min-height: 0; }
 .cta__field { display: block; }
 .cta__field--comment { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 
 .cta__control {
-  width: 100%;                                          /* = ширина колонки формы (438) */
+  width: 100%;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);   /* прямая линия 1px под полем */
-  border-radius: 0;                                     /* без скругления по бокам */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0;
   padding: 0 0 calc(12 * var(--wm));
   color: var(--color-white);
-  font-size: var(--text-base); font-weight: var(--weight-regular); line-height: calc(19 * var(--wm));   /* text M (16) */
+  font-size: var(--text-base); font-weight: var(--weight-regular); line-height: calc(19 * var(--wm));
   transition: border-color var(--duration-fast) var(--ease-out);
 }
-.cta__control::placeholder { color: rgba(255, 255, 255, 0.8); }       /* Figma: label как плейсхолдер */
-.cta__control:focus { outline: none; box-shadow: none; border-color: rgba(255, 255, 255, 0.3); }   /* без зелёной обводки/подсветки при клике */
+.cta__control::placeholder { color: rgba(255, 255, 255, 0.8); }
+.cta__control:focus { outline: none; box-shadow: none; border-color: rgba(255, 255, 255, 0.3); }
 .cta__control:focus-visible { outline: none; }
 .cta__control[aria-invalid="true"] { border-bottom-color: #d64545; }
-textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(--wm)); }   /* «Комментарий» тянется на весь свободный низ карточки */
+textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(--wm)); }
 .cta__field .field__error { font-size: var(--text-sm); color: #d64545; min-height: 1.1em; margin-top: calc(6 * var(--wm)); }
 
 @media (max-width: 900px) {
@@ -323,59 +272,49 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .cta__media, .cta__media iframe { min-height: calc(320 * var(--wm)); }
   .cta__media { order: -1; }
 }
-/* Мобайл ≤600: без обводки блока, форма сверху, карта снизу */
+
 @media (max-width: 600px) {
-  .cta__br-d { display: none; }   /* десктопный перенос убираем */
-  .cta__br-m { display: inline; } /* «Давайте обсудим» / «ваш проект» */
+  .cta__br-d { display: none; }
+  .cta__br-m { display: inline; }
   .cta { border: 0; padding: 0; }
   .cta__content { order: 0; }
-  .cta__field--comment .cta__control { height: calc(100 * var(--wm)); resize: none; }   /* поле «Комментарий» — 100px */
+  .cta__field--comment .cta__control { height: calc(100 * var(--wm)); resize: none; }
   .cta__media { order: 1; border: 0; min-height: calc(426 * var(--wm)); }
-  .cta__media iframe { min-height: calc(426 * var(--wm)); filter: none; }   /* без ховера — карта всегда светлая */
+  .cta__media iframe { min-height: calc(426 * var(--wm)); filter: none; }
 }
 
-/* =============================================================================
-   HERO ГЛАВНОЙ
-   Центрированный заголовок в декоративном кольце (assets/images/hero-decor.svg).
-   Макет: артборд 1360×602, круг-кольцо в центре (cy 301 = 50%) → текст центрируется
-   и по горизонтали, и по вертикали, абсолютные координаты плагина не нужны.
-   ============================================================================= */
-.hero-home { padding-block: 0 clamp(1.5rem, 0.5rem + 4vw, 3rem); }  /* без отступа от navbar сверху (как в Figma) */
+.hero-home { padding-block: 0 clamp(1.5rem, 0.5rem + 4vw, 3rem); }
 .hero-home__inner {
   position: relative;
   display: grid; place-items: center;
-  aspect-ratio: 1360 / 602;             /* пропорции макета; SVG масштабируется внутри */
+  aspect-ratio: 1360 / 602;
   isolation: isolate;
 }
-.hero-home__decor--m { display: none; }        /* мобильный круг — только ≤600px */
+.hero-home__decor--m { display: none; }
 .hero-home__decor {
-  position: absolute; inset: 0; z-index: 1;   /* SVG-круг перекрывает внутреннюю часть блика */
+  position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%;
   object-fit: contain; object-position: center;
   pointer-events: none; user-select: none;
 }
-/* Вращающийся акцентный блик за центральным кругом.
-   Квадрат = высоте артборда = диаметру круга; блик у левого края (на ободе круга)
-   вращается вокруг центра — наружу выступает светящийся полумесяц. */
+
 .hero-home__glow {
   position: absolute; top: 50%; left: 50%; z-index: 0;
-  height: 122%; aspect-ratio: 1;             /* больше круга: кольцо-дуга ложится ЗА тёмный диск (там фон прозрачный → видно) */
+  height: 122%; aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   pointer-events: none;
-  /* яркая дуга по углу — «обволакивает» круг; длина дуги = ширина яркого сектора conic */
+
   background: conic-gradient(from -23deg,
     rgba(233, 255, 188, 0) 0deg,
     rgba(233, 255, 188, 0.9) 23deg,
     rgba(233, 255, 188, 0) 46deg);
-  /* концентрическое кольцо у самой кромки — оба края дуги повторяют кривизну круга */
+
   -webkit-mask: radial-gradient(circle closest-side, transparent 80%, #000 83%, #000 85.5%, transparent 90%);
           mask: radial-gradient(circle closest-side, transparent 80%, #000 83%, #000 85.5%, transparent 90%);
   filter: blur(70px);
   animation: hero-glow-spin 9s linear infinite;
-  /* Кэшируем размытый+маскированный слой в отдельную GPU-текстуру: тогда на каждом
-     кадре крутится только transform (дёшево), а blur(70px) НЕ пере-растеризуется —
-     иначе он конкурирует с композитором при скролле и вызывает «буксование». */
+
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -383,13 +322,9 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 @media (prefers-reduced-motion: reduce) { .hero-home__glow { animation: none; } }
 
 .hero-home__content { position: relative; z-index: 2; text-align: center; padding-inline: var(--space-md); }
-.hero-home__title { color: var(--color-accent); max-width: none; margin: 0; }   /* лайм; размеры/трекинг — из базового h1 */
-.hero-home__cta { display: none; }   /* только мобайл — на десктопе кнопка «Связаться» в шапке */
+.hero-home__title { color: var(--color-accent); max-width: none; margin: 0; }
+.hero-home__cta { display: none; }
 
-/* =============================================================================
-   ПРЕЛОАДЕР (десктоп): тёмный фон + один большой круг (как эллипс из hero-SVG,
-   Ø580) + та же вращающаяся подсветка + счётчик процентов по центру круга.
-   ============================================================================= */
 .preloader {
   position: fixed; inset: 0; z-index: 9999;
   display: grid; place-items: center;
@@ -399,15 +334,15 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 .preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .preloader__stage {
   position: relative; display: grid; place-items: center;
-  width: calc(580 * var(--wm)); height: calc(580 * var(--wm));   /* Ø большого круга из heroBackground.svg */
+  width: calc(580 * var(--wm)); height: calc(580 * var(--wm));
   isolation: isolate;
 }
 .preloader__ring {
   position: absolute; inset: 0; z-index: 1;
-  border: 1px solid rgba(255, 255, 255, 0.08);   /* тонкий обод — как эллипс на макете */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 50%;
 }
-.preloader__glow {                                /* идентична hero-home__glow */
+.preloader__glow {
   position: absolute; top: 50%; left: 50%; z-index: 0;
   height: 122%; aspect-ratio: 1;
   transform: translate(-50%, -50%);
@@ -426,123 +361,111 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   position: relative; z-index: 2;
   font-family: var(--font-sans); text-transform: uppercase; text-align: center;
   font-size: calc(24 * var(--wm)); font-weight: var(--weight-regular);
-  line-height: var(--leading-snug); color: var(--color-white);   /* Text XL: Manrope 24/400/120% */
+  line-height: var(--leading-snug); color: var(--color-white);
 }
 @media (prefers-reduced-motion: reduce) { .preloader__glow { animation: none; } }
-@media (max-width: 600px) { .preloader { display: none; } }   /* прелоадер — только десктоп */
+@media (max-width: 600px) { .preloader { display: none; } }
 .hero-home__lead {
-  margin-top: var(--space-md);          /* Figma: заголовок → подзаголовок ~24 */
-  font-size: var(--text-base);          /* 16 */
-  font-weight: var(--weight-medium);    /* 500 */
+  margin-top: var(--space-md);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
   line-height: 1.3;
   color: var(--color-white);
-  max-width: calc(247 * var(--wm));     /* макс. длина 247 → перенос как на макете */
+  max-width: calc(247 * var(--wm));
   margin-inline: auto;
 }
 
-/* Мобайл ≤600: круг влезает в экран (375−16·2); блик анимируется; заголовок в одну строку; кнопка снизу */
 @media (max-width: 600px) {
-  .hero-home { padding-block: calc(16 * var(--wm)) calc(40 * var(--wm)); }   /* низ = половина 80 до след. блока */
+  .hero-home { padding-block: calc(16 * var(--wm)) calc(40 * var(--wm)); }
   .hero-home__inner {
-    aspect-ratio: 1;                       /* квадрат → круг, а не эллипс */
+    aspect-ratio: 1;
     width: 100%; max-width: calc(358 * var(--wm));
     margin-inline: auto;
-    align-items: end;                      /* блок текста прижат к низу, отступ добираем margin-bottom */
+    align-items: end;
   }
-  .hero-home__glow { height: 122%; filter: blur(28px); }   /* дуга выходит за кромку залитого круга → видна и крутится */
+  .hero-home__glow { height: 122%; filter: blur(28px); }
   .hero-home__decor--d { display: none; }
   .hero-home__decor--m { display: block; }
   .hero-home__content {
     width: 100%; padding-inline: calc(16 * var(--wm)); margin-inline: 0;
-    margin-bottom: calc(110 * var(--wm));   /* до нижней кромки круга 110 (до верхней ≈160) */
+    margin-bottom: calc(110 * var(--wm));
   }
-  .hero-home__title {                       /* Benzin-Bold 40/100% +2% uppercase center */
+  .hero-home__title {
     font-size: calc(40 * var(--wm));
     line-height: 1;
     letter-spacing: 0.02em;
-    text-indent: 0.02em;                    /* компенсация трекинга справа → оптический центр */
+    text-indent: 0.02em;
     text-align: center;
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .hero-home__lead {                        /* Manrope 500 16/130% center */
+  .hero-home__lead {
     font-size: calc(16 * var(--wm));
     font-weight: 500;
     line-height: 1.3;
     letter-spacing: 0;
     text-align: center;
-    max-width: calc(247 * var(--wm)); margin-inline: auto;   /* макс. длина 247 */
-    margin-top: calc(7 * var(--wm));        /* заголовок → подзаголовок 7 */
+    max-width: calc(247 * var(--wm)); margin-inline: auto;
+    margin-top: calc(7 * var(--wm));
   }
   .hero-home__cta { display: flex; width: 100%; margin-top: var(--space-md); }
 }
 
-/* =============================================================================
-   О КОМПАНИИ / ЦИФРЫ (пересекающиеся кольца)
-   Figma: три круга Ø322, ряд 899 (нахлёст calc(34 * var(--wm))), заголовок и кнопка по центру.
-   ============================================================================= */
 .about-intro { text-align: center; }
-.about-intro__title { max-width: 783px; margin: 0 auto 2.5rem; text-wrap: wrap; }   /* макс. длина 783 как в макете (фикс px: шрифт h2 = 36px абсолютный); text-wrap: wrap — именно wrap, НЕ «normal»: normal невалиден, декларация отбрасывалась и оставался balance от h1-h6, он и ломал перенос → greedy: «Мы — проектная компания» / «полного цикла» */
-@media (hover: hover) and (min-width: 601px) { .about-intro .btn--outline:active { --_bg: var(--color-white); --_fg: var(--color-ink); border-color: var(--color-white); } }  /* нажатие → белый */
+.about-intro__title { max-width: 783px; margin: 0 auto 2.5rem; text-wrap: wrap; }
+@media (hover: hover) and (min-width: 601px) { .about-intro .btn--outline:active { --_bg: var(--color-white); --_fg: var(--color-ink); border-color: var(--color-white); } }
 
 .circles { display: flex; justify-content: center; align-items: center; }
 .circle {
   width: calc(322 * var(--wm)); height: calc(322 * var(--wm)); flex: none;
   border-radius: 50%;
   border: 1px solid var(--color-border);
-  display: grid; place-content: center; gap: calc(6 * var(--wm));      /* Figma: число ↔ подпись 6 */
+  display: grid; place-content: center; gap: calc(6 * var(--wm));
   padding: var(--space-md);
 }
-.circle + .circle { margin-left: calc(-34 * var(--wm)); }               /* Figma: нахлёст колец */
+.circle + .circle { margin-left: calc(-34 * var(--wm)); }
 .circle__value { font-size: var(--text-numbers); font-weight: var(--weight-medium); color: var(--color-white); line-height: 1.1; }
 .circle__label { font-size: var(--text-sm); color: var(--color-white); }
 
-/* Длинный заголовок блока «о компании»: авто-перенос на всю ширину контента (без max-width) —
-   строки набиваются до конца и ложатся в 5 строк, как в макете; text-wrap: wrap (не balance). */
-.about-intro__title--long { max-width: calc(1071 * var(--wm)); margin-inline: auto; padding-inline: 0; text-wrap: wrap; color: var(--color-body); font-size: calc(36 * var(--wm)); line-height: var(--leading-snug); }   /* Figma: блок about us на страничке о компании — ширина 1071, по центру; Benzin-Semibold 36/120% uppercase center */
-.about-intro__title--long strong { font-weight: inherit; }   /* акцентная фраза (strong.u-accent) — цвет лайм, вес наследуется от заголовка */
+.about-intro__title--long { max-width: calc(1071 * var(--wm)); margin-inline: auto; padding-inline: 0; text-wrap: wrap; color: var(--color-body); font-size: calc(36 * var(--wm)); line-height: var(--leading-snug); }
+.about-intro__title--long strong { font-weight: inherit; }
 
 @media (max-width: 760px) {
   .circles { flex-direction: column; }
   .circle { width: calc(260 * var(--wm)); height: calc(260 * var(--wm)); }
-  .circle + .circle { margin-left: 0; margin-top: calc(-34 * var(--wm)); }   /* нахлёст по вертикали */
+  .circle + .circle { margin-left: 0; margin-top: calc(-34 * var(--wm)); }
 }
-/* Мобайл ≤600: кольца крупнее, до краёв блока (18 внутри), стопкой с нахлёстом */
+
 @media (max-width: 600px) {
-  .about-intro__title { margin-bottom: calc(20 * var(--wm)); max-width: calc(410 * var(--wm)); text-wrap: wrap; }   /* заголовок → кольца 20; ширина 410 (замер Benzin 24px: «компания полного» 353 влезает, «…компания» 494 и «…полного цикла» 476 — нет) → 3 строки: «Мы — проектная» / «компания полного» / «цикла» */
-  .about-intro__title--long { max-width: none; text-align: left; font-size: calc(24 * var(--wm)); }   /* мобайл: Benzin 24, по левому краю (макет); ширину под 3 строки НЕ ограничиваем */
+  .about-intro__title { margin-bottom: calc(20 * var(--wm)); max-width: calc(410 * var(--wm)); text-wrap: wrap; }
+  .about-intro__title--long { max-width: none; text-align: left; font-size: calc(24 * var(--wm)); }
   .circles { flex-direction: column; align-items: center; }
   .circle {
-    width: 100%; max-width: calc(322 * var(--wm)); height: auto; aspect-ratio: 1;   /* круг 322×322 */
+    width: 100%; max-width: calc(322 * var(--wm)); height: auto; aspect-ratio: 1;
     padding: calc(18 * var(--wm));
   }
   .circle + .circle { margin-left: 0; margin-top: calc(-34 * var(--wm)); }
 }
 
-/* =============================================================================
-   КЛЮЧЕВЫЕ НАПРАВЛЕНИЯ (карточки услуг)
-   Figma: 4 карточки Ø322×467, bg #222, border, r16, паддинг 18, кнопка снизу.
-   ============================================================================= */
 .services__head {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: var(--space-2xl);
-  margin-bottom: 2.5rem;   /* заголовок → карточки 40 */
+  margin-bottom: 2.5rem;
 }
 .services__title { max-width: none; margin: 0; }
 .services__intro { max-width: calc(553 * var(--wm)); font-size: var(--text-base); color: var(--color-white); flex: none; }
 
-.services__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }  /* Figma: gap 24 */
+.services__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
 
 .service-card {
   display: flex; flex-direction: column;
-  min-height: calc(467 * var(--wm));                          /* Figma: высота карточки 467 */
-  padding: calc(18 * var(--wm));                              /* Figma: квадрат с иконкой прилеплен к левой/верхней грани на 18 */
+  min-height: calc(467 * var(--wm));
+  padding: calc(18 * var(--wm));
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
 }
-/* Ховер по карточке намеренно нейтральный: без подсветки рамки и без движения.
-   Реагирует только кнопка внутри (см. ниже). */
+
 .service-card__icon {
   width: calc(75 * var(--wm)); height: calc(75 * var(--wm)); flex: none;
   display: grid; place-items: center;
@@ -552,55 +475,47 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   color: var(--color-accent);
 }
 .service-card__icon svg { width: calc(38 * var(--wm)); height: calc(38 * var(--wm)); }
-.service-card__body { margin-top: auto; margin-bottom: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); }  /* прижат к низу, под иконкой воздух */
+.service-card__body { margin-top: auto; margin-bottom: var(--space-md); display: flex; flex-direction: column; gap: var(--space-xs); }
 .service-card__title { font-size: var(--text-h3); }
 .service-card__text { font-size: var(--text-sm); color: rgba(255,255,255,0.6); }
 @media (hover: hover) and (min-width: 601px) {
-  .service-card .btn:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }  /* ховер → лайм */
-  .service-card .btn:active { --_bg: #000;                --_fg: var(--color-white); }       /* нажатие → чёрный */
+  .service-card .btn:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
+  .service-card .btn:active { --_bg: #000;                --_fg: var(--color-white); }
 }
 
 @media (max-width: 1024px) { .services__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px)  { .services__head { flex-direction: column; gap: var(--space-md); } .services__title { max-width: none; } }
 @media (max-width: 540px)  { .services__grid { grid-template-columns: 1fr; } .service-card { min-height: 0; } }
-/* Мобайл ≤600: одна колонка, зазор 16, карточка 426, паддинг 16 */
+
 @media (max-width: 600px) {
   .services__grid { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
   .service-card { min-height: calc(426 * var(--wm)); padding: calc(16 * var(--wm)); }
 }
 
-/* =============================================================================
-   ГАЛЕРЕЯ ПРОЕКТОВ (шахматная раскладка)
-   Figma: карточки Ø437×471, 3 колонки (gap 24), средняя смещена вниз на 140.
-   Плашка-ярлык сверху по центру (299×44, bg #1a1718, скруглена снизу).
-   ============================================================================= */
 .proj { text-align: center; }
 @media (hover: hover) and (min-width: 601px) {
-  .proj .btn--outline:hover  { --_bg: var(--color-surface-3); --_fg: var(--color-white); border-color: var(--color-surface-3); }  /* ховер → светло-серый */
-  .proj .btn--outline:active { --_bg: var(--color-white);     --_fg: var(--color-ink);   border-color: var(--color-white); }      /* нажатие → белый */
+  .proj .btn--outline:hover  { --_bg: var(--color-surface-3); --_fg: var(--color-white); border-color: var(--color-surface-3); }
+  .proj .btn--outline:active { --_bg: var(--color-white);     --_fg: var(--color-ink);   border-color: var(--color-white); }
 }
-.proj__title { max-width: calc(556 * var(--wm)); margin: 0 auto 2.5rem; }   /* заголовок → галерея 40; макс. длина 556 */
+.proj__title { max-width: calc(556 * var(--wm)); margin: 0 auto 2.5rem; }
 .proj__gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); text-align: left; }
 .proj__col { display: flex; flex-direction: column; gap: var(--space-md); }
-.proj__col--offset { margin-top: calc(140 * var(--wm)); }                /* Figma: средняя колонка ниже */
+.proj__col--offset { margin-top: calc(140 * var(--wm)); }
 
 .proj-card {
   position: relative;
   aspect-ratio: 437 / 471;
   border-radius: var(--radius-lg);
-  background: transparent;                         /* под фото — основной фон страницы (как в Figma) */
-  border: 1px solid var(--color-border);           /* тонкий ободок карточки — вместе с плашкой единая фигура */
+  background: transparent;
+  border: 1px solid var(--color-border);
   transition: border-color var(--duration-base) var(--ease-out);
 }
-/* overflow:hidden НЕ на карточке (иначе обрезает плашку, перекрывающую верхнюю грань).
-   Скругление и обрезку фото делаем на самом изображении. */
+
 @media (hover: hover) and (min-width: 601px) {
-  .proj-card:hover { border-color: var(--color-accent); }                       /* ховер → акцентная обводка */
+  .proj-card:hover { border-color: var(--color-accent); }
   .proj-card:hover .proj-card__tag { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-on-accent); box-shadow: 0 -1px 0 0 var(--color-accent); }
 }
 
-/* Заливка под фото: на ховере раскрывается кругом из центра до полного квадрата.
-   Градиент: снизу светлее (#96B6BA) → сверху темнее (#4B92A2). */
 .proj-card::before {
   content: ""; position: absolute; inset: 0; z-index: 0;
   border-radius: var(--radius-lg);
@@ -610,19 +525,19 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 @media (hover: hover) and (min-width: 601px) { .proj-card:hover::before { clip-path: circle(75% at 50% 50%); } }
 
-.proj-card__link { position: absolute; inset: 0; z-index: 3; border-radius: var(--radius-lg); }   /* вся карточка кликается → страница проекта */
+.proj-card__link { position: absolute; inset: 0; z-index: 3; border-radius: var(--radius-lg); }
 .proj-card__img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
 .proj-card__tag {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
   z-index: 2;
-  box-shadow: 0 -1px 0 0 var(--color-bg);   /* 1px-полоса фона над плашкой закрывает верхнюю грань ободка — без линии и без выпирания на ховере */
+  box-shadow: 0 -1px 0 0 var(--color-bg);
   max-width: calc(100% - calc(32 * var(--wm)));
   padding: calc(10 * var(--wm)) calc(24 * var(--wm));
-  background: var(--color-bg);                           /* = фон страницы: плашка перекрывает верхнюю грань, читается только контур */
-  border: 1px solid var(--color-border);                 /* обводка с 3 сторон (низ + бока), верх открыт — стыкуется с ободком карточки */
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-top: 0;
   border-radius: 0 0 calc(6 * var(--wm)) calc(6 * var(--wm));
-  font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: 1.2;   /* 20/700 */
+  font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: 1.2;
   color: var(--color-white);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   transition: background-color var(--duration-base) var(--ease-out),
@@ -631,9 +546,8 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
               color var(--duration-base) var(--ease-out);
 }
 
-/* Проекты на странице услуги: шапка (заголовок слева + кнопка справа) + ряд из 3 карточек */
 .proj__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: 2.5rem; }
-@media (hover: hover) and (min-width: 601px) {              /* кнопка «Все проекты»: ховер → светло-серый, нажатие → белый */
+@media (hover: hover) and (min-width: 601px) {
   .proj__head .btn--ghost:hover  { --_bg: var(--color-surface-3); --_fg: var(--color-white); border-color: var(--color-surface-3); }
   .proj__head .btn--ghost:active { --_bg: var(--color-white);     --_fg: var(--color-ink);   border-color: var(--color-white); }
 }
@@ -649,38 +563,30 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   .proj__gallery { grid-template-columns: 1fr; }
   .proj-card__tag { font-size: var(--text-base); }
 }
-/* Мобайл ≤600: одна колонка, влево, зазор 16, только 3 карточки */
+
 @media (max-width: 600px) {
   .proj { text-align: left; }
   .proj__title { margin: 0 0 2.5rem; }
   .proj__gallery { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
   .proj__col { gap: calc(16 * var(--wm)); }
   .proj-card--m-hide { display: none; }
-  .proj-card { aspect-ratio: auto; height: calc(426 * var(--wm)); }   /* высота 426, ширина как была (100% колонки) */
+  .proj-card { aspect-ratio: auto; height: calc(426 * var(--wm)); }
   .proj-card__img { height: 100%; }
-  /* на тач нет ховера → показываем «активное» состояние по умолчанию:
-     раскрытый градиент и акцентная плашка. Обводку карточки убираем (без зелёной рамки),
-     плашка без box-shadow — чтобы не выпирала на 1–2px над карточкой */
+
   .proj-card { border-color: transparent; }
   .proj-card::before { clip-path: circle(75% at 50% 50%); }
   .proj-card__tag {
     background: var(--color-accent); border-color: transparent;
     color: var(--color-on-accent); box-shadow: none;
   }
-  /* Услуговый блок «Проекты»: заголовок по центру сверху, галерея, кнопка под ней (32 от последнего проекта).
-     display:contents распускает .proj__head → title и кнопку можно упорядочить в общем flex-потоке. */
+
   .proj:has(.proj__head) .container { display: flex; flex-direction: column; }
   .proj__head { display: contents; }
-  .proj__title--left { order: 0; text-align: center; margin: 0 0 calc(24 * var(--wm)); font-size: calc(24 * var(--wm)); }   /* Benzin 24/120% uppercase */
+  .proj__title--left { order: 0; text-align: center; margin: 0 0 calc(24 * var(--wm)); font-size: calc(24 * var(--wm)); }
   .proj__gallery--row { order: 1; grid-template-columns: 1fr; }
   .proj__head .btn--ghost { order: 2; margin-top: calc(32 * var(--wm)); }
 }
 
-/* =============================================================================
-   НАШИ ПАРТНЁРЫ (бегущая строка)
-   Figma: заголовок слева (Benzin, uppercase), абзац справа, ниже ряд логотипов
-   Ø187×48 с gap 80, бесконечно едущий влево.
-   ============================================================================= */
 .ticker__head {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: var(--space-2xl);
@@ -689,15 +595,13 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 .ticker__title { max-width: none; margin: 0; text-transform: uppercase; }
 .ticker__intro { max-width: calc(553 * var(--wm)); font-size: var(--text-base); color: var(--color-white); flex: none; }
 
-/* Две дорожки, едущие в противоположные стороны. Каждая дорожка = два одинаковых
-   ряда (оригинал + копия); сдвиг на -50% (ширина одного ряда) даёт бесшовный цикл. */
 .ticker__track { display: flex; flex-direction: column; gap: var(--space-md); overflow: hidden; }
 .ticker__line { display: flex; width: max-content; }
-.ticker__line--ltr { animation: ticker-scroll 30s linear infinite; }        /* «наши партнёры» → влево */
-.ticker__line--rtl { animation: ticker-scroll-rev 30s linear infinite; display: none; }   /* вторая лента — только мобайл; на десктопе одна строка */
+.ticker__line--ltr { animation: ticker-scroll 30s linear infinite; }
+.ticker__line--rtl { animation: ticker-scroll-rev 30s linear infinite; display: none; }
 .ticker__row {
   display: flex; align-items: center; gap: calc(80 * var(--wm));
-  padding-right: calc(80 * var(--wm));          /* стык между копиями = такой же gap */
+  padding-right: calc(80 * var(--wm));
   flex: none;
 }
 .ticker__item { flex: none; }
@@ -712,17 +616,13 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 @media (max-width: 760px) {
   .ticker__head { flex-direction: column; gap: var(--space-md); }
 }
-/* Мобайл ≤600: две ленты в разные стороны */
+
 @media (max-width: 600px) {
   .ticker__line--rtl { display: flex; }
 }
 
-/* =============================================================================
-   СТРАНИЦА «О КОМПАНИИ» — hero-баннер + слайдер сертификатов
-   ============================================================================= */
-/* Hero-баннер: фото 1360×430 (radius-lg), контент слева поверх */
-.about-banner { padding-top: 0; }              /* без отступа от navbar до первого блока (как на главной) */
-.about-banner .container { position: relative; }   /* контекст для абсолютной кнопки на десктопе */
+.about-banner { padding-top: 0; }
+.about-banner .container { position: relative; }
 .about-banner__inner {
   position: relative;
   border-radius: var(--radius-lg);
@@ -735,103 +635,95 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   display: flex; flex-direction: column; align-items: flex-start;
   max-width: calc(350 * var(--wm));
 }
-.about-banner__title {                        /* Benzin-Semibold 36/120% uppercase, трекинг 0 */
+.about-banner__title {
   margin: 0; color: var(--color-white);
   font-family: var(--font-display);
-  font-size: var(--text-h2);                  /* 28→36 (десктоп = 36) */
+  font-size: var(--text-h2);
   font-weight: var(--weight-regular);
-  line-height: var(--leading-snug);           /* 120% */
+  line-height: var(--leading-snug);
   letter-spacing: 0;
   text-transform: uppercase;
-  white-space: nowrap;                        /* «Аудит проектов» — в одну строку */
+  white-space: nowrap;
 }
 .about-banner__lead {
-  margin-top: calc(6 * var(--wm));            /* заголовок → подзаголовок 6 (Figma) */
+  margin-top: calc(6 * var(--wm));
   font-size: var(--text-base); font-weight: var(--weight-medium); line-height: 1.3;
   color: var(--color-white);
 }
-.about-banner__cta {                          /* десктоп: кнопка поверх фото (Figma left 115, top 256 от края фото) */
+.about-banner__cta {
   position: absolute;
   left: calc(var(--container-pad) + 115 * var(--wm));
   top: calc(256 * var(--wm));
-  width: calc(178 * var(--wm)); height: calc(48 * var(--wm)); padding-block: 0;   /* Figma: 178×48 */
+  width: calc(178 * var(--wm)); height: calc(48 * var(--wm)); padding-block: 0;
 }
-@media (hover: hover) and (min-width: 601px) {                                  /* как кнопка в карточках «Ключевые направления» */
+@media (hover: hover) and (min-width: 601px) {
   .about-banner__cta:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
   .about-banner__cta:active { --_bg: #000;                --_fg: var(--color-white); }
 }
 
-/* Мобайл ≤600: фото 358×372 (16 от края через .container); текст внизу (12 по бокам, 16 от низа, 6 до «О компании») */
 @media (max-width: 600px) {
   .about-banner__inner { aspect-ratio: 358 / 372; }
-  .about-banner__title { font-size: calc(24 * var(--wm)); }   /* Figma mobile: Benzin 24/120% uppercase — влезает в одну строку */
+  .about-banner__title { font-size: calc(24 * var(--wm)); }
   .about-banner__content {
     left: calc(12 * var(--wm)); right: calc(12 * var(--wm));
     top: auto; bottom: calc(16 * var(--wm)); max-width: none;
   }
-  .about-banner__lead { font-size: calc(16 * var(--wm)); }   /* скейлится вместе с шириной блока — 2 строки на любом экране */
+  .about-banner__lead { font-size: calc(16 * var(--wm)); }
   .about-banner__cta {
-    position: static;                        /* из оверлея — в поток под фото */
+    position: static;
     margin-top: calc(32 * var(--wm)); width: 100%;
   }
 }
 
-/* =============================================================================
-   СТРАНИЦА «ПРОЕКТЫ» — hero с избранным проектом + галерея с «Загрузить ещё»
-   ============================================================================= */
-/* Hero: строка (заголовок слева + абзац справа) → крупный баннер избранного проекта */
-.proj-hero { padding-top: 0; }                 /* без отступа от navbar (как на других hero) */
+.proj-hero { padding-top: 0; }
 .proj-hero__head {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: var(--space-md); margin-bottom: calc(39 * var(--wm));
 }
-.proj-hero__title {                            /* Benzin 36/120% uppercase, акцент */
+.proj-hero__title {
   margin: 0; color: var(--color-accent);
   font-family: var(--font-display);
-  font-size: var(--text-h2);                   /* 28→36 (десктоп = 36) */
+  font-size: var(--text-h2);
   font-weight: var(--weight-regular);
   line-height: var(--leading-snug);
   letter-spacing: 0; text-transform: uppercase; white-space: nowrap;
 }
-.proj-hero__lead {                             /* Manrope 16/120%, ширина по Figma 553 */
+.proj-hero__lead {
   max-width: calc(553 * var(--wm));
   font-size: var(--text-base); font-weight: var(--weight-regular);
   line-height: var(--leading-snug); color: var(--color-white);
 }
-.proj-hero__banner {                           /* фото 1360×420, radius-lg */
+.proj-hero__banner {
   position: relative; margin: 0;
   border-radius: var(--radius-lg); overflow: hidden;
   aspect-ratio: 1360 / 420;
 }
 .proj-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.proj-hero__overlay {                          /* контент 32 от левого и нижнего края фото */
+.proj-hero__overlay {
   position: absolute; left: calc(32 * var(--wm)); bottom: calc(32 * var(--wm)); right: calc(32 * var(--wm));
   display: flex; flex-direction: column; align-items: flex-start;
 }
-.proj-hero__name {                             /* Manrope 24/700/120% uppercase */
+.proj-hero__name {
   margin: 0; color: var(--color-white);
   font-family: var(--font-body);
   font-size: calc(24 * var(--wm)); font-weight: var(--weight-bold);
   line-height: var(--leading-snug); text-transform: uppercase; white-space: nowrap;
 }
-.proj-hero__desc {                             /* Manrope 16/120%, ширина по Figma 691 */
+.proj-hero__desc {
   margin: calc(12 * var(--wm)) 0 calc(15 * var(--wm)); max-width: calc(691 * var(--wm));
   font-size: var(--text-base); font-weight: var(--weight-regular);
   line-height: var(--leading-snug); color: var(--color-white);
 }
 
-/* Мобайл ≤600: заголовок над абзацем, баннер уже, контент 16 от краёв */
 @media (max-width: 600px) {
   .proj-hero__head { flex-direction: column; gap: calc(16 * var(--wm)); margin-bottom: calc(24 * var(--wm)); }
   .proj-hero__lead { max-width: none; font-size: calc(16 * var(--wm)); }
-  .proj-hero__banner { aspect-ratio: auto; height: calc(452 * var(--wm)); }   /* Figma mobile: высота фото 452 */
+  .proj-hero__banner { aspect-ratio: auto; height: calc(452 * var(--wm)); }
   .proj-hero__overlay { left: calc(16 * var(--wm)); right: calc(16 * var(--wm)); bottom: calc(16 * var(--wm)); }
   .proj-hero__name { font-size: calc(20 * var(--wm)); white-space: normal; }
-  .proj-hero__desc { margin: calc(12 * var(--wm)) 0 calc(24 * var(--wm)); font-size: calc(14 * var(--wm)); }  /* тексты 12, до кнопки 24 */
+  .proj-hero__desc { margin: calc(12 * var(--wm)) 0 calc(24 * var(--wm)); font-size: calc(14 * var(--wm)); }
 }
 
-/* Текстовая ссылка-кнопка с подчёркиванием (hero «подробнее»): 95×20 по умолчанию.
-   Manrope 16/400/100% uppercase, линия под текстом (gap 3). Ховер → акцент (текст+линия). */
 .link-underline {
   display: inline-flex; flex-direction: column; align-items: flex-start;
   gap: calc(3 * var(--wm)); min-width: calc(95 * var(--wm));
@@ -842,248 +734,220 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 .link-underline::after { content: ""; width: 100%; height: 1px; background: currentColor; border-radius: 12px; }
 @media (hover: hover) and (min-width: 601px) { .link-underline:hover { color: var(--color-accent); } }
 
-/* «Загрузить ещё»: подгруженные карточки появляются плавно */
 .proj-card.is-loading { animation: proj-fade-in var(--duration-slow, 500ms) var(--ease-out) both; }
 @keyframes proj-fade-in { from { opacity: 0; transform: translateY(calc(16 * var(--wm))); } to { opacity: 1; transform: none; } }
 
-/* =============================================================================
-   СТРАНИЦА «ПРОЕКТ» (карточка одного проекта — переход по «Подробнее» из hero)
-   Блоки: hero избранного, галерея-мозаика, «делегирование», лайм-CTA, другие проекты.
-   ============================================================================= */
-
-/* --- Hero: фото слева (668×420) + описание справа --- */
-.pcase-hero { padding-top: 0; }                /* без отступа от navbar (как остальные hero) */
+.pcase-hero { padding-top: 0; }
 .pcase-hero__grid {
   display: grid;
-  grid-template-columns: calc(668 * var(--wm)) 1fr;   /* Figma: фото 668, текст справа до края 1360 */
+  grid-template-columns: calc(668 * var(--wm)) 1fr;
   gap: calc(24 * var(--wm));
   align-items: start;
 }
 .pcase-hero__img { width: 100%; aspect-ratio: 668 / 420; object-fit: cover; border-radius: var(--radius-lg); }
-.pcase-hero__body { display: flex; flex-direction: column; padding-top: calc(11 * var(--wm)); }  /* Figma: текст начинается на 11 ниже верхнего края фото */
-.pcase-hero__name {                            /* Benzin 36/120% uppercase, белый */
+.pcase-hero__body { display: flex; flex-direction: column; padding-top: calc(11 * var(--wm)); }
+.pcase-hero__name {
   margin: 0; color: var(--color-white);
   font-family: var(--font-display);
   font-size: var(--text-h2); font-weight: var(--weight-regular);
   line-height: var(--leading-snug); text-transform: uppercase; white-space: nowrap;
 }
-.pcase-hero__meta {                            /* список «Заказчик / Год / Услуга» */
-  margin: calc(132 * var(--wm)) 0 0;           /* Figma: заголовок → мета 132 */
+.pcase-hero__meta {
+  margin: calc(132 * var(--wm)) 0 0;
   padding: 0; list-style: none;
-  display: flex; flex-direction: column; gap: calc(12 * var(--wm));   /* строки 41 шаг = 29 текст + 12 */
+  display: flex; flex-direction: column; gap: calc(12 * var(--wm));
 }
 .pcase-hero__mrow { display: flex; gap: calc(8 * var(--wm)); align-items: baseline; flex-wrap: wrap; }
-.pcase-hero__mkey {                            /* Manrope 24/700/120% uppercase, акцент */
+.pcase-hero__mkey {
   font-family: var(--font-body); font-size: var(--text-h3); font-weight: var(--weight-bold);
   line-height: var(--leading-snug); text-transform: uppercase; color: var(--color-accent);
 }
-.pcase-hero__mval {                            /* Manrope 24/400/120% uppercase, белый */
+.pcase-hero__mval {
   font-family: var(--font-body); font-size: var(--text-h3); font-weight: var(--weight-regular);
   line-height: var(--leading-snug); text-transform: uppercase; color: var(--color-white);
 }
-.pcase-hero__desc {                            /* Manrope 18/500/120%, ширина фото 668 */
+.pcase-hero__desc {
   margin: calc(24 * var(--wm)) 0 0; max-width: calc(668 * var(--wm));
   font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium);
   line-height: var(--leading-snug); color: var(--color-white);
 }
-/* Мобайл ≤600: фото сверху, текст под ним; переносы разрешаем */
+
 @media (max-width: 600px) {
   .pcase-hero__grid { grid-template-columns: 1fr; gap: calc(24 * var(--wm)); }
   .pcase-hero__body { padding-top: 0; }
   .pcase-hero__name { font-size: calc(24 * var(--wm)); white-space: normal; }
   .pcase-hero__meta { margin-top: calc(24 * var(--wm)); }
-  /* Заказчик/Год/Услуга — Text M med: Manrope 16/500/130% */
+
   .pcase-hero__mkey, .pcase-hero__mval { font-size: calc(16 * var(--wm)); font-weight: var(--weight-medium); line-height: 1.3; }
-  /* Описание — Manrope 16/400/120% */
+
   .pcase-hero__desc { max-width: none; font-size: calc(16 * var(--wm)); font-weight: var(--weight-regular); line-height: var(--leading-snug); }
 }
 
-/* --- Галерея проекта: мозаика из 4 фото (322/553 сверху, 437 во всю высоту, 899 снизу) --- */
-.pgal__title { margin: 0 0 calc(40 * var(--wm)); }   /* h2 Benzin 36 → мозаика 40 */
+.pgal__title { margin: 0 0 calc(40 * var(--wm)); }
 .pgal__grid {
   display: grid;
-  grid-template-columns: 322fr 553fr 437fr;    /* Figma: пропорции колонок */
+  grid-template-columns: 322fr 553fr 437fr;
   grid-template-rows: 1fr 1fr;
   gap: calc(24 * var(--wm));
-  aspect-ratio: 1360 / 984;                    /* два ряда по 480 + gap 24 */
+  aspect-ratio: 1360 / 984;
 }
 .pgal__img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
-.pgal__img--a { grid-column: 1; grid-row: 1; }             /* 322×480 */
-.pgal__img--b { grid-column: 2; grid-row: 1; }             /* 553×480 */
-.pgal__img--c { grid-column: 3; grid-row: 1 / span 2; }    /* 437×984 — на всю высоту */
-.pgal__img--d { grid-column: 1 / span 2; grid-row: 2; }    /* 899×480 */
-/* Мобайл ≤600: две квадратные сверху (171×240), под ними широкая (358×240),
-   и в самом низу — длинное фото (projectGallery3, 358×496) */
+.pgal__img--a { grid-column: 1; grid-row: 1; }
+.pgal__img--b { grid-column: 2; grid-row: 1; }
+.pgal__img--c { grid-column: 3; grid-row: 1 / span 2; }
+.pgal__img--d { grid-column: 1 / span 2; grid-row: 2; }
+
 @media (max-width: 600px) {
-  .pgal__title { margin-bottom: calc(24 * var(--wm)); font-size: calc(24 * var(--wm)); }   /* Benzin 24/120% uppercase */
+  .pgal__title { margin-bottom: calc(24 * var(--wm)); font-size: calc(24 * var(--wm)); }
   .pgal__grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; aspect-ratio: auto; gap: calc(16 * var(--wm)); }
   .pgal__img--a { grid-column: 1; grid-row: 1; aspect-ratio: 171 / 240; }
   .pgal__img--b { grid-column: 2; grid-row: 1; aspect-ratio: 171 / 240; }
-  .pgal__img--d { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: 358 / 240; }   /* projectGallery4 */
-  .pgal__img--c { grid-column: 1 / span 2; grid-row: 3; aspect-ratio: 358 / 496; }   /* projectGallery3 — последней */
+  .pgal__img--d { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: 358 / 240; }
+  .pgal__img--c { grid-column: 1 / span 2; grid-row: 3; aspect-ratio: 358 / 496; }
 }
 
-/* --- Делегирование: заголовок по центру + фото слева / список справа + кнопка --- */
 .pdel__title { max-width: calc(751 * var(--wm)); margin: 0 auto calc(40 * var(--wm)); text-align: center; }
 .pdel__row {
   display: grid;
-  grid-template-columns: calc(668 * var(--wm)) 1fr;   /* Figma: фото 668, список 621 (gap 71) */
+  grid-template-columns: calc(668 * var(--wm)) 1fr;
   gap: calc(71 * var(--wm));
   align-items: start;
 }
 .pdel__img { width: 100%; aspect-ratio: 668 / 401; object-fit: cover; border-radius: var(--radius-lg); }
-.pdel__col { display: flex; flex-direction: column; }   /* список + кнопка под ним в правой колонке */
+.pdel__col { display: flex; flex-direction: column; }
 .pdel__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(24 * var(--wm)); }
 .pdel__item { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
-.pdel__lead { margin: 0; font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: var(--leading-snug); color: var(--color-white); }   /* 20/700 */
+.pdel__lead { margin: 0; font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: var(--leading-snug); color: var(--color-white); }
 .pdel__text { margin: 0; font-size: var(--text-base); font-weight: var(--weight-regular); line-height: var(--leading-snug); color: var(--color-white); }
-.pdel__actions { display: flex; justify-content: flex-start; margin-top: calc(40 * var(--wm)); }   /* кнопка под текстом на 40 */
-@media (hover: hover) and (min-width: 601px) {              /* кнопка «Начать проект»: ховер → светло-серый, нажатие → белый */
+.pdel__actions { display: flex; justify-content: flex-start; margin-top: calc(40 * var(--wm)); }
+@media (hover: hover) and (min-width: 601px) {
   .pdel .btn--outline:hover  { --_bg: var(--color-surface-3); --_fg: var(--color-white); border-color: var(--color-surface-3); }
   .pdel .btn--outline:active { --_bg: var(--color-white);     --_fg: var(--color-ink);   border-color: var(--color-white); }
 }
-/* Мобайл ≤600: фото сверху, список под ним, кнопка на всю ширину */
+
 @media (max-width: 600px) {
-  .pdel__title { max-width: none; margin-bottom: calc(24 * var(--wm)); text-align: left; font-size: calc(24 * var(--wm)); }   /* по левому краю, Benzin 24 */
+  .pdel__title { max-width: none; margin-bottom: calc(24 * var(--wm)); text-align: left; font-size: calc(24 * var(--wm)); }
   .pdel__row { grid-template-columns: 1fr; gap: calc(24 * var(--wm)); }
   .pdel__actions { margin-top: calc(32 * var(--wm)); }
   .pdel__actions .btn { width: 100%; }
 }
 
-/* --- Лайм-CTA «оставьте заявку» --- */
 .pcta__box {
   background: var(--color-accent); border-radius: var(--radius-lg);
   padding: calc(80 * var(--wm)) calc(24 * var(--wm));
   text-align: center;
 }
-.pcta__title { max-width: calc(585 * var(--wm)); margin: 0 auto calc(40 * var(--wm)); color: var(--color-ink); }   /* h2, тёмный на лайме; макс. длина 585 */
+.pcta__title { max-width: calc(585 * var(--wm)); margin: 0 auto calc(40 * var(--wm)); color: var(--color-ink); }
 .pcta__actions { display: flex; justify-content: center; }
-/* Тёмная кнопка «Обсудить проект» на лайме: чёрная заливка, скругление 12 */
+
 .btn--dark { --_bg: #000; --_fg: var(--color-white); border-radius: var(--radius-md); min-width: calc(206 * var(--wm));
   transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out); }
 @media (hover: hover) and (min-width: 601px) {
-  .btn--dark:hover { --_bg: var(--color-white); --_fg: var(--color-ink); }   /* ховер → белая заливка, тёмный текст */
+  .btn--dark:hover { --_bg: var(--color-white); --_fg: var(--color-ink); }
 }
 @media (max-width: 600px) {
   .pcta__box { padding: calc(40 * var(--wm)) calc(16 * var(--wm)); }
   .pcta__title { margin-bottom: calc(24 * var(--wm)); font-size: calc(24 * var(--wm)); }
-  /* Figma mobile: 171×48 — сужаем горизонтальный паддинг, чтобы «Обсудить проект» влез целиком */
+
   .btn--dark { width: calc(171 * var(--wm)); min-width: 0; padding-inline: calc(12 * var(--wm)); }
 }
 
-/* =============================================================================
-   СТРАНИЦА «КОНТАКТЫ»
-   Figma: крупный h1, слева две плашки (контакты+график / форма), справа карта
-   на всю высоту двух плашек. Карта — существующий стиль .cta__media, но крупнее.
-   ============================================================================= */
-.cpage { padding-top: 0; }                             /* без отступа от navbar до заголовка */
-.cpage__title { margin: 0 0 calc(20 * var(--wm)); }   /* h1 Benzin 100 → контент 20 */
+.cpage { padding-top: 0; }
+.cpage__title { margin: 0 0 calc(20 * var(--wm)); }
 .cpage__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;                     /* Figma: две колонки по 668, gap 24 */
+  grid-template-columns: 1fr 1fr;
   gap: calc(24 * var(--wm));
   align-items: stretch;
 }
-.cpage__col { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); }   /* Figma: между плашками 20 */
+.cpage__col { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); }
 
-/* --- Плашка «контакты + график» --- */
 .cpage__info {
-  display: flex; align-items: flex-start; gap: calc(86 * var(--wm));   /* контакты → время (в строку) 86 */
+  display: flex; align-items: flex-start; gap: calc(86 * var(--wm));
   background: var(--color-surface); border-radius: var(--radius-lg);
-  padding: calc(24 * var(--wm)) calc(186 * var(--wm)) calc(24 * var(--wm)) calc(24 * var(--wm));   /* время → правая граница плашки 186 */
+  padding: calc(24 * var(--wm)) calc(186 * var(--wm)) calc(24 * var(--wm)) calc(24 * var(--wm));
 }
 .cpage__info-main { display: flex; flex-direction: column; gap: calc(24 * var(--wm)); }
 .cpage__lines { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
-.cpage__line { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); white-space: nowrap; }   /* Text L: Manrope 18/500/120%, без переносов */
+.cpage__line { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); white-space: nowrap; }
 .cpage__socials { display: flex; align-items: center; gap: calc(20 * var(--wm)); }
 .cpage__social { display: inline-flex; width: calc(24 * var(--wm)); height: calc(24 * var(--wm)); color: var(--color-white); transition: color var(--duration-base) var(--ease-out); }
 .cpage__social svg { width: 100%; height: 100%; }
 @media (hover: hover) and (min-width: 601px) { .cpage__social:hover { color: var(--color-accent); } }
 .cpage__hours { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); flex: none; }
-.cpage__hours-item { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }   /* Manrope 18/500/120% */
-.cpage__hours-day { display: block; }   /* день сверху, время под ним отдельной строкой */
+.cpage__hours-item { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }
+.cpage__hours-day { display: block; }
 
-/* --- Плашка с формой --- */
 .cpage__form-card {
-  display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0;   /* добирает высоту колонки до карты (593) */
+  display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0;
   background: var(--color-surface); border-radius: var(--radius-lg);
   padding: calc(24 * var(--wm));
 }
-.cpage__form-title { margin: 0 0 calc(20 * var(--wm)); }   /* h3 Manrope 24/700 uppercase → поля 20 */
+.cpage__form-title { margin: 0 0 calc(20 * var(--wm)); }
 
-/* --- Карта: наш стиль .cta__media, но крупнее (на всю высоту двух плашек) --- */
 .cpage__map { min-height: calc(593 * var(--wm)); height: 100%; border-radius: var(--radius-lg); }
 .cpage__map iframe { min-height: calc(593 * var(--wm)); }
 
-/* Мобайл ≤600: одна колонка — контакты, форма, карта */
 @media (max-width: 600px) {
-  .cpage__title { font-size: calc(40 * var(--wm)); }   /* Benzin 40/100% +2% uppercase */
+  .cpage__title { font-size: calc(40 * var(--wm)); }
   .cpage__grid { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
-  .cpage__info { flex-direction: column; gap: calc(24 * var(--wm)); padding: calc(24 * var(--wm)); }   /* мобайл: равномерный паддинг, отступы 86/186 — только десктоп */
-  .cpage__hours { flex-direction: row; gap: calc(16 * var(--wm)); }   /* ПН-ПТ и СБ-ВС рядом, отступ 16 */
+  .cpage__info { flex-direction: column; gap: calc(24 * var(--wm)); padding: calc(24 * var(--wm)); }
+  .cpage__hours { flex-direction: row; gap: calc(16 * var(--wm)); }
   .cpage__map { min-height: calc(360 * var(--wm)); }
-  .cpage__map iframe { min-height: calc(360 * var(--wm)); filter: none; }   /* без ховера на тач — карта светлая */
+  .cpage__map iframe { min-height: calc(360 * var(--wm)); filter: none; }
 }
 
-/* =============================================================================
-   СТРАНИЦА «СПАСИБО ЗА ЗАЯВКУ» — центр. контент на фоне hero-круга (тот же SVG+блик)
-   Фон/анимация переиспользуют .hero-home__inner / __glow / __decor.
-   ============================================================================= */
 .thanks__content { display: flex; flex-direction: column; align-items: center; }
-.thanks__title {                               /* Benzin 36/120% uppercase, центр */
+.thanks__title {
   margin: 0 auto; max-width: calc(296 * var(--wm)); color: var(--color-white);
   font-family: var(--font-display);
   font-size: calc(36 * var(--wm)); font-weight: var(--weight-regular);
   line-height: var(--leading-snug); letter-spacing: 0;
   text-align: center; text-transform: uppercase;
 }
-.thanks__text {                                /* Manrope 18/500/120%, центр */
+.thanks__text {
   margin: calc(12 * var(--wm)) 0 0;
   font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium);
   line-height: var(--leading-snug); text-align: center; color: var(--color-white);
 }
 .thanks__btn { margin-top: calc(40 * var(--wm)); }
-@media (hover: hover) and (min-width: 601px) {  /* «На главную»: ховер → акцент, нажатие → чёрный */
+@media (hover: hover) and (min-width: 601px) {
   .thanks__btn:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
   .thanks__btn:active { --_bg: #000;                --_fg: var(--color-white); }
 }
-/* Мобайл ≤600: контент строго по центру круга; заголовок 24, текст 16/400, до кнопки 32 */
+
 @media (max-width: 600px) {
-  .thanks .hero-home__inner { align-items: center; }        /* не прижимаем к низу — центр круга */
+  .thanks .hero-home__inner { align-items: center; }
   .thanks .hero-home__content { margin-bottom: 0; }
-  .thanks__title { font-size: calc(24 * var(--wm)); max-width: calc(197 * var(--wm)); }       /* Benzin 24/120% uppercase; макс. длина 197 */
-  .thanks__text { font-size: calc(16 * var(--wm)); font-weight: var(--weight-regular); }   /* Manrope 16/400/120% */
-  .thanks__btn { margin-top: calc(32 * var(--wm)); }        /* текст → кнопка 32 */
+  .thanks__title { font-size: calc(24 * var(--wm)); max-width: calc(197 * var(--wm)); }
+  .thanks__text { font-size: calc(16 * var(--wm)); font-weight: var(--weight-regular); }
+  .thanks__btn { margin-top: calc(32 * var(--wm)); }
 }
 
-/* =============================================================================
-   СТРАНИЦА 404 — крупный «404», подпись и кнопка «На главную», всё по центру
-   ============================================================================= */
-.nf { display: grid; place-items: center; min-height: calc(564 * var(--wm)); text-align: center; padding-top: 0; }   /* без отступа от navbar */
+.nf { display: grid; place-items: center; min-height: calc(564 * var(--wm)); text-align: center; padding-top: 0; }
 .nf__inner { display: flex; flex-direction: column; align-items: center; }
-.nf__title { margin: 0; color: var(--color-white); }        /* h1 Benzin 100/100% +2% uppercase — из базового h1 */
-.nf__text {                                    /* Manrope 18/500/120%, центр */
+.nf__title { margin: 0; color: var(--color-white); }
+.nf__text {
   margin: calc(12 * var(--wm)) auto 0; max-width: calc(417 * var(--wm));
   font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium);
   line-height: var(--leading-snug); text-align: center; color: var(--color-white);
 }
 .nf__btn { margin-top: calc(40 * var(--wm)); }
-.nf-br-m { display: none; }                     /* мобильные переносы — вкл. в мобильном блоке */
-@media (hover: hover) and (min-width: 601px) {  /* «На главную»: ховер → акцент, нажатие → чёрный */
+.nf-br-m { display: none; }
+@media (hover: hover) and (min-width: 601px) {
   .nf__btn:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
   .nf__btn:active { --_bg: #000;                --_fg: var(--color-white); }
 }
 @media (max-width: 600px) {
-  .nf__title { font-size: calc(40 * var(--wm)); }           /* Benzin 40/100% +2% uppercase */
-  .nf__text { margin-top: calc(8 * var(--wm)); font-size: calc(14 * var(--wm)); font-weight: var(--weight-regular); }   /* Manrope 14/400/120%; заголовок → текст 8 */
-  .nf__btn { margin-top: calc(32 * var(--wm)); }            /* текст → кнопка 32 */
-  .nf-br-m { display: inline; }                             /* переносы: после «ищете,» и «вернёмся» */
-  .nf-br-d { display: none; }                               /* десктопный перенос убираем */
+  .nf__title { font-size: calc(40 * var(--wm)); }
+  .nf__text { margin-top: calc(8 * var(--wm)); font-size: calc(14 * var(--wm)); font-weight: var(--weight-regular); }
+  .nf__btn { margin-top: calc(32 * var(--wm)); }
+  .nf-br-m { display: inline; }
+  .nf-br-d { display: none; }
 }
 
-/* Слайдер сертификатов */
 .certs__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: calc(43 * var(--wm)); }
-.certs__title { margin: 0; }                                                   /* Benzin 36 uppercase */
+.certs__title { margin: 0; }
 .certs__nav { display: flex; gap: calc(20 * var(--wm)); flex: none; }
 .certs__arrow {
   display: inline-flex; align-items: center; justify-content: center;
@@ -1094,18 +958,18 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 .certs__arrow svg { width: calc(18 * var(--wm)); height: calc(14 * var(--wm)); }
 @media (hover: hover) and (min-width: 601px) {
-  .certs__arrow:hover  { background: var(--color-accent);    border-color: var(--color-accent);    color: var(--color-on-accent); }   /* ховер → акцент */
-  .certs__arrow:active { background: var(--color-surface-3); border-color: var(--color-surface-3); color: var(--color-white); }        /* нажатие → светло-серый */
+  .certs__arrow:hover  { background: var(--color-accent);    border-color: var(--color-accent);    color: var(--color-on-accent); }
+  .certs__arrow:active { background: var(--color-surface-3); border-color: var(--color-surface-3); color: var(--color-white); }
 }
 .certs__track {
   display: flex; gap: calc(24 * var(--wm));
   list-style: none; margin: 0; padding: 0;
-  overflow-x: auto; scroll-snap-type: x proximity;   /* proximity, не mandatory — нативный снэп не дёргает; магнитим сами из JS */
-  scroll-behavior: smooth;                     /* примагничивание к карточке — плавное, не резкое */
-  scrollbar-width: none;                       /* прячем полосу — навигация стрелками */
-  cursor: grab; touch-action: pan-y;           /* перетаскивание мышью */
+  overflow-x: auto; scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  cursor: grab; touch-action: pan-y;
 }
-.certs__track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }   /* во время drag — без снэпа */
+.certs__track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
 .certs__track::-webkit-scrollbar { display: none; }
 .certs__card {
   flex: none; scroll-snap-align: start;
@@ -1114,26 +978,19 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 .certs__card img {
   width: 100%; height: 100%; object-fit: cover;
-  user-select: none; -webkit-user-drag: none;   /* не тянем картинку-призрак */
-  filter: brightness(0.55);                     /* затемнение по умолчанию */
+  user-select: none; -webkit-user-drag: none;
+  filter: brightness(0.55);
   transition: filter var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
 }
 @media (hover: hover) and (min-width: 601px) {
-  .certs__card:hover img { filter: brightness(1); }   /* подсветка на ховере */
+  .certs__card:hover img { filter: brightness(1); }
 }
 
-/* Мобайл ≤600: без стрелок, листаем свайпом (overflow-x трека); карточки не затемняются */
 @media (max-width: 600px) {
   .certs__nav { display: none; }
-  .certs__card img { filter: none; }   /* на мобильном сертификаты всегда светлые */
+  .certs__card img { filter: none; }
 }
 
-/* =============================================================================
-   СТРАНИЦА УСЛУГИ (напр. «Аудит»): аккордеон, этапы, лайм-баннер «почему мы».
-   Центрированная колонка контента 668 (Figma left 386).
-   ============================================================================= */
-
-/* --- Аккордеон (список вопросов) --- */
 .faq__list { max-width: calc(668 * var(--wm)); margin-inline: auto; display: flex; flex-direction: column; gap: calc(26 * var(--wm)); }
 .faq__head {
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
@@ -1141,21 +998,21 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   padding: calc(13 * var(--wm)) calc(16 * var(--wm));
   background: var(--color-surface); border-radius: var(--radius-sm);
 }
-.faq__q { font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: 1.2; color: rgba(255,255,255,0.6); }  /* 20/700 */
+.faq__q { font-size: var(--text-h4); font-weight: var(--weight-bold); line-height: 1.2; color: rgba(255,255,255,0.6); }
 .faq__toggle {
   flex: none; display: inline-flex; align-items: center; justify-content: center;
   width: calc(30 * var(--wm)); height: calc(30 * var(--wm));
   border: 1px solid var(--color-white); border-radius: 50%; color: var(--color-white);
   background: transparent;
-  transform: rotate(90deg);   /* line-arrow из сертификатов «о компании»: закрыто — вниз */
+  transform: rotate(90deg);
   transition: transform var(--duration-base) var(--ease-out),
               background-color var(--duration-fast) var(--ease-out),
               border-color var(--duration-fast) var(--ease-out),
               color var(--duration-fast) var(--ease-out);
 }
 .faq__toggle svg { width: calc(14 * var(--wm)); height: calc(11 * var(--wm)); }
-.faq__item.is-open .faq__toggle { transform: rotate(-90deg); }   /* открыто — вверх */
-/* стрелка как в сертификатах: ховер → акцент, нажатие → светло-серый */
+.faq__item.is-open .faq__toggle { transform: rotate(-90deg); }
+
 @media (hover: hover) and (min-width: 601px) {
   .faq__head:hover  .faq__toggle { background: var(--color-accent);    border-color: var(--color-accent);    color: var(--color-on-accent); }
   .faq__head:active .faq__toggle { background: var(--color-surface-3); border-color: var(--color-surface-3); color: var(--color-white); }
@@ -1168,49 +1025,47 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   font-size: var(--text-base); line-height: 1.3; color: var(--color-white);
 }
 
-/* --- Этапы работы --- */
 .steps__inner { max-width: calc(668 * var(--wm)); margin-inline: auto; }
-.steps__intro { font-size: var(--text-base); font-weight: var(--weight-regular); line-height: 1.2; color: var(--color-white); margin-bottom: calc(40 * var(--wm)); }  /* Text M: Manrope 16/400/120% */
+.steps__intro { font-size: var(--text-base); font-weight: var(--weight-regular); line-height: 1.2; color: var(--color-white); margin-bottom: calc(40 * var(--wm)); }
 .steps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
 .step { display: flex; flex-direction: column; gap: calc(20 * var(--wm)); }
 .step__badge {
   padding: calc(6 * var(--wm)); text-align: center;
   background: var(--color-accent); color: var(--color-on-accent); border-radius: var(--radius-lg);
-  font-size: var(--text-base); font-weight: var(--weight-medium); line-height: 1.3;   /* 16/500 «N этап» */
+  font-size: var(--text-base); font-weight: var(--weight-medium); line-height: 1.3;
 }
 .step__box {
   border: 1px solid var(--color-border); border-radius: var(--radius-lg);
   padding: calc(24 * var(--wm)) calc(22 * var(--wm));
-  font-size: var(--text-sm); line-height: 1.2; color: var(--color-white);   /* 14 */
+  font-size: var(--text-sm); line-height: 1.2; color: var(--color-white);
 }
 
-/* --- Лайм-баннер «Почему мы?» --- */
 .why__box {
   display: flex; justify-content: space-between; gap: var(--space-2xl);
   background: var(--color-accent); color: var(--color-ink);
   border-radius: var(--radius-lg);
   padding: calc(80 * var(--wm)) calc(40 * var(--wm));
 }
-.why__title { margin: 0; color: var(--color-ink); flex: none; }        /* Benzin 36 uppercase */
+.why__title { margin: 0; color: var(--color-ink); flex: none; }
 .why__main { max-width: calc(668 * var(--wm)); }
-.why__text { font-size: var(--text-base); font-weight: var(--weight-regular); line-height: 1.2; color: var(--color-ink); margin-bottom: calc(24 * var(--wm)); }  /* Text M: Manrope 16/400/120% */
+.why__text { font-size: var(--text-base); font-weight: var(--weight-regular); line-height: 1.2; color: var(--color-ink); margin-bottom: calc(24 * var(--wm)); }
 .why__stats { display: flex; justify-content: space-between; gap: var(--space-md); }
 .why__stat { display: flex; flex-direction: column; gap: calc(6 * var(--wm)); }
-.why__value { font-size: var(--text-numbers); font-weight: var(--weight-medium); line-height: 1.1; color: var(--color-ink); }   /* 48/500 */
+.why__value { font-size: var(--text-numbers); font-weight: var(--weight-medium); line-height: 1.1; color: var(--color-ink); }
 .why__label { font-size: var(--text-sm); color: var(--color-ink); }
 
 @media (max-width: 900px) {
   .why__box { flex-direction: column; gap: var(--space-lg); }
   .why__main { max-width: none; }
 }
-/* Мобайл ≤600: центрированные колонки 668 разворачиваем во всю ширину */
+
 @media (max-width: 600px) {
   .faq__list, .steps__inner, .why__main { max-width: none; }
   .steps__grid { grid-template-columns: 1fr; }
   .steps__intro { margin-bottom: calc(24 * var(--wm)); }
   .why__box { flex-direction: column; gap: calc(16 * var(--wm)); padding: calc(24 * var(--wm)); }
   .why__title { font-size: calc(24 * var(--wm)); }
-  .why__text { margin-bottom: calc(16 * var(--wm)); }   /* абзац → цифры 16 (как между блоками) */
-  /* Цифры в 2 колонки: 700+ | 100+, ниже 16 лет (под 700+). Зазоры 16 (как между блоками). */
+  .why__text { margin-bottom: calc(16 * var(--wm)); }
+
   .why__stats { display: grid; grid-template-columns: 1fr 1fr; gap: calc(16 * var(--wm)); }
 }

@@ -1,22 +1,7 @@
-/* =============================================================================
-   UAK Trade — main.css (точка входа)
-   Архитектура по образцу https://github.com/sadova-nadezhda/Artwin (style.scss),
-   но на чистом CSS через @import — HTML подключает только этот файл.
 
-   Порядок = каскад:
-   1. vars.css   — дизайн-токены (:root) + смена базы fluid-множителя
-   2. fonts.css  — @font-face (Benzin, Manrope)
-   3. global.css — reset, базовая типографика, утилиты, reduced-motion
-   4. header.css — шапка, логотип, меню-модалка
-   5. footer.css — футер
-   6. style.css  — кнопки, компоненты и секции страниц
-      (медиа-запросы каждого блока — сразу за блоком, а не общей кучей в конце)
-
-   При правках менять ?v= у изменённого файла (кэш-бастинг).
-   ============================================================================= */
-@import url("vars.css?v=2");
-@import url("fonts.css?v=2");
-@import url("global.css?v=8");
-@import url("header.css?v=8");
-@import url("footer.css?v=7");
-@import url("style.css?v=42");
+@import url("vars.css?v=3");
+@import url("fonts.css?v=3");
+@import url("global.css?v=9");
+@import url("header.css?v=9");
+@import url("footer.css?v=8");
+@import url("style.css?v=43");
