@@ -80,9 +80,9 @@
     const onScroll = (y) => {
       const goingUp = y < lastY;
       lastY = y;
-      if (y <= 8) expand();                                          // у самого верха — всегда полная
-      else if (goingUp && y < window.innerHeight * 0.5) expand();    // вверх в верхней зоне → разворот сразу
-      else if (!goingUp) collapse();                                 // вниз → компактная
+      if (y <= 8) expand();                        // у самого верха — всегда полная
+      else if (goingUp && y < 230) expand();       // вверх в зоне 230px до верха → разворот сразу
+      else if (!goingUp) collapse();               // вниз → компактная
     };
     header.classList.toggle("is-scrolled", window.scrollY > 8);
     if (lenis) {
