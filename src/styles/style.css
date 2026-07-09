@@ -1058,11 +1058,20 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   flex: none; display: inline-flex; align-items: center; justify-content: center;
   width: calc(30 * var(--wm)); height: calc(30 * var(--wm));
   border: 1px solid var(--color-white); border-radius: 50%; color: var(--color-white);
+  background: transparent;
   transform: rotate(90deg);   /* line-arrow из сертификатов «о компании»: закрыто — вниз */
-  transition: transform var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-base) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
 }
 .faq__toggle svg { width: calc(14 * var(--wm)); height: calc(11 * var(--wm)); }
 .faq__item.is-open .faq__toggle { transform: rotate(-90deg); }   /* открыто — вверх */
+/* стрелка как в сертификатах: ховер → акцент, нажатие → светло-серый */
+@media (hover: hover) and (min-width: 601px) {
+  .faq__head:hover  .faq__toggle { background: var(--color-accent);    border-color: var(--color-accent);    color: var(--color-on-accent); }
+  .faq__head:active .faq__toggle { background: var(--color-surface-3); border-color: var(--color-surface-3); color: var(--color-white); }
+}
 .faq__body { overflow: hidden; max-height: 0; transition: max-height var(--duration-base) var(--ease-out); }
 .faq__item.is-open .faq__body { max-height: calc(600 * var(--wm)); }
 .faq__panel {
