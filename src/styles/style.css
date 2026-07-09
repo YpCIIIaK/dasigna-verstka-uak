@@ -586,6 +586,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 @media (hover: hover) and (min-width: 601px) { .proj-card:hover::before { clip-path: circle(75% at 50% 50%); } }
 
+.proj-card__link { position: absolute; inset: 0; z-index: 3; border-radius: var(--radius-lg); }   /* вся карточка кликается → страница проекта */
 .proj-card__img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
 .proj-card__tag {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -965,7 +966,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 .cpage__info-main { display: flex; flex-direction: column; gap: calc(24 * var(--wm)); }
 .cpage__lines { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
-.cpage__line { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }   /* Manrope 18/500/120% */
+.cpage__line { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); white-space: nowrap; }   /* Text L: Manrope 18/500/120%, без переносов */
 .cpage__socials { display: flex; align-items: center; gap: calc(20 * var(--wm)); }
 .cpage__social { display: inline-flex; width: calc(24 * var(--wm)); height: calc(24 * var(--wm)); color: var(--color-white); transition: color var(--duration-base) var(--ease-out); }
 .cpage__social svg { width: 100%; height: 100%; }
@@ -1079,7 +1080,15 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   width: calc(322 * var(--wm)); height: calc(480 * var(--wm));
   border-radius: var(--radius-md); overflow: hidden;
 }
-.certs__card img { width: 100%; height: 100%; object-fit: cover; }
+.certs__link { display: block; width: 100%; height: 100%; cursor: zoom-in; }
+.certs__card img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.55);                     /* затемнение по умолчанию */
+  transition: filter var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+}
+@media (hover: hover) and (min-width: 601px) {
+  .certs__link:hover img { filter: brightness(1); transform: scale(1.04); }   /* подсветка на ховере */
+}
 
 /* Мобайл ≤600: без стрелок, листаем свайпом (overflow-x трека) */
 @media (max-width: 600px) {
