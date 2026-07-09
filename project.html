@@ -22,7 +22,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=120" />
+  <link rel="stylesheet" href="src/styles/main.css?v=121" />
 </head>
 <body>
 
@@ -136,7 +136,7 @@
           </ul>
 
           <div class="pdel__actions">
-            <a class="btn btn--md btn--outline" href="contacts.html">Начать проект</a>
+            <button class="btn btn--md btn--outline" type="button" data-modal-open="#modal-request">Начать проект</button>
           </div>
         </div>
       </div>
@@ -149,9 +149,9 @@
       <div class="pcta__box">
         <h2 class="pcta__title">Оставьте заявку,<br />чтобы начать проект</h2>
         <div class="pcta__actions">
-          <a class="btn btn--md btn--dark" href="contacts.html">
+          <button class="btn btn--md btn--dark" type="button" data-modal-open="#modal-request">
             <span class="btn__swap"><span>Обсудить проект</span><span>Обсудить проект</span></span>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -241,6 +241,36 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===================== МОДАЛКА «Оставьте заявку» ===================== -->
+  <div class="modal" id="modal-request">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog modal__dialog--form" role="dialog" aria-modal="true" aria-labelledby="modal-request-title">
+      <button class="modal__close" type="button" data-modal-close aria-label="Закрыть">
+        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <h3 class="modal__title" id="modal-request-title">Оставьте заявку</h3>
+      <form class="cta__form" data-form data-success="#modal-success">
+        <div class="cta__fields">
+          <label class="cta__field" data-field="name">
+            <input class="cta__control field__control" type="text" name="name" placeholder="Ваше имя *" />
+            <span class="field__error"></span>
+          </label>
+          <label class="cta__field" data-field="phone">
+            <input class="cta__control field__control" type="tel" name="phone" placeholder="Номер телефона *" />
+            <span class="field__error"></span>
+          </label>
+          <label class="cta__field">
+            <input class="cta__control field__control" type="text" name="company" placeholder="Наименование компании" />
+          </label>
+          <label class="cta__field cta__field--comment">
+            <textarea class="cta__control field__control" name="comment" rows="1" placeholder="Комментарий"></textarea>
+          </label>
+        </div>
+        <button class="btn btn--md btn--block" type="submit">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
   <script src="src/lib/main.js?v=7"></script>
