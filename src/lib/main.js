@@ -71,9 +71,15 @@
      Шапка: тень при скролле
      -------------------------------------------------------------------------- */
   if (header) {
-    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const setHeader = (y) => header.classList.toggle("is-scrolled", y > 8);
+    setHeader(window.scrollY);
+    if (lenis) {
+      // синхронно с Lenis (каждый кадр) — иначе нативный scroll во время инерции
+      // приходит с запозданием и шапка разворачивается «догоняя», с задержкой
+      lenis.on("scroll", ({ scroll }) => setHeader(scroll));
+    } else {
+      window.addEventListener("scroll", () => setHeader(window.scrollY), { passive: true });
+    }
   }
 
   /* --------------------------------------------------------------------------

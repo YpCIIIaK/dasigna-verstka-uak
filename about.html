@@ -23,7 +23,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
   <link rel="stylesheet" href="assets/vendor/fancybox.css" />
-  <link rel="stylesheet" href="src/styles/main.css?v=139" />
+  <link rel="stylesheet" href="src/styles/main.css?v=140" />
 </head>
 <body>
 
@@ -271,18 +271,22 @@
 
   <script src="assets/vendor/lenis.min.js"></script>
   <script src="assets/vendor/fancybox.umd.js"></script>
-  <script src="src/lib/main.js?v=7"></script>
-  <!-- Fancybox для сертификатов: клик по карточке открывает во весь экран -->
-  <script>
-    if (window.Fancybox) Fancybox.bind('[data-fancybox="certs"]', {});
-  </script>
-  <!-- Слайдер сертификатов: стрелки (шаг = ширина карточки + gap) + перетаскивание мышью -->
+  <script src="src/lib/main.js?v=8"></script>
+  <!-- Слайдер сертификатов: стрелки + drag-скролл + открытие в fancybox по тапу -->
   <script>
     (function () {
       var track = document.querySelector('[data-cert-track]');
       if (!track) return;
       var prev = document.querySelector('[data-cert-prev]');
       var next = document.querySelector('[data-cert-next]');
+      var links = Array.prototype.slice.call(track.querySelectorAll('a[data-fancybox]'));
+      // Галерея для fancybox: открываем сами (setPointerCapture ниже «перехватывает» click,
+      // поэтому штатный Fancybox.bind по делегированию не срабатывает на десктопе)
+      var slides = links.map(function (a) { return { src: a.getAttribute('href'), type: 'image' }; });
+      function openCert(a) {
+        if (!window.Fancybox) return;
+        Fancybox.show(slides, { startIndex: Math.max(0, links.indexOf(a)) });
+      }
       function step() {
         var card = track.querySelector('.certs__card');
         if (!card) return track.clientWidth;
@@ -293,12 +297,13 @@
       next && next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
 
       // Перетаскивание мышью/пальцем (drag-to-scroll)
-      var down = false, startX = 0, startScroll = 0, moved = false;
+      var down = false, startX = 0, startScroll = 0, moved = false, downAnchor = null;
       // Гасим нативный drag ссылок/картинок — иначе браузер «тянет ссылку», а не скроллит
       track.querySelectorAll('img, a').forEach(function (el) { el.draggable = false; });
       track.addEventListener('dragstart', function (e) { e.preventDefault(); });
       track.addEventListener('pointerdown', function (e) {
         down = true; moved = false; startX = e.clientX; startScroll = track.scrollLeft;
+        downAnchor = e.target.closest ? e.target.closest('a[data-fancybox]') : null;
         track.classList.add('is-dragging');
         e.preventDefault();                                  // не даём начать выделение/нативный drag ссылки
         try { track.setPointerCapture(e.pointerId); } catch (err) {}
@@ -308,17 +313,20 @@
         if (Math.abs(e.clientX - startX) > 4) moved = true;   // порог: это тянут, а не кликают
         track.scrollLeft = startScroll - (e.clientX - startX);
       });
-      // Если был drag — глушим последующий клик, чтобы не открылся fancybox
+      // Клик по анкору всегда глушим — открытие делаем сами на pointerup (см. end)
       track.addEventListener('click', function (e) {
-        if (moved) { e.preventDefault(); e.stopPropagation(); }
+        if (e.target.closest('a[data-fancybox]')) { e.preventDefault(); e.stopPropagation(); }
       }, true);
-      // Плавная магнитность: после отпускания сами доводим до ближайшей карточки
+      // Плавная магнитность: после отпускания сами доводим до ближайшей карточки;
+      // если не тянули (moved=false) и отпустили на сертификате — открываем fancybox
       var end = function () {
         if (!down) return;
         down = false; track.classList.remove('is-dragging');
         var s = step();
         var target = Math.round(track.scrollLeft / s) * s;
         track.scrollTo({ left: target, behavior: 'smooth' });
+        if (!moved && downAnchor) openCert(downAnchor);
+        downAnchor = null;
       };
       track.addEventListener('pointerup', end);
       track.addEventListener('pointercancel', end);
