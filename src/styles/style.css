@@ -959,11 +959,11 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
 /* --- Плашка «контакты + график» --- */
 .cpage__info {
-  display: flex; flex-direction: column; gap: calc(86 * var(--wm));   /* контакты → график 86 */
+  display: flex; align-items: flex-start; gap: calc(86 * var(--wm));   /* контакты → время (в строку) 86 */
   background: var(--color-surface); border-radius: var(--radius-lg);
-  padding: calc(24 * var(--wm)) calc(24 * var(--wm)) calc(186 * var(--wm));   /* график → нижняя граница плашки 186 */
+  padding: calc(24 * var(--wm)) calc(186 * var(--wm)) calc(24 * var(--wm)) calc(24 * var(--wm));   /* время → правая граница плашки 186 */
 }
-.cpage__info-main { display: flex; flex-direction: column; justify-content: space-between; gap: calc(24 * var(--wm)); }
+.cpage__info-main { display: flex; flex-direction: column; gap: calc(24 * var(--wm)); }
 .cpage__lines { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
 .cpage__line { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }   /* Manrope 18/500/120% */
 .cpage__socials { display: flex; align-items: center; gap: calc(20 * var(--wm)); }
@@ -975,7 +975,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
 /* --- Плашка с формой --- */
 .cpage__form-card {
-  display: flex; flex-direction: column; flex: 0 0 auto;   /* своя высота: не схлопывается под высокую плашку контактов */
+  display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0;   /* добирает высоту колонки до карты (593) */
   background: var(--color-surface); border-radius: var(--radius-lg);
   padding: calc(24 * var(--wm));
 }
