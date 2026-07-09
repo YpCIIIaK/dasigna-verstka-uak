@@ -7,14 +7,12 @@
   <meta name="description" content="UAK Trade — проектная компания полного цикла: аудит проектов, проектирование наружных и внутренних сетей, сопровождение под ключ." />
   <link rel="canonical" href="https://uaktrade.kz/" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://uaktrade.kz/" />
   <meta property="og:title" content="UAK Trade — инженерное проектирование полного цикла" />
   <meta property="og:description" content="Проектная компания полного цикла: аудит, наружные и внутренние сети, сопровождение под ключ." />
   <meta property="og:locale" content="ru_RU" />
 
-  <!-- Manrope самохостится через @font-face в main.css; предзагрузка ключевых начертаний -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-600.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-400.woff2" crossorigin />
 
@@ -37,7 +35,6 @@
 </head>
 <body>
 
-  <!-- ===================== ПРЕЛОАДЕР (десктоп) ===================== -->
   <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Загрузка сайта">
     <div class="preloader__stage">
       <span class="preloader__glow" aria-hidden="true"></span>
@@ -46,7 +43,6 @@
     </div>
   </div>
 
-  <!-- ============================ ШАПКА ============================ -->
   <header class="header" data-header>
     <div class="container header__inner">
       <a class="header__logo" href="index.html" aria-label="UAK Trade — на главную">
@@ -65,7 +61,6 @@
         </button>
       </div>
 
-      <!-- Меню-модалка — внутри header__inner (right:0 от контейнера) -->
       <div class="menu" id="menu" data-menu aria-label="Меню">
         <nav class="menu__nav" aria-label="Основная навигация">
           <a class="menu__item" href="about.html"><span>О компании</span><svg class="menu__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -91,7 +86,6 @@
   </header>
 
 
-  <!-- ============================= HERO =========================== -->
   <main>
   <section class="hero-home">
     <div class="container">
@@ -108,7 +102,6 @@
     </div>
   </section>
 
-  <!-- ================= О КОМПАНИИ / ЦИФРЫ (кольца) ================ -->
   <section class="section about-intro">
     <div class="container">
       <h2 class="about-intro__title">Мы — проектная компания полного цикла</h2>
@@ -134,7 +127,6 @@
     </div>
   </section>
 
-  <!-- ============ КЛЮЧЕВЫЕ НАПРАВЛЕНИЯ (услуги) ============ -->
   <section class="section services">
     <div class="container">
       <div class="services__head">
@@ -190,14 +182,10 @@
     </div>
   </section>
 
-  <!-- ================== ГАЛЕРЕЯ ПРОЕКТОВ ================== -->
   <section class="section proj">
     <div class="container">
       <h2 class="proj__title">Галерея наших проектов</h2>
 
-      <!-- Вывод: десктоп — 6 карточек, мобилка — 3 (лишние помечены .proj-card--m-hide).
-           WP: цикл WP_Query по CPT «project»; posts_per_page=6, на мобиле первые 3 —
-           класс --m-hide навешивать начиная с 4-й карточки в шаблоне. -->
       <div class="proj__gallery">
         <div class="proj__col">
           <figure class="proj-card">
@@ -245,7 +233,6 @@
     </div>
   </section>
 
-  <!-- ================= НАШИ ПАРТНЁРЫ (бегущая строка) ================= -->
   <section class="section ticker">
     <div class="container ticker__head">
       <h2 class="ticker__title">Наши партнёры и клиенты</h2>
@@ -292,7 +279,6 @@
     </div>
   </section>
 
-  <!-- ========================= CTA-ФОРМА ========================= -->
   <section class="section">
     <div class="container">
       <div class="cta">
@@ -330,7 +316,6 @@
 
   </main>
 
-  <!-- ============================ ФУТЕР =========================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
@@ -412,6 +397,6 @@
   </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="src/lib/main.js?v=11"></script>
+  <script src="src/lib/main.js?v=12"></script>
 </body>
 </html>

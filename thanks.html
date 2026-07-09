@@ -8,7 +8,6 @@
   <link rel="canonical" href="https://uaktrade.kz/thanks.html" />
   <meta name="robots" content="noindex" />
 
-  <!-- Manrope самохостится через @font-face в main.css; предзагрузка ключевых начертаний -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-600.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-400.woff2" crossorigin />
 
@@ -20,7 +19,6 @@
 </head>
 <body>
 
-  <!-- ===================== ПРЕЛОАДЕР (десктоп) ===================== -->
   <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Загрузка сайта">
     <div class="preloader__stage">
       <span class="preloader__glow" aria-hidden="true"></span>
@@ -29,7 +27,6 @@
     </div>
   </div>
 
-  <!-- ============================ ШАПКА ============================ -->
   <header class="header" data-header>
     <div class="container header__inner">
       <a class="header__logo" href="index.html" aria-label="UAK Trade — на главную">
@@ -48,7 +45,6 @@
         </button>
       </div>
 
-      <!-- Меню-модалка — внутри header__inner (right:0 от контейнера) -->
       <div class="menu" id="menu" data-menu aria-label="Меню">
         <nav class="menu__nav" aria-label="Основная навигация">
           <a class="menu__item" href="about.html"><span>О компании</span><svg class="menu__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -76,7 +72,6 @@
 
   <main>
 
-  <!-- ===================== СПАСИБО ЗА ЗАЯВКУ ===================== -->
   <section class="section hero-home thanks">
     <div class="container">
       <div class="hero-home__inner">
@@ -95,7 +90,6 @@
 
   </main>
 
-  <!-- ============================ ФУТЕР =========================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
@@ -177,6 +171,6 @@
   </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="src/lib/main.js?v=11"></script>
+  <script src="src/lib/main.js?v=12"></script>
 </body>
 </html>

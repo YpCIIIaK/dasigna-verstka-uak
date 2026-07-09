@@ -7,14 +7,12 @@
   <meta name="description" content="Family Gardens, BI GROUP — аудит проекта: инженерная концепция, синхронизация с графиком строительства, прохождение экспертизы." />
   <link rel="canonical" href="https://uaktrade.kz/project.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://uaktrade.kz/project.html" />
   <meta property="og:title" content="Family Gardens — проект UAK Trade" />
   <meta property="og:description" content="Аудит проекта Family Gardens, BI GROUP." />
   <meta property="og:locale" content="ru_RU" />
 
-  <!-- Manrope самохостится через @font-face в main.css; предзагрузка ключевых начертаний -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-600.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic-400.woff2" crossorigin />
 
@@ -26,7 +24,6 @@
 </head>
 <body>
 
-  <!-- ===================== ПРЕЛОАДЕР (десктоп) ===================== -->
   <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Загрузка сайта">
     <div class="preloader__stage">
       <span class="preloader__glow" aria-hidden="true"></span>
@@ -35,7 +32,6 @@
     </div>
   </div>
 
-  <!-- ============================ ШАПКА ============================ -->
   <header class="header" data-header>
     <div class="container header__inner">
       <a class="header__logo" href="index.html" aria-label="UAK Trade — на главную">
@@ -54,7 +50,6 @@
         </button>
       </div>
 
-      <!-- Меню-модалка — внутри header__inner (right:0 от контейнера) -->
       <div class="menu" id="menu" data-menu aria-label="Меню">
         <nav class="menu__nav" aria-label="Основная навигация">
           <a class="menu__item" href="about.html"><span>О компании</span><svg class="menu__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -82,17 +77,14 @@
 
   <main>
 
-  <!-- ===================== HERO — избранный проект ===================== -->
   <section class="section pcase-hero">
     <div class="container">
       <div class="pcase-hero__grid">
-        <!-- WP: главное фото проекта (поле «cover») -->
         <img class="pcase-hero__img" src="assets/images/projectPageImg.png" alt="Family Gardens" width="668" height="420" />
 
         <div class="pcase-hero__body">
           <h1 class="pcase-hero__name">Family Gardens</h1>
 
-          <!-- WP: ACF-поля проекта (заказчик / год / услуга) -->
           <ul class="pcase-hero__meta">
             <li class="pcase-hero__mrow"><span class="pcase-hero__mkey">Заказчик:</span><span class="pcase-hero__mval">BI GROUP</span></li>
             <li class="pcase-hero__mrow"><span class="pcase-hero__mkey">Год реализации:</span><span class="pcase-hero__mval">2026</span></li>
@@ -105,12 +97,10 @@
     </div>
   </section>
 
-  <!-- ===================== ГАЛЕРЕЯ ПРОЕКТА ===================== -->
   <section class="section pgal">
     <div class="container">
       <h2 class="pgal__title">Галерея проекта</h2>
 
-      <!-- WP: галерея проекта (ACF gallery) — раскладка-мозаика из 4 фото -->
       <div class="pgal__grid">
         <img class="pgal__img pgal__img--a" src="assets/images/projectGallery1.png" alt="Family Gardens — фрагмент фасада" width="322" height="480" loading="lazy" />
         <img class="pgal__img pgal__img--b" src="assets/images/projectGallery2.png" alt="Family Gardens — озеленённые террасы" width="553" height="480" loading="lazy" />
@@ -120,7 +110,6 @@
     </div>
   </section>
 
-  <!-- ===================== ДЕЛЕГИРОВАНИЕ ЗАДАЧ ===================== -->
   <section class="section pdel">
     <div class="container">
       <h2 class="pdel__title">Управление стоимостью и логикой строительства через инженерию</h2>
@@ -152,7 +141,6 @@
     </div>
   </section>
 
-  <!-- ========================= ЛАЙМ-CTA ========================= -->
   <section class="section">
     <div class="container">
       <div class="pcta__box">
@@ -164,7 +152,6 @@
     </div>
   </section>
 
-  <!-- ===================== ДРУГИЕ ПРОЕКТЫ ===================== -->
   <section class="section proj">
     <div class="container">
       <div class="proj__head">
@@ -172,7 +159,6 @@
         <a class="btn btn--ghost" href="projects.html">Все проекты</a>
       </div>
 
-      <!-- WP: WP_Query по CPT «project», exclude текущий, posts_per_page=3 -->
       <div class="proj__gallery proj__gallery--row">
         <figure class="proj-card">
           <a class="proj-card__link" href="project.html" aria-label="Family Gardens — открыть проект"></a>
@@ -195,7 +181,6 @@
 
   </main>
 
-  <!-- ============================ ФУТЕР =========================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
@@ -249,7 +234,6 @@
     </div>
   </footer>
 
-  <!-- ===================== МОДАЛКА «Оставьте заявку» ===================== -->
   <div class="modal" id="modal-request">
     <div class="modal__overlay" data-modal-close></div>
     <div class="modal__dialog modal__dialog--form" role="dialog" aria-modal="true" aria-labelledby="modal-request-title">
@@ -278,6 +262,6 @@
   </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="src/lib/main.js?v=11"></script>
+  <script src="src/lib/main.js?v=12"></script>
 </body>
 </html>
