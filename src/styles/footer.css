@@ -39,10 +39,10 @@
 /* Мобайл ≤600: две колонки — лого слева, инфо-колонка справа (контакты → соцсети → меню) */
 @media (max-width: 600px) {
   .footer { min-height: calc(450 * var(--wm)); padding-block: calc(24 * var(--wm)) calc(24 * var(--wm)); }
-  .footer__grid { flex-wrap: nowrap; gap: calc(24 * var(--wm)); padding-bottom: calc(24 * var(--wm)); }
+  .footer__grid { flex-wrap: nowrap; gap: calc(24 * var(--wm)); padding-bottom: calc(32 * var(--wm)); }   /* ссылки → разделитель 32 */
   .footer__grid > :first-child { margin-right: 0; flex-basis: auto; }
   .footer__logo img { width: calc(144 * var(--wm)); height: auto; }
   .footer__cols { flex-direction: column-reverse; gap: calc(32 * var(--wm)); margin-right: 0; }   /* соцсети → список ссылок 32 */
   .footer__contacts { margin-bottom: calc(16 * var(--wm)); }   /* email → соцсети 16 */
-  .footer__bottom { flex-direction: column; gap: calc(6 * var(--wm)); }   /* копирайт → «Сделано в factum» 6 */
+  .footer__bottom { flex-direction: column; gap: calc(6 * var(--wm)); padding-top: calc(24 * var(--wm)); }   /* разделитель → копирайт 24; копирайт → «Сделано в factum» 6 */
 }
