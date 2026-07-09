@@ -23,7 +23,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
   <link rel="stylesheet" href="assets/vendor/fancybox.css" />
-  <link rel="stylesheet" href="src/styles/main.css?v=138" />
+  <link rel="stylesheet" href="src/styles/main.css?v=139" />
 </head>
 <body>
 
@@ -294,10 +294,13 @@
 
       // Перетаскивание мышью/пальцем (drag-to-scroll)
       var down = false, startX = 0, startScroll = 0, moved = false;
-      track.querySelectorAll('img').forEach(function (img) { img.draggable = false; });
+      // Гасим нативный drag ссылок/картинок — иначе браузер «тянет ссылку», а не скроллит
+      track.querySelectorAll('img, a').forEach(function (el) { el.draggable = false; });
+      track.addEventListener('dragstart', function (e) { e.preventDefault(); });
       track.addEventListener('pointerdown', function (e) {
         down = true; moved = false; startX = e.clientX; startScroll = track.scrollLeft;
         track.classList.add('is-dragging');
+        e.preventDefault();                                  // не даём начать выделение/нативный drag ссылки
         try { track.setPointerCapture(e.pointerId); } catch (err) {}
       });
       track.addEventListener('pointermove', function (e) {
