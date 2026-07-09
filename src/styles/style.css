@@ -914,9 +914,9 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 
 /* --- Плашка «контакты + график» --- */
 .cpage__info {
-  display: flex; justify-content: space-between; gap: calc(24 * var(--wm));
+  display: flex; flex-direction: column; gap: calc(86 * var(--wm));   /* контакты → график 86 */
   background: var(--color-surface); border-radius: var(--radius-lg);
-  padding: calc(24 * var(--wm));
+  padding: calc(24 * var(--wm)) calc(24 * var(--wm)) calc(186 * var(--wm));   /* график → нижняя граница плашки 186 */
 }
 .cpage__info-main { display: flex; flex-direction: column; justify-content: space-between; gap: calc(24 * var(--wm)); }
 .cpage__lines { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); }
@@ -944,7 +944,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 @media (max-width: 600px) {
   .cpage__title { font-size: calc(40 * var(--wm)); }   /* Benzin 40/100% +2% uppercase */
   .cpage__grid { grid-template-columns: 1fr; gap: calc(16 * var(--wm)); }
-  .cpage__info { flex-direction: column; gap: calc(24 * var(--wm)); }
+  .cpage__info { flex-direction: column; gap: calc(24 * var(--wm)); padding: calc(24 * var(--wm)); }   /* мобайл: равномерный паддинг, отступы 86/186 — только десктоп */
   .cpage__map { min-height: calc(360 * var(--wm)); }
   .cpage__map iframe { min-height: calc(360 * var(--wm)); filter: none; }   /* без ховера на тач — карта светлая */
 }
