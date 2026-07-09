@@ -9,9 +9,9 @@
   align-items: flex-start;
   padding-bottom: calc(60 * var(--wm));   /* блоки со ссылками → разделитель 60 */
 }
-.footer__grid > :first-child { margin-right: auto; }  /* лого прижимает группу вправо */
-/* Группа nav+контакты (Figma: до правой стенки 362, между собой 211, слева авто) */
-.footer__cols { display: flex; gap: calc(211 * var(--wm)); margin-right: calc(322 * var(--wm)); }  /* 322 = 362 − поле 40 */
+.footer__grid > :first-child { margin-right: calc(254 * var(--wm)); }  /* лого → столбик ссылок 254 */
+/* Группа nav+контакты: между ссылками и контактами 211 */
+.footer__cols { display: flex; gap: calc(211 * var(--wm)); }
 .footer__label { font-size: var(--text-sm); color: rgba(255,255,255,0.5); margin-bottom: var(--space-md); }
 .footer__list { display: grid; gap: calc(12 * var(--wm)); }        /* Figma: gap 12 */
 .footer__list, .footer__contacts { font-size: var(--text-base); font-weight: var(--weight-regular); }
@@ -39,7 +39,7 @@
 /* Мобайл ≤600: две колонки — лого слева, инфо-колонка справа (контакты → соцсети → меню) */
 @media (max-width: 600px) {
   .footer { min-height: calc(450 * var(--wm)); padding-block: calc(24 * var(--wm)) calc(24 * var(--wm)); }
-  .footer__grid { flex-wrap: nowrap; gap: calc(24 * var(--wm)); padding-bottom: calc(32 * var(--wm)); }   /* ссылки → разделитель 32 */
+  .footer__grid { flex-wrap: nowrap; gap: calc(43 * var(--wm)); padding-bottom: calc(32 * var(--wm)); }   /* лого → столбик 43; ссылки → разделитель 32 */
   .footer__grid > :first-child { margin-right: 0; flex-basis: auto; }
   .footer__logo img { width: calc(144 * var(--wm)); height: auto; }
   .footer__cols { flex-direction: column-reverse; gap: calc(32 * var(--wm)); margin-right: 0; }   /* соцсети → список ссылок 32 */
