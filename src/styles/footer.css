@@ -1,13 +1,13 @@
 /* =============================================================================
    footer.css — футер (медиа-запросы блока — рядом с блоком)
    ============================================================================= */
-.footer { background: var(--color-surface); color: var(--color-white); border-radius: var(--radius-lg); min-height: calc(405 * var(--wm)); padding-block: calc(60 * var(--wm)) calc(40 * var(--wm)); margin-top: calc(var(--space-section) / 2); }  /* Figma: #222222, r16, высота 405; горизонт — через .container; отступ сверху — добор до 180 после CTA */
+.footer { background: var(--color-surface); color: var(--color-white); border-radius: var(--radius-lg); min-height: calc(405 * var(--wm)); padding-block: calc(60 * var(--wm)) calc(60 * var(--wm)); margin-top: calc(var(--space-section) / 2); }  /* Figma: #222222, r16, высота 405; горизонт — через .container; низ — 60 до края футера */
 .footer a { color: var(--color-white); transition: color var(--duration-fast); }
 .footer a:hover { color: var(--color-accent); }
 .footer__grid {
   display: flex;
   align-items: flex-start;
-  padding-bottom: calc(40 * var(--wm));
+  padding-bottom: calc(60 * var(--wm));   /* блоки со ссылками → разделитель 60 */
 }
 .footer__grid > :first-child { margin-right: auto; }  /* лого прижимает группу вправо */
 /* Группа nav+контакты (Figma: до правой стенки 362, между собой 211, слева авто) */
@@ -21,7 +21,7 @@
 .footer__social:hover { color: var(--color-accent); }
 .footer__social svg { width: calc(24 * var(--wm)); height: calc(24 * var(--wm)); }
 .footer__divider { height: 1px; background: var(--color-border); border: 0; margin: 0; }  /* rgba(255,255,255,.3) */
-.footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-sm); padding-top: calc(40 * var(--wm)); font-size: var(--text-base); color: rgba(255,255,255,0.6); }
+.footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-sm); padding-top: calc(60 * var(--wm)); font-size: var(--text-base); color: rgba(255,255,255,0.6); }  /* разделитель → копирайт 60 */
 .footer__bottom b { color: var(--color-white); font-weight: var(--weight-semibold); }
 
 @media (max-width: 1024px) {
