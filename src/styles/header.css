@@ -16,9 +16,11 @@
 }
 .header__logo { display: inline-flex; align-items: center; gap: calc(12 * var(--wm)); color: var(--color-heading); }
 .header__actions { display: inline-flex; align-items: center; gap: calc(15 * var(--wm)); }  /* Figma: зазор Связаться↔Меню */
-/* Кнопки в шапке фиксированного размера: «Связаться» 125×46, «Меню» 92×46 */
-.header__actions .btn { min-width: 0; width: calc(125 * var(--wm)); height: calc(46 * var(--wm)); padding-block: 0; }
+/* Кнопки в шапке фиксированного размера: «Связаться» 125×46, «Меню» 92×46.
+   Паддинг уменьшен, nowrap — чтобы длинный текст («Связаться», «Закрыть») влезал при масштабировании. */
+.header__actions .btn { min-width: 0; width: calc(125 * var(--wm)); height: calc(46 * var(--wm)); padding-block: 0; padding-inline: calc(12 * var(--wm)); white-space: nowrap; }
 .header__actions .btn--menu { width: calc(92 * var(--wm)); }
+.header__actions .btn__swap { width: 100%; }
 
 /* Белая кнопка «Связаться» в шапке: нажатие → чёрный фон, белый текст. */
 @media (hover: hover) and (min-width: 601px) { .header .btn:not(.btn--menu):active { --_bg: #000; --_fg: var(--color-white); } }
