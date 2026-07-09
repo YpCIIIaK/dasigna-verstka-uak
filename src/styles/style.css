@@ -999,6 +999,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 @media (hover: hover) and (min-width: 601px) { .cpage__social:hover { color: var(--color-accent); } }
 .cpage__hours { display: flex; flex-direction: column; gap: calc(12 * var(--wm)); flex: none; }
 .cpage__hours-item { margin: 0; font-size: calc(18 * var(--wm)); font-weight: var(--weight-medium); line-height: var(--leading-snug); color: var(--color-white); }   /* Manrope 18/500/120% */
+.cpage__hours-day { display: block; }   /* день сверху, время под ним отдельной строкой */
 
 /* --- Плашка с формой --- */
 .cpage__form-card {
@@ -1097,7 +1098,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 .certs__track {
   display: flex; gap: calc(24 * var(--wm));
   list-style: none; margin: 0; padding: 0;
-  overflow-x: auto; scroll-snap-type: x mandatory;
+  overflow-x: auto; scroll-snap-type: x proximity;   /* proximity, не mandatory — нативный снэп не дёргает; магнитим сами из JS */
   scroll-behavior: smooth;                     /* примагничивание к карточке — плавное, не резкое */
   scrollbar-width: none;                       /* прячем полосу — навигация стрелками */
   cursor: grab; touch-action: pan-y;           /* перетаскивание мышью */

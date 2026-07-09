@@ -22,9 +22,19 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=134" />
+  <link rel="stylesheet" href="assets/vendor/fancybox.css" />
+  <link rel="stylesheet" href="src/styles/main.css?v=137" />
 </head>
 <body>
+
+  <!-- ===================== ПРЕЛОАДЕР (десктоп) ===================== -->
+  <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Загрузка сайта">
+    <div class="preloader__stage">
+      <span class="preloader__glow" aria-hidden="true"></span>
+      <span class="preloader__ring" aria-hidden="true"></span>
+      <span class="preloader__percent" data-preloader-percent>0%</span>
+    </div>
+  </div>
 
   <!-- ============================ ШАПКА ============================ -->
   <header class="header" data-header>
@@ -127,14 +137,14 @@
       </div>
 
       <ul class="certs__track" data-cert-track>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
-        <li class="certs__card"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
+        <li class="certs__card"><a class="certs__zoom" data-fancybox="certs" href="assets/images/certificate.png" aria-label="Открыть сертификат"><img src="assets/images/certificate.png" alt="Сертификат" width="322" height="480" loading="lazy" /></a></li>
       </ul>
     </div>
   </section>
@@ -260,7 +270,12 @@
   </div>
 
   <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/vendor/fancybox.umd.js"></script>
   <script src="src/lib/main.js?v=7"></script>
+  <!-- Fancybox для сертификатов: клик по карточке открывает во весь экран -->
+  <script>
+    if (window.Fancybox) Fancybox.bind('[data-fancybox="certs"]', {});
+  </script>
   <!-- Слайдер сертификатов: стрелки (шаг = ширина карточки + gap) + перетаскивание мышью -->
   <script>
     (function () {
@@ -278,18 +293,30 @@
       next && next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
 
       // Перетаскивание мышью/пальцем (drag-to-scroll)
-      var down = false, startX = 0, startScroll = 0;
+      var down = false, startX = 0, startScroll = 0, moved = false;
       track.querySelectorAll('img').forEach(function (img) { img.draggable = false; });
       track.addEventListener('pointerdown', function (e) {
-        down = true; startX = e.clientX; startScroll = track.scrollLeft;
+        down = true; moved = false; startX = e.clientX; startScroll = track.scrollLeft;
         track.classList.add('is-dragging');
         try { track.setPointerCapture(e.pointerId); } catch (err) {}
       });
       track.addEventListener('pointermove', function (e) {
         if (!down) return;
+        if (Math.abs(e.clientX - startX) > 4) moved = true;   // порог: это тянут, а не кликают
         track.scrollLeft = startScroll - (e.clientX - startX);
       });
-      var end = function () { down = false; track.classList.remove('is-dragging'); };
+      // Если был drag — глушим последующий клик, чтобы не открылся fancybox
+      track.addEventListener('click', function (e) {
+        if (moved) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+      // Плавная магнитность: после отпускания сами доводим до ближайшей карточки
+      var end = function () {
+        if (!down) return;
+        down = false; track.classList.remove('is-dragging');
+        var s = step();
+        var target = Math.round(track.scrollLeft / s) * s;
+        track.scrollTo({ left: target, behavior: 'smooth' });
+      };
       track.addEventListener('pointerup', end);
       track.addEventListener('pointercancel', end);
       track.addEventListener('pointerleave', end);

@@ -22,9 +22,18 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
-  <link rel="stylesheet" href="src/styles/main.css?v=134" />
+  <link rel="stylesheet" href="src/styles/main.css?v=137" />
 </head>
 <body>
+
+  <!-- ===================== ПРЕЛОАДЕР (десктоп) ===================== -->
+  <div class="preloader" data-preloader role="status" aria-live="polite" aria-label="Загрузка сайта">
+    <div class="preloader__stage">
+      <span class="preloader__glow" aria-hidden="true"></span>
+      <span class="preloader__ring" aria-hidden="true"></span>
+      <span class="preloader__percent" data-preloader-percent>0%</span>
+    </div>
+  </div>
 
   <!-- ============================ ШАПКА ============================ -->
   <header class="header" data-header>
@@ -103,8 +112,8 @@
             </div>
 
             <div class="cpage__hours">
-              <p class="cpage__hours-item">ПН-ПТ: 09:00 - 19:00</p>
-              <p class="cpage__hours-item">СБ-ВС 10:00 - 18:00</p>
+              <p class="cpage__hours-item"><span class="cpage__hours-day">ПН-ПТ:</span>09:00 - 19:00</p>
+              <p class="cpage__hours-item"><span class="cpage__hours-day">СБ-ВС:</span>10:00 - 18:00</p>
             </div>
           </div>
 

@@ -45,12 +45,11 @@
 .logo--lg .logo__text { font-size: 1.75rem; }
 
 /* Меню-модалка (дропдаун из кнопки «Меню»).
-   Живёт ВНУТРИ .header__inner (position:relative) → absolute right:0
-   сам выравнивается по правому краю контейнера на любой ширине. */
+   Живёт ВНУТРИ .header__inner (position:relative). */
 .menu {
   position: absolute; z-index: var(--z-menu);
   top: calc(100% - 16 * var(--wm));           /* низ шапки минус нахлёст 16 (как было) */
-  right: 0;
+  right: calc(40 * var(--wm));                /* отступ справа — у контейнера есть свой паддинг */
   width: calc(248 * var(--wm));                               /* Figma: 248 × 336 */
   background: var(--color-surface);           /* #222222 */
   border-radius: var(--radius-lg);            /* 16 */
@@ -110,4 +109,5 @@
     width: calc(77 * var(--wm)); height: calc(46 * var(--wm));
     padding: 0;
   }
+  .menu { right: calc(16 * var(--wm)); }    /* в мобильном отступ контейнера меньше */
 }
