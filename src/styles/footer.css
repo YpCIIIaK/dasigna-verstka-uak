@@ -1,7 +1,7 @@
 /* =============================================================================
    footer.css — футер (медиа-запросы блока — рядом с блоком)
    ============================================================================= */
-.footer { background: var(--color-surface); color: var(--color-white); border-radius: var(--radius-lg); padding-block: calc(60 * var(--wm)) calc(40 * var(--wm)); margin-top: calc(var(--space-section) / 2); }  /* Figma: #222222, r16; горизонт — через .container; отступ сверху — добор до 180 после CTA */
+.footer { background: var(--color-surface); color: var(--color-white); border-radius: var(--radius-lg); min-height: calc(405 * var(--wm)); padding-block: calc(60 * var(--wm)) calc(40 * var(--wm)); margin-top: calc(var(--space-section) / 2); }  /* Figma: #222222, r16, высота 405; горизонт — через .container; отступ сверху — добор до 180 после CTA */
 .footer a { color: var(--color-white); transition: color var(--duration-fast); }
 .footer a:hover { color: var(--color-accent); }
 .footer__grid {
@@ -38,7 +38,7 @@
 
 /* Мобайл ≤600: две колонки — лого слева, инфо-колонка справа (контакты → соцсети → меню) */
 @media (max-width: 600px) {
-  .footer { padding-block: calc(24 * var(--wm)) calc(24 * var(--wm)); }
+  .footer { min-height: calc(450 * var(--wm)); padding-block: calc(24 * var(--wm)) calc(24 * var(--wm)); }
   .footer__grid { flex-wrap: nowrap; gap: calc(24 * var(--wm)); padding-bottom: calc(24 * var(--wm)); }
   .footer__grid > :first-child { margin-right: 0; flex-basis: auto; }
   .footer__logo img { width: calc(144 * var(--wm)); height: auto; }

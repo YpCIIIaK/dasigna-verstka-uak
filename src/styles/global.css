@@ -93,7 +93,7 @@ p  { line-height: var(--leading-normal); }
 @media (max-width: 600px) {
   .about-intro__title, .services__title, .proj__title,
   .ticker__title, .cta__title,
-  .about-banner__title, .certs__title { font-size: calc(24 * var(--wm)); }
+  .about-banner__title, .certs__title { font-size: calc(24 * var(--wm)); text-align: center; }
 }
 
 /* --- Утилиты --- */
