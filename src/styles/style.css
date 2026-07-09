@@ -524,6 +524,8 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
 }
 .services__title { max-width: none; margin: 0; }
 .services__intro { max-width: calc(553 * var(--wm)); font-size: var(--text-base); color: var(--color-white); flex: none; }
+/* Подсветка ключевой фразы в интро (services/ticker) — акцентный цвет, вес наследуется */
+.services__intro strong, .ticker__intro strong { color: var(--color-accent); font-weight: inherit; }
 
 .services__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }  /* Figma: gap 24 */
 

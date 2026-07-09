@@ -3,16 +3,21 @@
    ============================================================================= */
 .header {
   position: sticky; top: 0; z-index: var(--z-header);
-  background: transparent;                 /* всегда прозрачная, в т.ч. при прокрутке */
-  transition: box-shadow var(--duration-base) var(--ease-out);
+  background: transparent;                 /* прозрачная в самом верху */
+  transition: background-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
 }
-.header.is-scrolled { box-shadow: none; }
+/* При прокрутке: фон = цвет фона сайта, паддинги вдвое меньше — компактная шапка */
+.header.is-scrolled { background: var(--color-bg); box-shadow: none; }
+.header.is-scrolled .header__inner { min-height: auto; padding-block: calc(20 * var(--wm)); }
 .header__inner {
   position: relative;                                 /* якорь для абсолютного меню-дропдауна */
   min-height: var(--header-height);
   display: flex; align-items: center; justify-content: space-between;
   gap: var(--space-lg);
   padding-block: calc(40 * var(--wm));                /* Figma: контент отступает на 40 сверху/снизу */
+  transition: min-height var(--duration-base) var(--ease-out),
+              padding-block var(--duration-base) var(--ease-out);
 }
 .header__logo { display: inline-flex; align-items: center; gap: calc(12 * var(--wm)); color: var(--color-heading); }
 .header__actions { display: inline-flex; align-items: center; gap: calc(15 * var(--wm)); }  /* Figma: зазор Связаться↔Меню */
@@ -97,6 +102,7 @@
 /* Мобайл ≤600: шапка ниже, лого-мобайл, кнопка «Меню» фиксированного размера */
 @media (max-width: 600px) {
   .header__inner { min-height: calc(96 * var(--wm)); padding-block: calc(24 * var(--wm)); }
+  .header.is-scrolled .header__inner { padding-block: calc(12 * var(--wm)); }
   .header__logo img { width: calc(95 * var(--wm)); height: auto; }
   .header__actions .btn--menu {             /* фикс 77×46 — «Меню»/«Закрыть» не меняют размер */
     min-width: 0;
