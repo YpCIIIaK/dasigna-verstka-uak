@@ -23,7 +23,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/fav-32-dark.png" media="(prefers-color-scheme: dark)" />
 
   <link rel="stylesheet" href="assets/vendor/fancybox.css" />
-  <link rel="stylesheet" href="src/styles/main.css?v=140" />
+  <link rel="stylesheet" href="src/styles/main.css?v=141" />
 </head>
 <body>
 
@@ -271,7 +271,7 @@
 
   <script src="assets/vendor/lenis.min.js"></script>
   <script src="assets/vendor/fancybox.umd.js"></script>
-  <script src="src/lib/main.js?v=8"></script>
+  <script src="src/lib/main.js?v=9"></script>
   <!-- Слайдер сертификатов: стрелки + drag-скролл + открытие в fancybox по тапу -->
   <script>
     (function () {
@@ -285,7 +285,14 @@
       var slides = links.map(function (a) { return { src: a.getAttribute('href'), type: 'image' }; });
       function openCert(a) {
         if (!window.Fancybox) return;
-        Fancybox.show(slides, { startIndex: Math.max(0, links.indexOf(a)) });
+        Fancybox.show(slides, {
+          startIndex: Math.max(0, links.indexOf(a)),
+          hideScrollbar: false,   // не прячем полосу прокрутки → контент не сдвигается (как у модалок)
+          on: {
+            init: function () { if (window.lenis) window.lenis.stop(); },     // пауза Lenis вместо снятия скролла
+            destroy: function () { if (window.lenis) window.lenis.start(); },
+          },
+        });
       }
       function step() {
         var card = track.querySelector('.certs__card');

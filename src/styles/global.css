@@ -32,7 +32,10 @@ body {
   padding-top: var(--header-height);       /* фикс-шапка висит сверху → отступ на её высоту (136) */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;                       /* липкий футер: на короткой странице (404) прижат к низу */
+  display: flex; flex-direction: column;   /* header/modal — fixed, вне потока; в потоке main + footer */
 }
+body > main { flex: 1 0 auto; }            /* main растягивается → под футером нет пустоты */
 @media (max-width: 600px) { body { padding-top: calc(96 * var(--wm)); } }   /* мобильная шапка ниже — 96 */
 
 img, picture, svg, video { display: block; max-width: 100%; height: auto; }

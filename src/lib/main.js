@@ -71,14 +71,24 @@
      Шапка: тень при скролле
      -------------------------------------------------------------------------- */
   if (header) {
-    const setHeader = (y) => header.classList.toggle("is-scrolled", y > 8);
-    setHeader(window.scrollY);
+    const expand = () => header.classList.remove("is-scrolled");
+    const collapse = () => header.classList.add("is-scrolled");
+    // Разворот по направлению скролла: движемся вверх к верхней зоне — разворачиваем
+    // СРАЗУ, не дожидаясь, пока инерция Lenis доедет до нуля (иначе кажется запоздалым).
+    // Защёлка: класс меняем только при реальном движении → в покое не мерцает.
+    let lastY = window.scrollY;
+    const onScroll = (y) => {
+      const goingUp = y < lastY;
+      lastY = y;
+      if (y <= 8) expand();                                          // у самого верха — всегда полная
+      else if (goingUp && y < window.innerHeight * 0.5) expand();    // вверх в верхней зоне → разворот сразу
+      else if (!goingUp) collapse();                                 // вниз → компактная
+    };
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
     if (lenis) {
-      // синхронно с Lenis (каждый кадр) — иначе нативный scroll во время инерции
-      // приходит с запозданием и шапка разворачивается «догоняя», с задержкой
-      lenis.on("scroll", ({ scroll }) => setHeader(scroll));
+      lenis.on("scroll", ({ scroll }) => onScroll(scroll));
     } else {
-      window.addEventListener("scroll", () => setHeader(window.scrollY), { passive: true });
+      window.addEventListener("scroll", () => onScroll(window.scrollY), { passive: true });
     }
   }
 
