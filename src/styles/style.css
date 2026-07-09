@@ -684,6 +684,7 @@ textarea.cta__control { resize: none; flex: 1 1 auto; min-height: calc(60 * var(
   position: absolute;
   left: calc(var(--container-pad) + 115 * var(--wm));
   top: calc(256 * var(--wm));
+  width: calc(178 * var(--wm)); height: calc(48 * var(--wm)); padding-block: 0;   /* Figma: 178×48 */
 }
 @media (hover: hover) and (min-width: 601px) {                                  /* как кнопка в карточках «Ключевые направления» */
   .about-banner__cta:hover  { --_bg: var(--color-accent); --_fg: var(--color-on-accent); }
