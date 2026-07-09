@@ -81,7 +81,7 @@
       const goingUp = y < lastY;
       lastY = y;
       if (y <= 8) expand();                        // у самого верха — всегда полная
-      else if (goingUp && y < 230) expand();       // вверх в зоне 230px до верха → разворот сразу
+      else if (goingUp && y < 160) expand();       // вверх в зоне 160px до верха → разворот сразу
       else if (!goingUp) collapse();               // вниз → компактная
     };
     header.classList.toggle("is-scrolled", window.scrollY > 8);
